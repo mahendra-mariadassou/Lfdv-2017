@@ -1,0 +1,753 @@
+---
+title: "Intégration"
+author: "Mahendra Mariadassou"
+date: "24 avril 2017"
+output:
+  ioslides_presentation:
+    css: ../CSS/custom_licence_fdv.css
+    keep_md: yes
+    toc: yes
+  beamer_presentation: default
+height: 720
+width: 1280
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
+```
+
+# Introduction 
+
+## Avant propos 
+
+L'objectif de ce cours est de comprendre l'intégrale. On présente souvent l'intégrale sous forme d'aire ou d'une primitive. Ces deux interprétations ne sont pas fausses mais masquent la nature fondamentale des intégrales
+
+<center>Une intégrale est une <alert>somme</alert></center></p>
+
+Plus précisément une somme de très nombreux éléménts (une infinité d'éléments) qui sont tous très petits (infinitésimaux). Il est souvent <alert>commode</alert> de calculer au moyen d'une primitive. 
+
+
+## Intuition géométrique
+
+<div class = "definition">
+Soit $f$ une fonction continue sur un **segment** $[a,b]$ (avec $a \leq b$). On appelle _intégrale de $a$ à $b$ de $f$_ l'aire située entre 
+
+- la courbe de $f$
+- l'axe des abscisses
+- les droites d'équation $x=a$ et $x=b$. 
+
+en attribuant un signe **négatif** aux parties situées sous l'axe des abscisses. L'intégrale sur $[a,b]$ de $f$ est notée $\int_a^b f(x)dx$
+</div>
+
+On pose par convention (pour généraliser la notion)
+$$
+\int_b^a f(x)dx = - \int_a^b f(x)dx
+$$
+
+**Remarque** La variable $x$ est muette mais on intègre <alert>toujours</alert> par rapport à une variable. 
+
+## Intuition géométrique (II)
+
+```{r integrale-illustration}
+library(ggplot2)
+plotdata <- data.frame(x = (x <- seq(0, pi, length.out = 200)), 
+                       y = cos(x))
+ggplot(plotdata, aes(x = x, y = y)) + geom_line() + theme_bw() + geom_hline(yintercept = 0) + geom_area(aes(fill = (y < 0))) + theme(legend.position = "none")
+```
+
+## Théorème fondamental du calcul intégral
+
+
+L'aire rouge compte positivement, l'aire bleue négativement. 
+
+<div class = "theorem">
+Soit $f$ une fonction continue sur un **segment** $[a,b]$ et $F$ une primitive de $f$ sur $[a,b]$. On a alors 
+$$
+\int_a^b f(x)dx = F(b) - F(a) = [F(x)]_a^b
+$$
+</div>
+
+## Remarques sur le théorème
+
+Le Théorème fondamental du calcul intégral est indispensable, en pratique, pour calculer des intégrales mais ne renseigne pas 
+
+- sur le lien entre intégrale et somme,
+- sur la façon dont on utilise les intégrales dans de nombreuses situations.
+
+## Primitives usuelles 
+
+On rappelle quelques primtives usuelles (qui se déduisent des dérivées usuelles)
+
+$$
+\begin{array}{|c||c|}
+\hline
+\text{Fonction } f & \text{Primitive } F \\
+\hline
+x^\alpha \quad (\alpha \neq 1) & x^{\alpha+1} / {(\alpha + 1})  \\
+\hline
+1 / x & \ln(x) \\
+\hline 
+e^x & e^x \\
+\hline
+\cos(x) & \sin(x) \\
+\hline
+\sin(x) & -\cos(x) \\
+\hline
+\frac{1}{\sqrt{1 - x^2}} & \arcsin(x) \\
+\hline 
+\frac{-1}{\sqrt{1 - x^2}} & \arccos(x) \\
+\hline 
+\frac{1}{1+x^2} & \arctan(x) \\
+\hline
+\end{array}
+$$
+
+## Recherche de Primitives (I)
+
+Contrairement à la dérivation, il y a peu de régles automatiques pour trouver des primitives, la seule qui fonctionne est la régle d'addition
+
+<div class = "proposition">
+Soit $f$ et $g$ deux fonctions continues sur un **segment** $[a,b]$ dont $F$ et $G$ sont deux primitives. $F+G$ est alors une primitive de $f+g$ sur le segment $[a, b]$.
+</div>
+
+Mais on ne sait pas faire mieux, en particulier multiplier, quotienter, composer, etc... 
+
+Si on n'a pas affaire à une fonction de primitive astucieuse, il faut être **astucieux** et reconnaître une forme détournée, souvent cachée par un changement de variable. 
+
+## Recherche de Primitives (II)
+
+Les changements de variables classiques sont les suivants:
+
+$$
+\begin{array}{|c||c|}
+\hline
+\text{Fonction } f & \text{Primitive } F \\
+\hline
+u'(x) u(x)^\alpha \quad (\alpha \neq -1) & \frac{u(x)^{\alpha+1}}{(\alpha + 1)}  \\
+\hline
+\frac{u'(x)}{u(x)} & \ln|u(x)| \\
+\hline 
+u'(x) e^{u(x)} & e^{u(x)} \\
+\hline
+u'(x) \cos(u(x)) & \sin(u(x)) \\
+\hline
+u'(x) \sin(u(x)) & -\cos(u(x)) \\
+\hline
+\end{array}
+$$
+Le but du jeu est bien sûr d'identifier la **bonne** fonction $u(x)$ qui permet de se ramener au tableau précédent. 
+
+## Exercice (I)
+
+Trouver une primitive des fonctions (de $x$) suivantes (avec $a \neq 0$):
+$$
+\begin{align*}
+f(x) = 1 - \frac{x^2}{2} & & f(x) = x^2 / (1+x^3) \\
+f(x) = \frac{x^3}{2} + \frac{3x^5}{4} & & f(x) = x^2 / \sqrt{1 + x^3} \\
+f(x) = 1 / (ax + b) & & f(x) = x^2 \sqrt{1 + x^3} \\
+f(x) = \cos(ax + b) & & f(x) = 1 / \sqrt{1 - x^2} \\
+f(x) = e^{ax + b}   & & f(x) = 1 / (1 + x^2)
+\end{align*}
+$$
+
+## Exercice (II)
+
+En utilisant le théorème fondamental, calculer les intégrales suivantes:
+$$
+\begin{align*}
+\int_{1}^2 (1 - x + x^2 - x^3)dx & & \int_0^{\pi} \sin(x)dx \\
+\int_{1}^4 \frac{dx}{\sqrt{x}} & & \int_{-\pi/2}^{\pi/2} \cos(x)dx \\
+\int_0^1 \frac{dx}{1+x} & & \int_{0}^1 \frac{2xdx}{1+x^2} \\
+\int_{1}^2 (1+x)^{\alpha}dx \quad (\alpha \neq -1) & & \int_{0}^1 x^2 e^{-x^3}dx \\
+\int_0^2 e^x dx & & \int_1^e \frac{\ln(x)}{x}dx
+\end{align*}
+$$
+# L'intégrale comme une somme
+
+## Intégrale et Somme
+
+Une intégrale est une <alert>somme</alert>. La notation $\int_{a}^b f(x)dx$ est très explicite:
+
+- le terme $dx$ sous-entend une <alert>variable</alert> $x$ qui varie très lentement par petits pas de longueur $dx$ entre $a$ et $b$. 
+- le terme $f(x)dx$ siginifie que les petits pas $dx$ sont multipliés par un coefficient multiplicatif, $f(x)$, qui varie lorsque $x$ varie. Au début, le coefficient multiplicatif vaut $f(a)$, à la fin $f(b)$ et entre les deux, il varie comme $f$. 
+- Le signe $\int$ correspond au $S$ allongé de Somme. 
+
+Il faut donc comprendre $\int_{a}^b f(x)dx$ comme *la somme de petites quantités $f(x)dx$ obtenues en faisant varier $x$ par petits pas $dx$ entre $a$ et $b$*. 
+
+## Interprétation graphique
+
+```{r somme-de-riemann}
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 10)
+f <- function(x) { x^2 }
+plot(x, f(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.1, 1))
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+text(x = x, y = rep(-0.03, length(x)), 
+     labels =  c("", 
+         expression(x[1]),
+         rep("", 2), 
+         expression(x),
+         rep("", length(x) - 6), 
+         ""), adj = c(0.5, 1), cex = 1.5)
+text(x = x[6], y = -0.03, labels = expression(x + dx), adj = c(0.5, 1), cex = 1.5)
+points(x = x[5], f(x[5]), pch = 19); text(x = x[5], y = f(x[5]), labels = expression(f(x)), adj = c(0.5, 0), cex = 1.5)
+
+text(x = 0, y = -0.03, labels = expression(x[0] == 0), adj = c(0.75, 1), cex = 1.5)
+text(x = 1, y = -0.03, labels = expression(x[n] == 1), adj = c(0.25, 1), cex = 1.5)
+segments(y0 = x, y1 = x, 
+         x0 = rep(0, length(x)),  x1 = rep(-0.025, length(x)))
+text(y = x, x = rep(-0.03, length(x)), 
+     labels =  c(0, 
+         0.1,
+         rep("", 2), 
+         "",
+         rep("", length(x) - 6), 
+         1), adj = c(0.5, 0), cex = 1.5)
+rect(xleft = x[-length(x)], xright = x[-1], ybottom= 0, ytop = (f(x)[-length(x)] + f(x)[-length(x)])/2, col = "grey80")
+rect(xleft = x[5], xright = x[6], ybottom= 0, ytop = (f(x)[5] + f(x)[5])/2, col = "grey60")
+```
+
+- Si $f(x) > 0$, $f(x)dx$ est l'aire du rectangle foncé 
+- Si $f(x) < 0$, $f(x)dx$ est l'opposé de la même aire. 
+
+## Calcul d'une intégrale simple 
+
+On va calculer l'intégrale simple $\int_{z_1}^{z_2} dz$. C'est la *somme de toutes les petites variations $dz$ lorsque $z$ passe de la valeur initiale $z_1$ à la valeur finale $z_2$.* 
+
+Quel que soit le chemin pris entre $z_1$ et $z_2$, en faisant la somme des petites variations successives, on obtient la variation totale, c'est à dire $\Delta z = z_2 - z_1$.
+
+Mais que faire quand on doit calculer une intégrale plus complexe du type $\int_{z_1}^{z_2} f(z)dz$ avec $f$ qui dépend de $z$?
+
+## Calcul d'une intégrale complexe
+
+$f(z)$ est un coefficient de proportionalité. La quantité $f(z)dz$ est proportionnelle à $dz$, on peut la comprendre comme la <alert>différentielle</alert> de quelque chose. 
+
+En particulier, si on trouve une fonction $F(z)$ telle que $\frac{dF(z)}{dz} = f(z)$, c'est à dire une **primitive** de $f$, on a alors la relation 
+
+$$
+dF = f(z) dz
+$$
+
+## Calcul d'une intégrale complexe (II)
+
+Ainsi, lorsque $z$ varie entre $z_1$ et $z_2$ par petits pas $dz$, la quantité $F(z)$ varie par petits pas $dF = f(z)dz$ entre une valeur initiale notée $F_1 = F(z 1 )$ et une valeur finale $F_2 = F(z_2)$. 
+
+La somme des petits éléments $f(z)dz$ entre $z_1$ et $z_2$ est donc la même que celle des petits incréments $dF$ entre $F_1$ et $F_2$.
+
+$$
+\int_{z_1}^{z_2} f(z)dz = \int_{F_1}^{F_2} dF = \Delta F = F_2 - F_1
+$$
+
+## Primitive et forme différentielle
+
+Les quantités infinitésimales ci-dessous sont de la forme $f(x) dx$. Les exprimer sous la
+forme $f (x)dx = dF$ , où  $F$ est par définition une primitive de $f$. Par exemple, $\cos(\theta) d\theta = d(\sin(\theta))$ car $\frac{d\sin(\theta)}{d\theta} = \cos(\theta)$. 
+
+$$
+\begin{align}
+-u e^{u^2} \text{d}u & & 3 \cos(\theta) \sin^2(\theta) \text{d} \theta \\
+\left( v / \sqrt{1 - v^2} \right) \text{d} v & & x^{\alpha} dx \\
+\sin(\alpha \varepsilon) \text{d} \varepsilon & & (y^3 \text{d}y) / (\alpha^4 + y^4)^2 \\
+(1 + \tan^2(\alpha)) \text{d} \alpha & & \text{d} z / ( 1 + a z) \quad (a \neq 0)
+\end{align}
+$$
+
+## Sommes de Riemann
+
+Soit $f$ une fonction continue sur un segment $[a, b]$. On va considérer des pas $dx$ bien choisis, de la forme $\frac{b - a}{n}$. Posons
+
+$$
+x_0 = 1, x_1 = a + \frac{b-a}{n}, ..., x_n = a + n\frac{b-a}{n} = b
+$$
+L'aire de chaque rectangle $f(x)dx$ est donc $f(x_k) \frac{b-a}{n}$ (en fonction du point $x_k$ où on l'évalue) et leur somme vaut 
+$$
+S_n = \sum_{k = 0}^{n-1} f(x_k) dx = \sum_{k = 0}^{n-1} f(x_k) (x_{k+1} - x_k) = \sum_{k = 0}^{n-1} f(x_k) \frac{b-a}{n}
+$$
+
+## Sommes de Riemann (II)
+
+D'après la définition de l'intégrale, on devrait avoir $S_n \simeq \int_{a}^b f(x)dx$ et on a effectivement le théorème suivant:
+
+<div class = "theorem">
+Soit $f$ une fonction continue sur un **segment** $[a,b]$. Pour tout $n \geq 1$, on pose 
+$$
+S_n = \frac{b-a}{n} \sum_{k = 0}^{n-1} f \left( a + k \frac{b-a}{n} \right)
+$$
+Alors 
+$$
+S_n \xrightarrow[n \to \infty]{} \int_{a}^b f(x)dx
+$$
+</div>
+
+## Sommes de Riemann (IV)
+
+On peut également construire d'autres suites de rectangles qui donnent une somme de Riemann qui convergent vers la même quantité:
+
+```{r somme-de-riemann-2}
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 10)
+f <- function(x) { x^2 }
+plot(x, f(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.1, 1))
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+text(x = x, y = rep(-0.03, length(x)), 
+     labels =  c("", 
+         expression(x[1]),
+         rep("", 2), 
+         expression(x),
+         rep("", length(x) - 6), 
+         ""), adj = c(0.5, 1), cex = 1.5)
+text(x = 0, y = -0.03, labels = expression(x[0] == 0), adj = c(0.75, 1), cex = 1.5)
+text(x = 1, y = -0.03, labels = expression(x[n] == 1), adj = c(0.25, 1), cex = 1.5)
+segments(y0 = x, y1 = x, 
+         x0 = rep(0, length(x)),  x1 = rep(-0.025, length(x)))
+text(y = x, x = rep(-0.03, length(x)), 
+     labels =  c(0, 
+         0.1,
+         rep("", 2), 
+         "",
+         rep("", length(x) - 6), 
+         1), adj = c(0.5, 0), cex = 1.5)
+rect(xleft = x[-length(x)], xright = x[-1], ybottom= 0, ytop = (f(x)[-1] + f(x)[-1])/2, col = "grey80")
+rect(xleft = x[5], xright = x[6], ybottom= 0, ytop = (f(x)[6] + f(x)[6])/2, col = "grey60")
+## Add annotations
+text(x = x[6], y = -0.03, labels = expression(x + dx), adj = c(0.5, 1), cex = 1.5)
+points(x = x[6], f(x[6]), pch = 19); text(x = x[6], y = f(x[6]), labels = expression(f(x + dx)), adj = c(0.5, 0), cex = 1.5)
+curve(f, add = TRUE, col = "red", lwd = 2)
+```
+
+## Sommes de Riemann (V)
+
+On peut également construire d'autres suites de rectangles qui donnent une somme de Riemann qui convergent vers la même quantité:
+
+```{r somme-de-riemann-3}
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 10)
+f <- function(x) { x^2 }
+plot(x, f(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.1, 1))
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+text(x = x, y = rep(-0.03, length(x)), 
+     labels =  c("", 
+         expression(x[1]),
+         rep("", 2), 
+         expression(x),
+         rep("", length(x) - 6), 
+         ""), adj = c(0.5, 1), cex = 1.5)
+text(x = 0, y = -0.03, labels = expression(x[0] == 0), adj = c(0.75, 1), cex = 1.5)
+text(x = 1, y = -0.03, labels = expression(x[n] == 1), adj = c(0.25, 1), cex = 1.5)
+segments(y0 = x, y1 = x, 
+         x0 = rep(0, length(x)),  x1 = rep(-0.025, length(x)))
+text(y = x, x = rep(-0.03, length(x)), 
+     labels =  c(0, 
+         0.1,
+         rep("", 2), 
+         "",
+         rep("", length(x) - 6), 
+         1), adj = c(0.5, 0), cex = 1.5)
+rect(xleft = x[-length(x)], xright = x[-1], ybottom= 0, ytop = (f(x)[-1] + f(x)[-length(x)])/2, col = "grey80")
+rect(xleft = x[5], xright = x[6], ybottom= 0, ytop = (f(x)[5] + f(x)[6])/2, col = "grey60")
+## Add annotations
+text(x = x[6], y = -0.03, labels = expression(x + dx), adj = c(0.5, 1), cex = 1.5)
+points(x = x[5], (f(x[5]) + f(x[6]))/2, pch = 19); text(x = x[5], y = (f(x[5]) + f(x[6]))/2, 
+                                          labels = expression(frac(f(x + dx) + f(x), 2)), adj = c(0.5, 0), cex = 1.5)
+curve(f, add = TRUE, col = "red", lwd = 2)
+```
+
+## Sommes de Riemann (VI)
+
+En particulier, on peut considérer les rectangles d'aires 
+$$
+\begin{align}
+\mathcal{A}_k & = (x_{k+1} - x_{k}) f(x_k) =  \frac{b-a}{n} f\left( a + k \frac{b-a}{n} \right) \\
+\mathcal{B}_k & = (x_{k+1} - x_{k}) f(x_{k+1}) = \frac{b-a}{n} f\left( a + (k+1) \frac{b-a}{n} \right) \\
+\mathcal{C}_k & = (x_{k+1} - x_{k}) \frac{f(x_{k}) + f(x_{k+1})}{2} \\ 
+& = \frac{b-a}{n} \frac{f\left( a + k \frac{b-a}{n} \right) + f\left( a + (k+1) \frac{b-a}{n} \right)}{2}
+\end{align}
+$$
+Et obtenir 3 sommes de Riemann différentes qui **convergent toutes** vers la <alert>même limite</alert> $\int_{a}^{b} f(x)dx$
+
+## Interprétation graphique (I)
+
+L'approximation $f(x)dx \simeq f(x_k) (x_{k+1} - x_{k})$ revient à:
+
+- considérer que $f$ est constante sur $[x_k, x_{k+1}]$
+- que la primitive $F$ de $f$ est affine, de pente $f(x_k)$ sur $[x_k, x_{k+1}]$
+
+## Interprétation graphique (II)
+
+Approximation pour $n = 10$
+
+```{r somme-de-riemann-approximation}
+par(mfrow = c(1, 2))
+## First Plot
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 10)
+f <- function(x) { x^2 }
+plot(x, f(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.1, 1), main = "Fonction")
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+text(x = x, y = rep(-0.03, length(x)), 
+     labels =  c("", 
+         expression(x[1]),
+         rep("", 2), 
+         expression(x),
+         rep("", length(x) - 6), 
+         ""), adj = c(0.5, 1), cex = 1.5)
+points(x = x[-length(x)], y = f(x[-length(x)]), pch = 19, col= "blue")
+segments(x0 = (x0 <- x[-length(x)]), x1 = x[-1], y0 = f(x0), col = "blue", lwd = 2)
+## Second Plot
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 10)
+F <- function(x) { x^3 / 3 }
+plot(x, F(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.05, 0.5), main = "Primitive")
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+text(x = x, y = rep(-0.03, length(x)), 
+     labels =  c("", 
+         expression(x[1]),
+         rep("", 2), 
+         expression(x),
+         rep("", length(x) - 6), 
+         ""), adj = c(0.5, 1), cex = 1.5)
+pas <- diff(x)[1]
+y <- cumsum(c(f(0), pas * f(x[-length(x)]))) 
+points(x = x, y = y, pch = 19, col= "blue")
+segments(x0 = x[-length(x)], x1 = x[-1], y0 = y[-length(y)], y1 = y[-1], col = "blue", lwd = 2)
+```
+
+## Interprétation graphique (III)
+
+Approximation pour $n = 50$ (Meilleure)
+
+```{r somme-de-riemann-approximation-2}
+par(mfrow = c(1, 2))
+## First Plot
+par(mar = c(1, 1, 1, 1))
+x <- seq(0, 1, length.out = 50)
+f <- function(x) { x^2 }
+plot(x, f(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.1, 1), main = "Fonction")
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.025, length(x)))
+## points(x = x[-length(x)], y = f(x[-length(x)]), pch = 19, col= "blue", cex = 0.5)
+segments(x0 = (x0 <- x[-length(x)]), x1 = x[-1], y0 = f(x0), col = "blue", lwd = 2)
+## Second Plot
+par(mar = c(1, 1, 1, 1))
+F <- function(x) { x^3 / 3 }
+plot(x, F(x), col = "red", lwd = 2, axes = FALSE, type = "l", xlab = "", ylab = "", 
+     xlim = c(-0.1, 1.05), ylim = c(-0.05, 0.5), main = "Primitive")
+abline(h = 0, v = 0)
+segments(x0 = x, x1 = x, 
+         y0 = rep(0, length(x)),  y1 = rep(-0.0125, length(x)))
+pas <- diff(x)[1]
+y <- cumsum(c(f(0), pas * f(x[-length(x)]))) 
+## points(x = x, y = y, pch = 19, col= "blue")
+segments(x0 = x[-length(x)], x1 = x[-1], y0 = y[-length(y)], y1 = y[-1], col = "blue", lwd = 2)
+```
+
+## Exercices
+
+Vérifier que les sommes suivantes sont bien des sommes de Riemann (c'est à dire peuvent s'écrire sous la forme $\frac{b-a}{n} \sum f(x_k)$ avec $f, a, b$ à déterminer) et calculer leurs limites
+$$
+\begin{align}
+A_n = \sum_{k = 0}^{n-1} \frac{k}{n^2} & & B_n = \sum_{k = 1}^n \frac{k}{n^2} \\ 
+C_n = \sum_{k = 0}^{n-1} \frac{k}{k^2 + n^2} & & D_n = \sum_{k = 1}^n \frac{1}{n+k}
+\end{align}
+$$
+
+# Propriétés de l'intégrale
+
+## Linéarité
+
+<div class = "proposition">
+Soit $f, g$ deux fonctions continues sur un **segment** $[a,b]$ et $\lambda \in \mathbb{R}$. 
+$$
+\begin{align}
+\int_{a}^b f(t) + g(t)dt & = \int_a^b f(t)dt + \int_a^b g(t)dt \\
+\int_a^b \lambda f(t)dt& = \lambda \int_a^b f(t)dt
+\end{align}
+$$
+</div>
+
+## Relation de Chasles
+
+<div class = "proposition">
+Soit $f$ continue sur un **segment** $[a,b]$ et $(x, y, z) \in [a, b]$ (quel que soit leur ordre)
+$$
+\int_x^z f(t)dt = \int_x^y f(t)dt + \int_y^z f(t)dt
+$$
+</div>
+
+On n'a pas besoin d'avoir $x \leq y \leq z$ mais il faut que $f$ soit bien continue sur les intervalles $[x, y]$, $[y, z]$, $[x, z]$ (avec les bornes éventuellement réordonnées). 
+
+## Positivité et croissance
+
+<div class = "proposition">
+
+Soit $f$ et $g$ continues sur $[a,b]$ et <alert>$a \leq b$</alert>. Si
+
+- $f$ est <alert>positive</alert>, alors
+$$
+\int_a^b f(t)dt \geq 0
+$$
+- Si $f(x) \leq g(x)$ pour tout $x \in [a, b]$ alors 
+$$
+\int_a^b f(t)dt \leq \int_a^b g(t)dt
+$$
+</div>
+
+## Passage à la valeur absolue
+
+<div class = "proposition">
+Soit $f$ continue sur $[a,b]$ et <alert>$a \leq b$</alert>. 
+$$
+- \int_{a}^b |f(t)|dt \leq \int_a^b f(t)dt \leq \int_{a}^b |f(t)|dt
+$$
+En particulier, 
+$$
+\left| \int_a^b f(t)dt \right| \leq \int_{a}^b |f(t)|dt
+$$
+</div>
+
+## Encadrement
+
+<div class = "proposition">
+Soit $f$ continue sur $[a,b]$ et <alert>$a \leq b$</alert>. S'il existe deux réels $m$ et $M$ tels que $m \leq f(x) \leq M$ pour tout $x \in [a, b]$, alors 
+$$
+m(b-a) \leq \int_a^b f(t)dt \leq M(b - a)
+$$
+</div>
+
+## Valeur moyenne d'une fonction
+
+<div class = "proposition">
+Soit $f$ continue sur $[a,b]$ et <alert>$a \leq b$</alert>. On appelle <alert>valeur moyenne</alert> de $f$ sur $[a, b]$ la quantité
+$$
+\frac{1}{b-a} \int_a^b f(t)dt
+$$
+Cette quantité est atteinte par $f$ en au moins un point de $[a, b]$. 
+</div>
+
+C'est l'équivalent du théorème des acroisseements finis, reformulés avec des intégrales. 
+
+# Techniques de calcul
+
+## Intégration par parties (IPP)
+
+L'idée d'une IPP est de profiter de la formule de dérivation d'un produit: $(fg)' = f'g + fg'$. Si on a deux fonctions de classe $\mathcal{C}^1$ sur $[a, b]$, on sait que:
+$$
+\int_a^b (fg)'(t) dt = [f(t)g(t)]_a^b
+$$
+Mais on sait aussi que 
+$$
+\int_a^b (fg)'(t) dt = \int_a^b f'(t)g(t) dt + \int_a^b f(t)g'(t) dt
+$$
+
+## Intégration par parties (IPP) (II)
+
+<div class = "proposition">
+Soit $f$, $g$ de classe $\mathcal{C}^1$ sur $[a,b]$. On a alors 
+$$
+\int_a^b f'(t)g(t) dt = [f(t)g(t)]_a^b - \int_a^b f(t)g'(t) dt
+$$
+</div>
+
+Lorsqu'on fait une IPP, il est recommandé de bien préciser $f, g, f', g'$. 
+
+## IPP: Exemple
+
+On cherche à calculer $A = \int_0^1 xe^{x}dx$. On sait facilement intégrer et dériver $e^x$ et $x$ donc deux choix s'offrent à nous:
+
+- Poser $f'(x) = x$ et $g(x) = e^x$. Mais on devra calculer $\int_0^1 f(x)g'(x)dx = \int_0^1 \frac{x^2}{2} e^x dx$...
+- Poser $f'(x) = e^{x}$ et $g(x) = x$. On devra calculer $\int_0^1 f(x)g'(x)dx = \int_0^1 e^x dx$. C'est mieux.
+
+## IPP: Exemple (II)
+
+On pose donc $f'(x) = e^{x}$ et $g(x) = x$ d'où on tire $f(x) = e^x$ et $g'(x) = 1$ et on injecte dans la formule:
+$$
+\begin{align}
+\int_0^1 xe^{x} dx & = \int_0^1 g(x)f'(x) dx \\ 
+& = [g(x)f(x)]_0^1 - \int_0^1 g'(x)f(x) dx \\
+& = [xe^x]_0^1 - \int_0^1 e^xdx = [xe^x]_0^1 - [e^x]_0^1 \\ 
+& = e - (e - 1) = 1
+\end{align}
+$$
+
+Les IPP sont surtout utiles pour les intégrales de fonction du type $x^k e^x$, $x^k \cos(x)$ et $\cos(x)e^x$. 
+
+## IPP: Exercices
+
+Calculer les intégrales suivantes à l'aide d'une ou plusieures IPP
+
+$$
+\begin{align}
+A = \int_{-1}^1 xe^{3x}dx &  & B = \int_0^1 y^4 e^y dy \\
+C = \int_{0}^1 (t^2 + t)e^{2t} dt  & & D = \int_{1}^e 1.\ln(x) dx \\
+E_n = \int_{1}^e u^n \ln(u) du \quad (n \in \mathbb{N}) & & F = \int_{\sqrt{e}}^e \frac{\ln(v)}{v}dv \\
+G = \int_{1}^{e^2} (2x^3 + 1) \ln(x)dx & & H = \int_1^4 \sqrt{3s} \ln(s) ds
+\end{align}
+$$
+
+## Changement de variables
+
+<div class = "theorem">
+Soit $f$ continue sur $[a,b]$ et $\phi$ une fonction $\mathcal{C}^1$ d'un intervalle $[\alpha, \beta]$ dans $[a, b]$ telle que $\phi(\alpha) = a$ et $\phi(\beta) = b$. Alors on peut effectuer le changement de variables $x = \phi(t)$ de la façon suivante
+$$
+\int_a^b f(x) dx = \int_{\alpha}^{\beta} f(\phi(t)) \phi'(t) dt
+$$
+</div>
+
+## En pratique
+
+Quand on change de variable, on a trois éléments à changer:
+
+- <alert>la variable:</alert> (ça va sans dire...) Il faut remplacer toutes les occurences de $x$ par leur expression $\phi(t)$
+- <alert>les bornes</alert> quand $x$ varie entre $a$ et $b$, $t$ varie entre $\alpha$ et $\beta$. Comme $x = \phi(t)$, on doit avoir $a=\phi(\alpha)$ et $b = \phi(\beta)$ et il faut donc trouver un $\alpha$ et un $\beta$ convenable. 
+- <alert>l'élement différentiel $dx$</alert> Comme on intègre par rapport à $t$, il faut remplacer $dx$ par une expression qui fait intervenir $dt$. Comme $x = \phi(t)$, on sait que $\frac{dx}{dt} = \phi'(t)$, c'est à dire $dx = \phi'(t) dt$. 
+
+En pratique, on utilise souvent la formule "de la droite vers la gauche". Intuitivement, les deux intégrales sont égales parce qu'on somme des petits éléments égaux:
+$$
+f(x)dx = g(t)dt \; [ = f(\phi(t)) \phi'(t) ]
+$$
+
+## Changement de variable: exemple
+
+On cherche à calculer $I = \int_1^e \frac{\ln(t)}{t}dt$ à l'aide du changement de variable $x = \ln(t)$. On effectue les trois changements. 
+
+- On change la variable: $\frac{\ln(t)}{t} = x/e^x$
+- On change les bornes: quand $t$ varie entre $1$ et $e$, $x = \ln(t)$ varie entre $0$ et $1$.
+- On change l'élément différentiel: $t = e^x$ donc $dt = e^x dx$
+
+$$
+\begin{align}
+I & = \int_{t = 1}^{t = e} \frac{\ln(t)}{t}dt = \int_{x = 0}^{x = 1} \frac{x}{e^x} e^x dx = \int_0^1 xdx = 1/2
+\end{align}
+$$
+
+## Deuxième exemple (I)
+
+On veut calculer l'intégrale $I = \int_{\pi/6}^{\pi/3} \frac{\cos(\theta)}{\sin(\theta)} d\theta$. On remarque au numérateur une différentielle connue puisque $\sin(\theta) d\theta = d(\sin(\theta))$. Il est donc tentant d'essayer de tout écrire en fonction de $y = \sin(\theta)$. 
+
+- Concernant l'élément différentiel, on sait que $dy = \cos(\theta) d\theta$
+- On veut réécrire l'expression dans l'intégrale en fonction de $y$ seulement: $\frac{\cos(\theta)}{\sin(\theta)} d\theta = \frac{dy}{\sin(\theta)} = \frac{dy}{y}$
+- On veut changer les bornes, quand $\theta = \pi/6$, $y = \sin(\pi/6) = 1/2$ et quand $\theta = \pi/3$, $y = \sin(\pi/6) = \sqrt{3}/2$
+
+## Deuxième exemple (II)
+
+On a donc 
+
+$$
+\begin{align}
+I & = \int_{\theta = \pi/6}^{\theta = \pi/3} \frac{\cos(\theta)}{\sin(\theta)}d\theta \\ 
+  & = \int_{y = 1/2}^{y = \sqrt{3}/2} \frac{dy}{y} \\ 
+  & = [\ln(y)]_{1/2}^{\sqrt{3}/2} = \ln(\sqrt{3})
+\end{align}
+$$
+
+## Troisième exemple (I)
+
+On cherche à calculer l'intégrale $\int_{0}^{\pi/2} \sin^{3}(\alpha) d\alpha$ avec le changement de variable $u = \cos(\alpha)$ 
+
+- Concernant l'élément différentiel, on sait que $du = -\sin(\alpha) d\alpha$
+- On veut réécrire l'expression dans l'intégrale en fonction de $u$ uniquement: 
+$$
+\begin{align}
+\sin^{3}(\alpha)d\alpha & = \sin^2(\alpha) \sin(\alpha) d\alpha = - \sin^2(\alpha) du \\ 
+                 & = -(1 - \cos^2(\alpha)) du = - (1 - u^2)du
+\end{align}                 
+$$
+* On veut changer les bornes, 
+    + quand $\alpha = 0$, $u = \cos(\alpha) = \cos(0) = 1$
+    + quand $\alpha = \pi/$, $u = \cos(\alpha) = \cos(\pi/2) = 0$
+
+## Troisième exemple (II)
+
+On a donc 
+
+$$
+\begin{align}
+I & = \int_{\alpha = 0}^{\alpha = \pi/2} \sin^3(\alpha) d\alpha \\ 
+  & = \int_{u = 1}^{u = 0} -(1 - u^2)du \\ 
+  & = \int_{u = 0}^{u = 1} (1 - u^2)du \\
+  & = \left[u - \frac{u^3}{3}\right]_{0}^1 = \frac{2}{3}
+\end{align}
+$$
+
+## Changement de variable: exercices
+
+Calculer les intégrales suivantes à l'aide du changement de variable proposé:
+$$
+\small
+\begin{align}
+\int_{\pi/4}^{\pi/3} \tan(\theta) d\theta & & \text{en posant } v = \cos(\theta) \\
+\int_{0}^{\pi/2} \cos^3(\theta) d\theta & & \text{en posant } v = \sin(\theta) \\
+\int_0^{\pi / \omega} \cos\left( \frac{\pi}{3}  - \frac{\omega t }{2}\right)dt & & \text{en posant } y = \frac{\pi}{3}  - \frac{\omega t}{2} \\
+\int_{x_0}^{x_0 + H} (x - x_0) e^{- \left( \frac{x - x_0}{h} \right)^2} dx& & \text{en posant } z = \left(\frac{x - x_0}{h}\right)^2 \\
+\int_0^R \frac{dr}{(R^2 + r^2)^{3/2}} & & \text{en posant } r = R\tan(\alpha) 
+\end{align}
+$$
+
+## Changement de variable: exercices (II)
+
+Calculer les intégrales suivantes:
+
+$$
+\small
+\begin{align}
+\int_{0}^{1} w \sqrt{3w+1} dw & & \text{en posant } z = 3w+1 \\
+\int_{0}^{1} \frac{dx}{e^x + 1} & & \text{en posant } v= e^x [*] \\
+\int_1^{2} \frac{ds}{s(s^3+1)} & & \text{en posant } y = s^3 + 1 \\
+\int_{-1}^{0} \frac{u^3 du}{(u^2 + 1)\sqrt{u^2 +1}} & & \text{en posant } v = u^2 + 1 \\
+\int_0^3  \frac{t \ln(t^2 + 1)}{t^2 + 1} & & \text{en posant } x = t^2 + 1
+\end{align}
+$$
+
+$[*]$ On peut utiliser le fait que $1/(x(x-1)) = 1/(x-1) - 1/x$.
+
+# Intégrale à borne variable
+
+## Un problème de notation
+
+Jusqu'à présent, on a uniquement des intégrales de la forme $I = \int_{x_0}^{x_1} f(x)dx$ mais rien n'oblige les deux bornes à être des constantes. On pourrait avoir envie de faire varier la valeur finale ($b$) et de l'appeler $x$. 
+
+<alert>Attention</alert>, bien qu'il soit tout à fait légitime d'appeler la valeur finale $x$, il faut alors faire attention aux notations pour éviter le grand n'importe quoi $\int_{x_0}^x f(x)dx$.
+
+Ici on a donné le même nom $x$à deux choses différentes:
+
+- la quantité qui varie par petit pas et qu'on utilise pour faire une grande somme de petits éléments;
+- la valeur finale pour laquelle on arrête de sommer.
+
+## Solution
+
+Pour lever l'incertitude, on donne un nom différent à la <alert>variable d'intégration</alert> et aux <alert>bornes d'intégration</alert>. Par exemple, on écrit souvent:
+
+$$
+I(x) = \int_{x_0}^x f(t)dt
+$$
+
+Le résultat de l'intégration n'est plus un nombre bien défini mais une valeur qui dépend de $x$, c'est une **fonction**, notée $I(x)$. Si $F$ est une primitive de $f$, on peut en effet écrire 
+$$
+I(x) = \int_{x_0}^x f(t)dt = F(x) - F(x_0)
+$$
+
+En particulier $I(x)$ est <alert>la primitive de $f$ qui s'annule en $x_0$</alert> (toutes les primitives sont égales à  constante près et $I(x_0) = 0$)
+
+## Exemple
+
+Un mobile se déplace sur une droite en partant du point $x = 0$. Sa vitesse au temps $t$ est notée $v(t)$. On sait alors que sa position au temps $t$ est donnée par 
+$$
+x(t) = \int_0^t v(z)dz
+$$

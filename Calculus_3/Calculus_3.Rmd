@@ -1,0 +1,744 @@
+---
+title: "Calcul Différentiel"
+author: "Mahendra Mariadassou"
+date: "8 mars 2017"
+output:
+  ioslides_presentation:
+    css: ../CSS/custom_licence_fdv.css
+    keep_md: yes
+    toc: yes
+  beamer_presentation: default
+height: 720
+width: 1280
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
+```
+
+# Introduction 
+
+## Plan du cours 
+
+- Domaine d'étude
+- Limites, continuité, dérivabilité et variations
+- Comparaison locale de fonction
+- Etude locale des fonctions
+- Retour sur la limite
+
+## Rappel: la notion de dérivée
+
+<div class = "definition">
+La dérivée en $x_0$ d'une fonction $f$ dépendant de $x$ est notée $f'(x_0)$ et définie comme suit
+$$f'(x_0) = \lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$$
+</div>
+
+<ul>
+<li>La dérivée est la limite de deux <alert>petites</alert> quantités qui tendent chacune vers $0$. </li>
+<li>Elle est utilisée (via son <alert>signe</alert>) pour étudier les variations (<alert>locales</alert>) de $f$ et essayer de trouver les optimas (minima et maxima de $f$). </li>
+<li>Elle peut être difficile à calculer <alert>rigoureusement</alert>
+</ul>
+
+## Rappel: le "Formulaire"
+
+Pour éviter de recalculer $f'$ <em>from scratch</em> à chaque fois, on vous a invité à apprendre par coeur <alert>le formulaire</alert>
+
+$$
+  \begin{align*}
+  \forall \alpha \in \mathbb{R}, \quad (x^{\alpha})' = \alpha x^{\alpha - 1}  & &\\
+  \sin'(x) = \cos(x) & & cos'(x) = -\sin(x) \\
+  (e^x)' = e^x & & \ln'(x) = \frac{1}{x} \\
+  (u \times v)' = u'v + uv' & & \left( \frac{u}{v} \right)' = \frac{u'v - uv'}{v^2} \\
+  (g \circ f)(x) = f'(x) g'(f(x)) & & (f^{-1})'(x) = \frac{1}{f' \circ f^{-1} (x)}
+  \end{align*}
+$$
+
+## À propos du "Formulaire"
+
+- Le formulaire utilise des notations compactes et faciles à retenir mais gêne la compréhension
+- On va aussi introduire des notations légèrement plus lourdes (très courantes en physique et en sciences expérimentales) qui mettent en évidence les quantités manipulées. 
+- Il reste néanmoins nécessaire d'avoir en tête le formulaire lors du calcul "effectif" des dérivées. 
+
+## Différientielles et dérivées (I)
+
+De façon générale, si deux quantités $a$ et $b$ sont liées entre elles par une relation quelconque (algébrique, géométrique, physique, etc), une infime variation de l'une (de $a$ vers $a + \text{d}a$) va entraîner une infime variation de l'autre (de $b$ vers $b+\text{d}b$). 
+$$
+\text{Si:} \quad a \to a + \text{d}a \quad \text{alors} \quad b\to  b + \text{d}b
+$$
+
+- La notation $\text{d}$ dans $\text{d}a$ et $\text{d}b$ signale qu'on parle de variations minuscules et même <alert>infinitésimales</alert>, c'est à dire aussi petites que l'on veut. 
+- Les physiciens parlent souvent de <alert>différentielle</alert> (terme emprunté à Leibniz) pour désigner une variation infinitésimale. 
+
+## Différentielles et dérivées (II)
+
+- La dérivée peut se concevoir comme le <alert>taux de variation</alert> de $b$ par rapport $a$, c'est à dire comme le quotient 
+$\displaystyle \frac{\text{d}a}{\text{d}b}$ dans la limite où les variations $\text{d}a$ et $\text{d}b$ sont très petites. 
+- l'idée <alert>principale</alert> de la dérivée est la suivante
+<div class = "proposition">
+Si les différentielles sont suffisamment petites, alors elles sont proportionnelles entre elles et le coefficient de multiplication est la dérivée:
+$$\text{db} =  \frac{\text{d}b}{\text{d}a} \text{d}a$$
+</div>
+
+## Différentielles et dérivées (III)
+
+Dans la notation traditionnelle avec $f'(x)$, on retrouve bien un rapport entre deux variations infinitésimales:
+
+- $\text{d}f = f(x+h) - f(x)$ (petite variation de $f$)
+- $\text{d}x = (x+h) - x$ (petite variation de $x$)
+
+On voit souvent les deux notations 
+
+- $\frac{\text{d}f(x)}{\text{d}x}$ qui insiste sur le rapport entre une petite variation de $\text{d}f(x)$ et une petite variation de $\text{d}x$
+- $\frac{\text{d}}{\text{d}x}f(x)$ qui insiste sur le fait qu'on dérive par rapport à la quantité $x$. 
+
+Les deux sont à connaître. 
+
+## Différentielles et dérivées (IV)
+
+On considère un angle qui mesure $\alpha$ radians. Une variation infime de cet angle, notée $\text{d}\alpha$, entrainera une minuscule variation de $\sin(\alpha)$, notée $\text{d}\sin(\alpha)$. Puisque la dérivée de $\sin$ est $\cos$, on la relation de proportionalité suivante entre les variations infinitésimales
+$$
+\text{d}\sin(\alpha) = \cos(\alpha) \text{d}\alpha
+$$
+En pratique, la relation précédente est vraie dès que $\text{d}\alpha$ est <alert>suffisamment petit</alert> (dans cet exemple, de l'ordre du centi ou milligradient). 
+
+On peut donc adopter une définition, moins rigoureuse mais plus pratique, des différentielles: ce sont des variations <alert>suffisamment petites</alert> pour que la relation de proportionnalité s'appelle (avec une précision raisonnable). [On donnera une définition rigoureuse plus tard]
+
+## Interprétation graphique (I)
+
+```{r, derivative, keep=TRUE}
+f <- function(x) {x^2}
+# curve(f, 0, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2)
+x <- (0:100)/100; plot(x, f(x), axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, type = "l")
+x <- c(0.5, .55); points(x = x, y = f(x), pch = 19)
+abline(h=0, v = 0, lwd = 2)
+segments(x0 = rep(x, each = 2), x1 = c(x[1], 0, x[2], 0), 
+         y0 = c(0, f(x[1]), 0, f(x[2])), y1 = rep(f(x), each = 2), lty = 2)
+## add labels
+text(x = x[1], y = 0.005, adj = c(1, 0), labels = "a")
+text(x = x[2], y = 0.005, adj = c(0, 0), labels = "a+da")
+text(x = 0.005, y = f(x[1]), adj = c(0, 1), labels = "b")
+text(x = 0.005, y = f(x[2]), adj = c(0, 0), labels = "b+db")
+abline(b = diff(f(x))/diff(x), a = f(x[1]) - x[1] * diff(f(x))/diff(x), lty = 2, col = "blue")
+text(x = x[2]+.05, y = f(x[2]), labels = expression(paste("slope = ", frac(db, da)(a))), adj = c(0, 0.5), col = "blue")
+```
+
+## Interprétation graphique (II)
+
+- Le graphique précédent représente $b(a)$. Localement, entre $(a, b)$ et $(a + \text{d}a, b + \text{d}b)$, la courbe peut-être confondue avec tangente en $(a, b)$ et le coefficient directeur de cette tangente est $\frac{\text{d}b}{\text{d}a}$. 
+- Il apparaît clairement sur le graphique précédent, et en toute généralité, que la valeur $\frac{\text{d}b}{\text{d}a}$ <alert>dépend</alert> de $a$ et qu'il faudrait donc la noter $\frac{\text{d}b}{\text{d}a}(a)$. 
+- On peut définir la <alert>dérivéé de la dérivée</alert> comme $\text{d}(\frac{\text{d}b}{\text{d}a})/\text{d}a$. Par souci de simplicité, on abrège la notation en $\frac{\text{d}^2 b}{\text{d}a^2}$
+- De même, la dérivée troisième est notée $\frac{\text{d}^3 b}{\text{d}a^3}$ et plus généralement la dérivée $n$-ème est notée $\frac{\text{d}^n b}{\text{d}a^n}$
+
+## Interprétation graphique (III)
+
+On peut relier les dérivées successives au comportement du graphe de $b(a)$ au voisinage de $a$
+
+- $b(a)$ indique la <alert>valeur</alert> de $b$ au point $a$.
+- La dérivée première $\frac{\text{d}b}{\text{d}a}(a)$ indique la <alert>pente</alert> de la courbe au voisinage de $a$. 
+    - Une pente positive ($\frac{\text{d}b}{\text{d}a} > 0$) correspond à une fonction <alert>localement</alert> croissante 
+    - Une pente négative ($\frac{\text{d}b}{\text{d}a} < 0$) correspond à une fonction <alert>localement</alert> décroissante 
+    - Une pente nulle ($\frac{\text{d}b}{\text{d}a} = 0$) correspond à une absence de pente et à une fonction <alert>localement</alert> constante
+
+## Interprétation graphique (IV)
+
+- La dérivée seconde  $\frac{\text{d}^2 b}{\text{d}a^2}(a)$ indique la <alert>concavité</alert> de la courbe au voisinage de $a$. 
+    - Une concavité positive ($\frac{\text{d}^2b}{\text{d}a^2} > 0$) correspond à une fonction localement <alert>convexe</alert> (en forme de creux) en $a$
+    - Une concavité négative ($\frac{\text{d}^2b}{\text{d}a^2} < 0$) correspond à une fonction localement <alert>concave</alert> (en forme de bosse) en $a$
+    - Une concavité nulle ($\frac{\text{d}^2b}{\text{d}a^2} = 0$) correspond à une absence de courbure et à une fonction localement <alert>linéaire</alert> en $a$
+    
+## Interprétation graphique (V)
+
+```{r concavity}
+par(mfrow = c(1, 3))
+f1 <- function(x) {x^2}
+f2 <- function(x) { log(x) }
+f3 <- function(x) { x+1 }
+curve(f1, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = "Convexe", cex.main = 2);abline(h = 0, v = 0)
+curve(f2, 0, 4, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = "Concave", cex.main = 2);abline(h = 0, v = 0)
+curve(f3, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = "Pas de courbure", cex.main = 2);abline(h = 0, v = 0)
+```
+
+## Variable de dérivation
+
+Attention à la <alert>variable de dérivation</alert>, les variations de $b$ en réponse aux variations de $a$ ne sont pas les mêmes que celles de $b$ en réponse aux variations de $u = g(a)$. 
+
+On considère $b = a^6$ et $u = a^2$, de sorte que $b = u^3$. On a 
+$$
+\frac{\text{d}b}{\text{d}a}(a) = 6a^5 \quad \text{mais} \quad \frac{\text{d}b}{\text{d}u}(u) = 3u^2 (\neq 6a^5)
+$$
+
+## Dérivée de fonctions composées (I)
+
+Il est très facile de manipuler les différentielles pour retrouver des dérivées compliquées. Il arrive souvent que la variation d'une quantité $A$ implique la variation d'une quantité $B$ qui implique la variation d'une quantité $C$. On a alors des relations de proportionalité entre les différentielles:
+$$
+\text{d}B = \frac{\text{d}B}{\text{d}A} \text{d}A \quad \text{d}C = \frac{\text{d}C}{\text{d}B} \text{d}B \quad \text{d}C = \frac{\text{d}C}{\text{d}A} \text{d}A
+$$
+d'où on déduit aisément 
+$$
+\frac{\text{d}C}{\text{d}A} = \frac{\text{d}C}{\text{d}B} \times \frac{\text{d}B}{\text{d}A}
+$$
+
+## Dérivée de fonctions composées (II)
+
+En alourdissant un peu les notations pour expliciter les points auquels sont calculés les dérivées, on obtient 
+$$
+\frac{\text{d}C}{\text{d}A}(A) = \frac{\text{d}C}{\text{d}B}(B) \times \frac{\text{d}B}{\text{d}A}(A)
+$$
+
+D'où on tire par analogie (avec $A=x$, $B=f(x)$ et $C=(g\circ f)(x)$ la formule fondamentale du calcul différentiel
+$$
+(g \circ f)'(x) = f'(x) g'(f(x))
+$$
+
+On peut évidemment généraliser à la composée de plus de deux fonctions.
+
+## Exemple
+
+En posant événtuellement $u = \omega t + \phi$, calculer la dérivée par rapport à $t$ de $\sin(\omega t + \phi)$
+
+$$
+\begin{align*}
+\frac{\text{d}(\sin(\omega t + \phi))}{\text{d}t}(t) & = \frac{\text{d}\sin(u)}{\text{d}u}(u) \times \frac{\text{d}u}{\text{d}t}(t) \\
+& = \cos(u) \times \omega \\
+& = \omega \cos(\omega t + \phi)
+\end{align*}
+$$
+On n'oubliera pas de bien tout exprimer en fonction de la variable de dérivation (ici $t$).
+
+## Lien avec le formulaire
+
+En combinant le mini-formulaire (exception faite de $(f^{-1})'(x)$) et le résultat précédent, on retrouve des dérivées connues uniquement comme cas particuliers
+$$
+\begin{align*}
+(e^{u(x)})' = u'(x)e^{u(x)} \\
+(\ln(u(x)))' = \frac{u'(x)}{u(x)} \\
+(u^\alpha(x))' = \alpha u'(x) u^{\alpha-1}(x)\\
+\end{align*}
+$$
+
+## Exercice: Dérivées de fonctions angulaires
+
+Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin)
+$$
+\begin{align*}
+\frac{\text{d}(\tan(\alpha))}{\text{d}\alpha} & & \frac{\text{d}[1/\cos(\alpha)]}{\text{d}\alpha} \\
+\frac{\text{d}[1/\sin(\alpha)]}{\text{d}\alpha} & & \frac{\text{d}[1/\tan(\alpha)]}{\text{d}\alpha}
+\end{align*}
+$$
+
+## Solutions 
+
+$$
+\begin{align*}
+\frac{\text{d}(\tan(\alpha))}{\text{d}\alpha} & = \frac{1}{\cos^2(\alpha)} = 1 + \tan^2(\alpha)\\ \frac{\text{d}[1/\cos(\alpha)]}{\text{d}\alpha} & = \frac{\sin(\alpha)}{\cos^2(\alpha)}\\
+\frac{\text{d}[1/\sin(\alpha)]}{\text{d}\alpha} & = -\frac{\cos(\alpha)}{\sin^2(\alpha)}\\
+\frac{\text{d}[1/\tan(\alpha)]}{\text{d}\alpha} & = \frac{-1}{\sin^2(\alpha)}
+\end{align*}
+$$
+
+## Exercices (dérivées de fonctions de bases)
+
+$$
+\begin{align*}
+\frac{\text{d}[u\ln(u) - u ]}{\text{d}u} & & \frac{\text{d}[(v - 1)e^v]}{\text{d}v}\\
+\frac{\text{d}[1/(1+\epsilon^2)]}{\text{d}\epsilon} & & \frac{\text{d}[1/\tan{\alpha}]}{\text{d}\alpha} \\
+\frac{\text{d}^2[\sin^2(\theta)]}{\text{d}\theta^2} & & \frac{\text{d}^2[x\sqrt{x}]}{\text{d}x^2} \\
+\frac{\text{d}^2[\ln(y)]}{\text{d}y^2} & & \frac{\text{d}^2[z^3+3z^2+3z+1]}{\text{d}z^2}
+\end{align*}
+$$
+
+## Solutions
+
+Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin)
+$$
+\small
+\begin{align*}
+\frac{\text{d}[u\ln(u) - u ]}{\text{d}u} = \ln(u) & & \frac{\text{d}[(v - 1)e^v]}{\text{d}v} = ve^v \\
+\frac{\text{d}[1/(1+\epsilon^2)]}{\text{d}\epsilon} = \frac{-2\varepsilon}{(1+\varepsilon^2)^2}& & \frac{\text{d}[1/\tan{\alpha}]}{\text{d}\alpha} = \frac{-1}{\sin^2(\alpha)} \\
+\frac{\text{d}^2[\sin^2(\theta)]}{\text{d}\theta^2} = 2\cos(2\theta) & & \frac{\text{d}^2[x\sqrt{x}]}{\text{d}x^2} = \frac{3}{4\sqrt{x}}\\
+\frac{\text{d}^2[\ln(y)]}{\text{d}y^2} = \frac{-1}{y^2} & & \frac{\text{d}^2[z^3+3z^2+3z+1]}{\text{d}z^2} = 6z + 6
+\end{align*}
+$$
+
+## Exercices (dérivées de fonctions composées)
+
+Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin)
+$$
+\begin{align*}
+\frac{\text{d}[(1+u^3)^4]}{\text{d}u} & & \frac{\text{d}[\sqrt{1+v^2}]}{\text{d}v} \\
+\frac{\text{d}[\ln(1-x)]}{\text{d}x}  & & \frac{\text{d}[2\sin(\alpha - \frac{\pi}{8})]}{\text{d}\alpha} \\
+\frac{\text{d}[\tan^2(\theta)]}{\text{d}\theta} & & \frac{\text{d}[e^{-y^2}]}{\text{d}y} \\
+\frac{\text{d}[1/\sqrt{1+u^2}]}{\text{d}u} & & \frac{\text{d}[\sqrt{z^3 + 3z^2 + 3z + 1}]}{\text{d}z}
+\end{align*}
+$$
+
+## Solutions
+
+Calculer les dérivées suivantes (en décomposant les calculs et en vous servant du formulaire si besoin)
+$$
+\scriptsize
+\begin{align*}
+\frac{\text{d}[(1+u^3)^4]}{\text{d}u} = 12u^2(1+u^3)^3 & & \frac{\text{d}[\sqrt{1+v^2}]}{\text{d}v} = \frac{v}{\sqrt{1+v^2}} \\
+\frac{\text{d}[\ln(1-x)]}{\text{d}x}  = \frac{-1}{1 - x} & & \frac{\text{d}[2\sin(\alpha - \frac{\pi}{8})]}{\text{d}\alpha} = 2\cos\left(\alpha - \frac{\pi}{8}\right)\\
+\frac{\text{d}[\tan^2(\theta)]}{\text{d}\theta} = 2\tan(\theta) + 2\tan^3(\theta))& & \frac{\text{d}[e^{-y^2}]}{\text{d}y} = -2y e^{-y^2}\\
+\frac{\text{d}[1/\sqrt{1+u^2}]}{\text{d}u} = -\frac{u}{(1+u^2)^{3/2}} & & \\ 
+\end{align*}
+$$
+$$
+\scriptsize
+\frac{\text{d}[\sqrt{z^3 + 3z^2 + 3z + 1}]}{\text{d}z} = \frac{3z^2 + 6z + 3}{2\sqrt{z^3 + 3z^2 + 3z + 1}}
+$$
+
+## Dérivées de fonctions réciproques
+
+Les fonctions réciproques jouent un rôle fondamentales en sciences expérimentales. Il est souvent possible d'<alert>inverser</alert> une relation entre deux quantités $a$ et $b$. C'est à dire qu'on peut exprimer 
+
+- $a$ en fonction de $b$ ($a = a(b)$)
+- $b$ en fonction de $a$ ($b = b(a)$)
+
+C'est le cas si $a(b)$ (ou $b(a)$) est une <alert>bijection</alert> (ou plus simplement une fonctions strictement monotone). Dans ce cas, $a(b)$ et $b(a)$ sont dites <alert>réciproques</alert>. 
+
+Dans le formalisme mathématique, on note plutôt $y = f(x)$ et $x = f^{-1}(y)$. 
+
+## Graphes de fonctions réciproques
+
+Les graphes de fonctions réciproques s'obtiennent aisément en <alert>permutant</alert> les axes des abscisses et des ordonnées. 
+
+```{r graphes-reciproques}
+f <- function(x) {x^2}
+g <- function(x) {sqrt(x)}
+par(mfrow = c(1, 2))
+## Graph 1
+curve(f, 0, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = "Graph of b(a)")
+x <- 0.4; points(x = x, y = f(x), pch = 19)
+abline(h=0, v = 0, lwd = 2)
+segments(x0 = rep(x, 2), x1 = c(x, 0), 
+         y0 = c(0, f(x)), y1 = rep(f(x), 2), lty = 2)
+## add labels
+text(x = x+0.025, y = 0.025, adj = c(0, 0), labels = "a")
+text(x = 0.025, y = f(x)+0.025, adj = c(0, 0), labels = "b")
+abline(b = 2*x, a = f(x) - x * 2*x, lty = 2, col = "blue")
+text(x = x+.05, y = f(x), labels = expression(paste("slope = ", frac(db, da)(a))), adj = c(0, 0.5), col = "blue")
+## Graph 2
+curve(g, 0, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = "Graph of a(b)")
+x <- f(0.4); points(x = x, y = g(x), pch = 19)
+abline(h=0, v = 0, lwd = 2)
+segments(x0 = rep(x, 2), x1 = c(x, 0), 
+         y0 = c(0, g(x)), y1 = rep(g(x), 2), lty = 2)
+## add labels
+text(x = x+0.025, y = 0.025, adj = c(0, 0), labels = "b")
+text(x = 0.025, y = g(x)+0.025, adj = c(0, 0), labels = "a")
+abline(b = 1/(2*sqrt(x)), a = g(x) - sqrt(x)/2, lty = 2, col = "blue")
+text(x = x+.05, y = g(x), labels = expression(paste("slope = ", frac(da, db)(b))), adj = c(0, 0.5), col = "blue")
+
+```
+
+## Dérivées de fonctions réciproques (II)
+
+Au vu des relations de proportionalités entre les différentielles:
+$$
+\text{db} =  \frac{\text{d}b}{\text{d}a} \text{d}a \qquad \text{da} =  \frac{\text{d}a}{\text{d}b} \text{d}b
+$$
+On a évidemment la relation suivante:
+$$
+\frac{\text{d}b}{\text{d}a}(a) = \left( \frac{\text{d}a}{\text{d}b}(b) \right)^{-1}
+$$
+
+## Dérivées de fonctions réciproques (III)
+
+Attention à bien calculer les dérivées au point d'intérêt. 
+
+Par exemple, si $a$ et $b$ sont des quantités positives, alors $b=\sqrt{a} \Leftrightarrow a = b^2$. 
+
+Sachant que $\frac{\text{d}a}{\text{d}b} = \frac{\text{d}(b^2)}{\text{d}b} = 2b$, on déduit tout de suite que $\frac{\text{d}b}{\text{d}a} = \frac{1}{2b}$. Mais pour que ce résultat soit intéressant, il faut le <alert>réexprimer</alert> en fonction de $a$, c'est à dire $\frac{\text{d}b}{\text{d}a} = \frac{1}{2\sqrt{a}}$.
+
+D'un point de formel, on retrouve la formule de la dérivée de la fonction réciproque. Si $y = f(x)$ et $x = f^{-1}(y)$, on a 
+$$
+(f^{-1})'(y) = \frac{\text{d}x}{\text{d}y}(y) = \left( \frac{\text{d}y}{\text{d}x}(x) \right)^{-1} = \frac{1}{f'(x)} = \frac{1}{f'\circ f^{-1}(y)}
+$$
+
+
+
+## Exercice: Dérivées de fonctions trigonométriques réciproques
+
+Les fonctions $\arcsin(x)$, $\arccos(x)$ et $\arctan(x)$ sont les réciproques (sur un certain intervalle) des fonctions trigonométriques $\sin(x)$, $\cos(x)$, $\tan(x)$. 
+
+Montrer que (les résultats sont à connaître)
+
+- $\frac{\text{d}\arcsin(x)}{\text{d}x} = \frac{1}{\sqrt{1 - x^2}}$
+- $\frac{\text{d}\arccos(x)}{\text{d}x} = \frac{-1}{\sqrt{1 - x^2}}$
+- $\frac{\text{d}\arctan(x)}{\text{d}x} = \frac{1}{1+x^2}$
+
+Indice: Quand $\cos(x) >0$, on a $\cos(x) = \sqrt{1 - \sin^2(x)}$. Pareil pour $\sin(x)$. 
+
+# Application des dérivées
+
+## Théorème et inégalité des acroissements finis (TAF/IAF)
+
+<div class = "theoreme">
+Soit $f: I = [a,b] \to \mathbb{R}$ une fonction dérivable sur $I$. Il existe alors au moins un point $c$ dans l'intervalle $(a, b)$ tel que $$f(b) - f(a) = f'(c) (b - a)$$
+</div>
+
+<div class = "theoreme">
+Soit $f: I = [a,b] \to \mathbb{R}$ une fonction dérivable sur $I$. On suppose que pour tout $x \in (a, b)$, on a $m \leq f'(x) \leq M$. Alors, pour tout $x \in (a, b)$, 
+$$m(x - a) \leq f(x) - f(a) \leq M(x-a)$$
+</div>
+
+## TAF et IAF (II)
+
+- TAF: La corde $[AB]$ entre $A = (a, f(a))$ et $B = (b, f(b))$ est parallèle à une des tangentes à la courbe (TAF). 
+- IAF: Si les tangentes extrêmes ont pour pentes $m$ et $M$, la courbe est comprise entre $a$ et $b$ entre les droites passant par $A$ et de coefficient directeur $m$ et $M$. 
+
+```{r, taf-iaf, fig.width=8, fig.height=4}
+par(mfrow = c(1, 2), xpd = FALSE)
+f <- function(x) { x^2 }
+curve(f, 0, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA)
+abline(h=0, v = 0, lwd = 2)
+abline(0, 1, col = c("blue"), lwd = 2)
+x <- 0.5; points(x = rep(x, 2), y = c(0, f(x)), pch = 19)
+## add labels
+text(x = x+0.025, y = 0.025, adj = c(0, 0), labels = "c")
+# text(x = 0.025, y = f(x)+0.025, adj = c(0, 0), labels = "b")
+abline(b = 2*x, a = f(x) - x * 2*x, lty = 2, col = "blue")
+## add a and b
+a <- 0; b = 1; points(c(a, b), f(c(a, b)), pch = 19)
+text(x = x+.05, y = f(x), labels = expression("slope = f'(c)"), adj = c(0, 0.5), col = "blue")
+
+## Figure 2
+f <- function(x) { cos(x - pi/4 ) }
+df <- function(x) { -sin(x - pi/4) }
+curve(f, 0, pi, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(-2, 3))
+abline(h=0, v = 0, lwd = 2)
+a <- 0; b = pi; points(c(a, b), f(c(a, b)), pch = 19)
+x <- 0; abline(b = -df(x), a = f(0), col = c("blue"), lwd = 2, lty = 2)
+x <- pi; abline(b = -df(x), a = f(0), col = c("blue"), lwd = 2, lty = 2)
+```
+
+## Tableau de variations 
+
+<div class = "proposition">
+Soit $f: I = [a,b] \to \mathbb{R}$ une fonction continue sur $I$ et dérivable sur $I$ (sauf éventuellement en un nombre <alert>fini</alert> de points).
+
+- $f' \geq 0$ (resp. $f > 0$ sauf éventuellement en un nombre <alert>fini</alert> de points) sur $I$, alors $f$ est croissante (resp. strictement croissante) sur $I$
+- $f' \leq 0$ (resp. $f < 0$ sauf éventuellement en un nombre <alert>fini</alert> de points) sur $I$, alors $f$ est décroissante (resp. strictement décroissante) sur $I$
+- $f' = 0$ sur $I$, alors $f$ est constante sur $I$
+</div>
+
+C'est une conséquence directe du TAF. 
+
+## Théorème de la bijection {.smaller}
+
+<div class = "theoreme">
+Soit $f$ une fonction <alert>continue</alert> et <alert>strictement monotone</alert> sur un intervalle $I$. Alors $f$ est bijective de $I$ sur $f(I)$. 
+
+De plus $f(I)$ se déduit simplement de $I$ et de la monotonie de $f$ comme suit: 
+$$
+\begin{array}{|c||c|c|}
+\hline
+\text{forme de } I & f \text{ croissante} & f \text{ décroissante} \\
+\hline
+\hline
+[a, b] & f(I) = [f(a), f(b)] & f(I) = [f(b), f(a)] \\
+\hline
+[a, b) & f(I) = [f(a), \lim_{b^-} f) & f(I) = (\lim_{b^-} f , f(a)] \\
+\hline
+(a, b] & f(I) = (\lim_{a^+} f, f(b)] & f(I) = [f(b) , \lim_{a^+} f) \\
+\hline
+(a, b) & f(I) = (\lim_{a^+} f, \lim_{b^-} f) & f(I) = (\lim_{b^-} f , \lim_{a^+} f) \\
+\hline
+\end{array}
+$$
+
+On utilise souvent le signe de la dérivée pour prouver la stricte monotonie 
+
+## Exercices (I)
+
+Déterminer l'image de l'intervalle $I$ par les fonctions suivantes:
+$$
+\small
+\begin{align}
+f: x \mapsto e^x - x & & \text{pour } I = \mathbb{R} & & \text{pour } I = (0, e) \\
+g: x \mapsto \ln(x+1) -x & & \text{pour } I = (-1, 0) & & \text{pour } I = [0, e] \\
+h: x \mapsto \frac{e^x + 1}{x+2} & & \text{pour } I = (-\infty, -2) & & \text{pour } I = \mathbb{R}_+ \\
+\end{align}
+$$
+
+## Solutions
+
+- $f$ est strictement décroissante sur $\mathbb{R}_-$, strictement croissante sur $\mathbb{R}_+$. De plus, $\lim_{-\infty} f = \lim_{+\infty} f = +\infty$ et $f(0) = 1$ donc $f(\mathbb{R}) = [1, +\infty)$ et $f((0, e)) = (1, e^e - e)$. 
+- $g$ est strictement croissante sur $(-1, 0]$ et strictement décroissante sur $[0, +\infty)$. De plus, $\lim_{-1} f =  -\infty$, $f(0) = 0$ et $f(e) = \ln(1+e) - e$ donc $f((-1, 0)) = (-\infty, 0)$ et $f([0, e]) = [\ln(1+e) - e, 0]$
+- $h$ est strictement décroissante sur $(-\infty, -2)$ et strictement croissante sur $[0, +\infty)$. De plus, $\lim_{-\infty} f =  0$, $\lim_{-2} f =  -\infty$, $f(0) = 1$ et $\lim_{+\infty} f = +\infty$ donc $f((-\infty, -2)) = (-\infty, 0)$ et $f([0, \infty)) = [1, +\infty)$
+
+
+## Exercices (II)
+
+- En fonction de la valeur du paramètre $m$, indiquer le nombre de solutions de l'équation $x^3 - x = m$. 
+- Montrer que l'équation $x^3 + x + 1 = 0$ admet une unique solution (notée $\alpha$) et que $-1 < \alpha < 0$. 
+
+## Solutions 
+
+Corrigé en cours
+
+## Application (I)
+
+Trouver toutes les applications dérivables de $\mathbb{R}_+^*$ telles que $f(xy) = f(x) + f(y)$ (on peut se rappeler que $\ln(x)$ est une primitive de $1/x$)
+
+On raisonne par analyse-synthèse. 
+
+## Application (II)
+
+<b>Analyse</b>
+Soit $f$ une telle fonction. Soit $y > 0$, on pose $g_y: x \mapsto f(xy)$. En dérivant $g_y$, on obtient:
+$$
+g'_y(x) = y f'(xy) = f'(x)
+$$
+Et en particulier, en $x = 1$, $f'(y) = f'(1) / y$ d'où on déduit que $f(y) = a (\ln(y) + C)$ avec $a = f'(1)$ et $C$ une constante à déterminer. On a également $f(1) = f(1 \times 1) = 2f(1)$ donc $f(1) = 0$ et $aC = 0$, \emph{i.e.} $a = 0$ ou $C = 0$. Au final $f$ doit être de la forme $f(y) = a\ln(y)$. 
+
+<b>Synthèse</b> Soit $f$ une fonction de la forme $f(y) = a \ln(y)$ avec $a \in \mathbb{R}$. On vérifie aisément que $f$ est dérivable et satisfait $f(xy) = f(x) + f(y)$ sur $\mathbb{R}_+^*$
+
+## Dérivées successives
+
+<div class = "définition">
+On définit les dérivées successives de $f$ en un point $a \in D_f$ (resp. sur $I \subset D_f$) par 
+$$
+\begin{cases}
+ & f^{(0)} & = & f \\
+\forall k \in \mathbb{N}^* & f^{(k)} & = & [f^{(k-1)}]'
+\end{cases}
+$$
+
+- On dit que $f$ est $k$ fois dérivable en $a$ (resp. sur $I$) lorsque $f^{(k)}(a)$ existe (resp. $f^{(k)}$ est définie sur $I$). 
+- On dit que $f$ est infiniment dérivable en $a$ (resp. sur $I$) lorsque $f^{(k)}(a)$ existe (resp. $f^{(k)}$ est définie sur $I$) pour tout $k \in \mathbb{N}$.
+</div>
+
+## Dérivées successives (II)
+
+<div class = "définition">
+
+- Une fonction $f$ est dite $D^k$ (en $a$, sur $I$) si elle est $k$-fois dérivable (en $a$, sur $I$)
+- Une fonction $f$ est dite $C^k$ (en $a$, sur $I$) si elle est $k$-fois dérivable et que $f^{(k)}$ est continue (en $a$, sur $I$).
+- Une fonction $f$ est dite $C^\infty$ (en $a$, sur $I$) si elle est infiniment dérivable (en $a$, sur $I$) (et on a $D^\infty = C^\infty$)
+
+</div>
+
+## Exemples
+
+- Tout polynôme est infiniment dérivable sur $\mathbb{R}$
+- Toute fraction rationnelle est infiniment dérivable sur son domaine de définition
+- $x \mapsto \sqrt{x}$ est infiniment dérivable sur $\mathbb{R}_+^*$ mais seulement $C^0$ en $0$. 
+- $\sin$, $\cos$, $\tan$, $\exp$, $\ln$ sont $C^\infty$ sur leurs domaines respectifs
+
+## Exercices
+
+Etudier l'existence des dérivées successives de 
+
+- $f: x \mapsto (x - 1)^{3/2}$
+- $g: x \mapsto \begin{cases} x^2 & \text{si} & x \geq 0 \\ x^3 & \text{si} & x < 0 \end{cases}$ 
+- $h: x \mapsto \begin{cases} x^2 \sin(1/x) & \text{si} & x \neq 0 \\ 0 & \text{si} & x = 0 \end{cases}$ 
+
+## Solutions
+
+- $f$ est définie sur $[1, +\infty)$, $C^{\infty}$ sur $(1, +\infty)$ mais seulement $C^1$ (dérivable de dérivée continue) en $1$. 
+- $g$ est $C^\infty$ sur $\mathbb{R}^*$ mais seulement $C^1$ en $0$. 
+- $h$ est $C^\infty$ sur $\mathbb{R}^*$ mais seulement $C^1$ en $0$. 
+
+# Étude de fonctions 
+
+## Tangentes verticales
+
+<div class = "proposition">
+Soit $f: I = [a,b] \to \mathbb{R}$ une fonction continue sur $I$, dérivable sur $I\setminus \{a\}$. Si $\lim_{a+} f' = \pm \infty$, alors le graphe $f$ admet une tangente verticale en $a$. 
+</div>
+
+```{r tangente-verticale}
+f <- function(x) { sqrt(x-1) }
+curve(f, 1, 4, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, xlim = c(0, 4))
+abline(h=0, v = 0, lwd = 2)
+abline(v = 1, col = c("blue"), lwd = 2)
+```
+
+## Recherche de minimums
+
+Soit $f: I \to \mathbb{R}$ une fonction dérivable qu'on cherche à minimiser (typiquement une énergie, un temps, une surface). Il est parfois plus facile de chercher le minimum de $f$ en passant par $f'$ qu'en faisant le tableau de variation complet de $f$. 
+
+<div class = "definition">
+Les points critiques de $f$ sont les points d'annulation de $f'$ <alert>et</alert> les bornes de son domaine de définition $I$.
+</div>
+
+<div class = "proposition">
+Les minimums <alert>locaux</alert> de $f$ sur $I$ sont forcément atteints en un point critique.
+</div>
+
+Il suffit donc d'étudier les points critiques (généralement peu nombreux) pour savoir où $f$ est (localement) minimum et de comparer ces mininums pour trouver le minimum global. 
+
+On note aussi que maximiser $f$ revient à minimiser $-f$, on se contente donc ici de chercher des minimums. 
+
+## Point critique et minimum
+
+Attention, un minimum est toujours un point critique mais un point critique n'est pas forcément un minimum. 
+
+```{r, point-critique}
+f <- function(x) { 1+x^3 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(0, 2))
+abline(h=0, v = 0, lwd = 2)
+points(0, f(0), pch = 19)
+abline(h = 1, col = c("blue"), lwd = 2)
+```
+
+## Nature des points critiques
+
+Si $f$ est deux-fois dérivable, on peut déterminer si un point critique (hors bornes du domaine) est un maximum local ou un minimum local en fonction du signe de $f''$. 
+
+<div class = "proposition">
+Soit $f: I = [a,b] \to \mathbb{R}$ une fonction deux fois dérivable sur $I$ et $a$ un point d'annulation de $f'$. 
+
+- $f''(a) > 0$, $a$ est un minimum local de $f$
+- $f''(a) < 0$, $a$ est un maximum local de $f$
+- $f''(a) = 0$ on peut pas conclure. 
+</div>
+
+## Nature du point quand $f''(a) \neq 0$
+
+```{r, point-critique-2}
+par(mfrow = c(1, 2))
+## graph 1
+f <- function(x) { 1+x^2 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(0, 2))
+abline(h=0, v = 0, lwd = 2)
+points(0, f(0), pch = 19)
+abline(h = 1, col = c("blue"), lwd = 2)
+## graph 2
+f <- function(x) { 1-x^2 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(0, 2))
+abline(h=0, v = 0, lwd = 2)
+points(0, f(0), pch = 19)
+abline(h = 1, col = c("blue"), lwd = 2)
+```
+
+## Nature du point quand $f''(a) = 0$
+
+```{r, point-critique-3}
+par(mfrow = c(1, 2))
+## graph 1
+f <- function(x) { 1+x^3 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(0, 2))
+abline(h=0, v = 0, lwd = 2)
+points(0, f(0), pch = 19)
+abline(h = 1, col = c("blue"), lwd = 2)
+## graph 2
+f <- function(x) { 1+x^4 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, ylim = c(0, 2))
+abline(h=0, v = 0, lwd = 2)
+points(0, f(0), pch = 19)
+abline(h = 1, col = c("blue"), lwd = 2)
+```
+
+# Mise en oeuvre
+
+## Application (I)
+
+Un pièton peut s'éloigner de $x$ mètres d'une antenne-relais (située en $x=0$). La puissance $f(x)$ des ondes-relais reçues est donnée par 
+$$f(x) = \frac{e^{-(x - \alpha)^2}}{x}$$ avec $\alpha = 2$.
+
+- À quelle distance doit-il se placer pour recevoir le moins d'ondes-relais?
+- Même question s'il ne peut s'éloigner de plus de 3 mètres? 
+- Où doit-il se placer pour maximiser la réception?
+- Même question s'il ne peut pas s'approcher de l'antenne à moins de 1 mètre. 
+
+## Application (II)
+
+Un campeur est situé à $3$ kilomètres en aval de sa tente, de l'autre côté d'une rivière qui fait $1$ km de large. Il nage à $2$ km/h et marche à $4$ km/h. 
+
+- Quel est le plus court chemin pour rentrer? 
+- Même question s'il existe un pont en face de sa tente.
+
+
+```{r, riviere}
+## graph 1
+f <- function(x) { 1+x^3 }
+curve(f, -1, 1, axes = FALSE, xlab = NA, ylab = NA, col = "red", lwd = 2, main = NA, xlim = c(-0.5, 3.5), ylim = c(0, 1), type = "n", asp = 1)
+abline(h = c(0, 1), col = c("black"), lwd = 2)
+points(0, 0, pch = 19, col = "red") ## piéton
+text(0, 0, "campeur", pos = 3, col = "red")
+points(3, 1, pch = 19, col = "red") ## tente
+text(3, 1, "tente", pos = 1, col = "red")
+arrows(1.5, 0, 1.5, 1, col = "blue", code = 3); text(1.5, 0.25, "1 km", pos = 4, col = "blue")
+arrows(0, 0.5, 3, 0.5, col = "maroon", code = 3); text(0.25, 0.5, "3 km", pos = 3, col = "maroon")
+```
+
+## Exercices (I)
+
+Trouver les minimums et maximums globaux des fonctions suivantes (il est recommandé de s'aider d'un ordinateur pour calculer $f$ en différentes valeurs, les exercices avec un (*) sont difficiles):
+$$
+\begin{align*}
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 & & \text{ pour } z \in [-2, 6] \\
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 & & \text{ pour } z \in [-2, 4] \\
+f(z) = 2z^4 - 16z^3 + 20z^2 - 7 & & \text{ pour } z \in [0, 2] \\
+f(t) = \frac{3 - 4t}{t^2 + 1} & & \text{ pour } t \in [-2, 4] \\
+f(x) = 3\cos(2x) - 5x & & \text{ pour } x \in [0, 6] \quad (*)\\
+f(x) = x\cos(x) - \sin(x) & & \text{ pour } x \in [-15, -5] \\
+f(z) = z^2e^{1-z} & & \text{ pour } z \in [-1/2, 5/2]\\
+f(t) = \ln(t^2 + t + 3) & & \text{ pour } t \in [-2, 2]
+\end{align*}
+$$
+
+## Solutions 
+
+$$
+\small
+\begin{array}{|cccc|}
+\hline
+f & I & \min & \max \\
+\hline
+\hline 
+2z^4 - 16z^3 + 20z^2 - 7 & [-2, 6] & -257 & 233 \\
+2z^4 - 16z^3 + 20z^2 - 7 & [-2, 4] & -199 & 233 \\
+2z^4 - 16z^3 + 20z^2 - 7 & [0, 2] & -23 & -1 \\
+\frac{3-4t}{t^2 + 1}     & [-2, 4] &  f(1 + \sqrt{2})  & f(1 - \sqrt{2}) \\
+3\cos(2x) - 5x      & [0, 6] & f(0) & f(30) \\
+x\cos(x) - \sin(x)      & [-15, -5] & f(-5) & f(-15) \\
+x^2e^{1 - x} & [-1/2, 5/2] & f(0) = 0 & f(2) = 4/e & \\
+\ln(t^2 + t + 3) & [-2, 2] & \ln(3.75) & 2\ln(3) \\
+\hline
+\end{array}
+$$
+
+## Exercices (II)
+
+Calculer, à l'aide de dérivées, les limites suivantes:
+$$
+\begin{align*}
+\lim_{x \to 3} \frac{\ln(x) - \ln(3)}{x - 3} & & \lim_{x \to 2} \frac{\sqrt{x+2} - 2}{x - 2} \\
+\lim_{x \to 1} \frac{e^x - e}{x - 1} & & \lim_{x \to -1} \frac{x^{2017} + 1}{x + 1}
+\end{align*}
+$$
+
+## Solutions 
+
+$$
+\begin{align*}
+\lim_{x \to 3} \frac{\ln(x) - \ln(3)}{x - 3} = \frac{1}{3} & & \lim_{x \to 2} \frac{\sqrt{x+2} - 2}{x - 2} = \frac{1}{4}\\
+\lim_{x \to 1} \frac{e^x - e}{x - 1} = e & & \lim_{x \to -1} \frac{x^{2017} + 1}{x + 1} = 2017
+\end{align*}
+$$
+
+## Exercices (III)
+
+À l'aide de la méthode de votre choix, montrez les inégalités (dites de convexité) suivantes:
+$$
+\small
+\begin{align*}
+\forall x \in \mathbb{R} & \quad e^x \geq 1 + x \\
+\forall x \geq 0 & \quad xe^x + 1 \geq e^x \geq 1 + x + \frac{x^2}{2} \\
+\forall x \in (-1, +\infty) & \quad \ln(1+x) \leq x \\
+\forall x \leq 0 & \quad 1+x \leq e^x \leq 1 + x + \frac{x^2}{2}
+\end{align*}
+$$
+
+## Exercices (IV)
+
+On considère la fonction $f(x) = (x+1)e^{-x}$
+
+- Montrer par récurrence que pour tout entier $n \geq 0$, il existe deux réels $a_n$ et $b_n$ tels que $f^{(n)}(x) = (a_n x + b_n)e^{-x}$.
+- Expliciter $a_n$
+- Vérifier que la suite $c_n = (-1)^n b_n$ est arithmétique. En déduire $b_n$. 
