@@ -3,3 +3,9 @@
 .RData
 .Ruserdata
 Administratif
+*/*html
+*/*pdf
+*/*_cache
+*/*_files
+*/*.md
+*/*-figure
