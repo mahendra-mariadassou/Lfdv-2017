@@ -92,7 +92,7 @@ la constante émerge du fait que $\int$ et $d$ ne sont pas exactement inverses.
 ## Fonction de plusieurs variables
 
 <div class = "definition">
-Une <alert>fonction $f$ de plusieurs variables</alert> associe à $(x_1, \dots, x_n) \in \mathbb{R}^n$ un nombre réel $f(x_1, \dots, x_n) \in mathbb$. On la note 
+Une <alert>fonction $f$ de plusieurs variables</alert> associe à $(x_1, \dots, x_n) \in \mathbb{R}^n$ un nombre réel $f(x_1, \dots, x_n) \in \mathbb{R}$. On la note 
 $$f: \begin{cases} \mathbb{R}^n & \to & \mathbb{R} \\ (x_1, \dots, x_n) & \mapsto & f(x_1, \dots, x_n) \end{cases}$$
 </div>
 
@@ -126,7 +126,7 @@ Soit $f: \mathbb{R}^2 \to \mathbb{R}$. Les dérivées partielles de $f$ par rapp
 $$
 \frac{\partial f}{\partial x}(x_0, y_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0)
 $$
-Les fonctions correspondantes sont généralement notées $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial x}$. 
+Les fonctions correspondantes sont notées $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial x}$. 
 </div>
 
 **Remarque** Si $z = f(x,y)$, on peut aussi écrire $\frac{\partial z}{\partial x}$ et $\frac{\partial z}{\partial y}$. 
