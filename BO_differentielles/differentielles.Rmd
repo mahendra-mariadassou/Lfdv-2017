@@ -1,0 +1,260 @@
+---
+title: "Boîte à Outils: Différentielles"
+author: "Mahendra Mariadassou"
+date: "6 décembre 2016"
+output:
+  ioslides_presentation:
+    css: ../CSS/custom_licence_fdv.css
+    toc: yes
+  beamer_presentation: default
+height: 720
+width: 1280
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Plan du cours 
+
+- Notions de différentielles
+- Opérations sur les différentielles
+
+## Objectifs
+
+- Différencier une expression (par exemple $PV = nRT$)
+- Manipuler des différentielles
+- Manipuler des relations entre différentielles
+  
+## Définition et propriété fondamentale
+
+<div class = "definition">
+La différentielle de $x$ notée $dx$ (parfois $\Delta x$ en physique) correspond à une variation **infitésimale** ($\simeq$ toute petite) de $x$
+</div>
+
+<div class = "proposition">
+Si $f$ est une fonction numérique (de $\mathbb{R}$ dans $\mathbb{R}$) et que $y = f(x)$, alors il existe une relation entre $dy$ et $dx$ donnée par 
+$$ dy = f'(x) dx$$
+où $f'$ est la fonction dérivée de $f$. 
+</div>
+
+**Interprétation**: Une petite variation (de taille $dx$) de la quantité $x$ se traduit par une petite variation (de taille $dy = f'(x)dx$) de la quantité $y$
+
+## Remarque(s) 
+
+Il existe un lien <alert>essentiel</alert> entre différentielles et dérivées (qu'on verra en détails plus tard) mais on peut retenir pour l'instant
+
+$$
+\begin{align}
+y = f(x) & \Rightarrow dy = d(f(x)) \\ 
+         & \Leftrightarrow dy = f'(x) dx \\ 
+         & \Leftrightarrow \frac{dy}{dx} = f'(x)
+\end{align}
+$$
+
+## Exercice
+
+Exprimer $dy$ en fonction de $dx$ quand $y$ et $x$ sont liés par les relations suivantes:
+
+- $y = ax + b$ (avec $(a,b) \in \mathbb{R}^2$)
+- $y = x^n$ (avec $n \in \mathbb{N}^\star$)
+- $y = \ln(x)$
+- $y = e^{\alpha x}$ ($\alpha \in \mathbb{R}$)
+- $y = x^{\alpha}$ (avec $\alpha \in \mathbb{R}$), on pourra écrire $x^\alpha = e^{\alpha \ln(x)}$
+
+## Intégration d'une différentielle
+
+<div class = "proposition">
+Si $f$ est une fonction numérique (de $\mathbb{R}$ dans $\mathbb{R}$) et que $y = f(x)$ de dérivée $f'$ alors 
+$$
+\int f'(x) dx = y + K \; (= f(x) + K)
+$$
+où $K$ est une constante arbitraire
+</div>
+
+**Intuition**: On peut retenir que $d$ et $\int$ sont des opérations (presque) inverses et écrire
+$$
+\int f'(x) dx = \int d(f(x)) = \int dy = y \; (+ K)
+$$
+la constante émerge du fait que $\int$ et $d$ ne sont pas exactement inverses. 
+
+## Exercices 
+
+À partir des relations suivantes, trouver un lien entre $y$ et $x$
+
+- $dy = 5 dx$
+- $dy = n x^{n-1} dx$
+- $dy = \frac{dx}{x}$
+- $dy = \alpha e^{\alpha x} dx$
+- $dy = \cos(x)dx$
+- $\frac{dy}{y} = \frac{dx}{x}$
+
+## Fonction de plusieurs variables
+
+<div class = "definition">
+Une <alert>fonction $f$ de plusieurs variables</alert> associe à $(x_1, \dots, x_n) \in \mathbb{R}^n$ un nombre réel $f(x_1, \dots, x_n) \in mathbb$. On la note 
+$$f: \begin{cases} \mathbb{R}^n & \to & \mathbb{R} \\ (x_1, \dots, x_n) & \mapsto & f(x_1, \dots, x_n) \end{cases}$$
+</div>
+
+Dans le cas le plus simple ($n=2$), on remplace généralement $(x_1, x_2)$ par $(x,y)$ et on définit $f$ par son expression:
+$$
+f(x, y) = 4x + 3y
+$$
+ou encore
+$$
+f: (x, y) \mapsto z = 4x+3y
+$$
+
+## Dérivées partielles (I)
+
+En un point donné, on peut définir plusieurs fonctions partielles d'une seule variable en
+
+- laissant une variable libre
+- fixant les autres
+
+Par exemple en $(x_0, y_0)$, on peut définir 
+
+- $g: x \mapsto f(x, y_0)$
+- $h: y \mapsto f(x_0, y)$
+
+et on définit les <alert>dérivées partielles</alert> de $f$ à partir de ces fonctions. 
+
+## Dérivées partielles (II)
+
+<div class = "definition">
+Soit $f: \mathbb{R}^2 \to \mathbb{R}$. Les dérivées partielles de $f$ par rapport à $x$ et $y$ en $(x_0, y_0)$ sont $h'(x_0)$ et $g'(y_0)$ où $g$ et $h$ sont définies par $g(x) = f(x, y_0)$ et $h(y) = g(x_0, y)$. Elles sont notées 
+$$
+\frac{\partial f}{\partial x}(x_0, y_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0)
+$$
+Les fonctions correspondantes sont généralement notées $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial x}$. 
+</div>
+
+**Remarque** Si $z = f(x,y)$, on peut aussi écrire $\frac{\partial z}{\partial x}$ et $\frac{\partial z}{\partial y}$. 
+
+## Exercice 
+
+On suppose que $x,y,z$ sont liés par les relations suivantes. Calculer les dérivées partielles de $z$ par rapport à $x$ et $y$. 
+
+- $z = x + y$
+- $z = xy$
+- $z = x / y$
+- $z = x \ln(y)$
+- $z = e^{x+y}$
+- $z = x^{\alpha} y^{\beta}$
+- $z = x^3 y^2 + \sin^2(y) + 3x$
+
+## Dérivées partielles: généralisations {.build}
+
+- On peut assez facilement généraliser les définitions précédentes à des fonctions $n$ variables. 
+- On peut également calculer des dérivées <alert>secondes</alert>.
+
+<div class = "theoreme">
+Sous des conditions vérifiées pour toutes les fonctions du cours, le théorème de Schwartz garantit que l'ordre de dérivation est indifférent:
+$$
+\frac{\partial^2 z}{\partial x \partial y} = \frac{\partial}{\partial x}\left[ \frac{\partial z}{\partial y}\right] = \frac{\partial}{\partial y}\left[ \frac{\partial z}{\partial x}\right] = \frac{\partial^2 z}{\partial y \partial x}
+$$
+</div>
+
+## Théorème de Scharwz {}
+
+On va vérifier le théorème de Schwarz sur $z = e^{xy}$. 
+
+Si on dérive par rapport à $y$ puis par rapport à $x$:
+$$
+\begin{align}
+\frac{\partial z}{\partial y} = & \frac{\partial e^{xy}}{\partial y} = & x e^{xy} \\
+\frac{\partial^2 z}{\partial x \partial y} = & \frac{\partial xe^{xy}}{\partial x} = & e^{xy} + xy e^{xy} \\
+\end{align}
+$$
+Si on dérive par rapport à $x$ puis par rapport à $y$:
+$$
+\begin{align}
+\frac{\partial z}{\partial x} = & \frac{\partial e^{xy}}{\partial x} = & y e^{xy} \\
+\frac{\partial^2 z}{\partial y \partial x} = & \frac{\partial ye^{xy}}{\partial y} = & e^{xy} + xy e^{xy} \\
+\end{align}
+$$
+Et le théorème est donc vérifié sur cet exemple. 
+
+## Différentielle Totale {.build}
+
+- On sait relier $dy$ et $dx$ quand il existe une relation entre $y = f(x)$.
+- Peut-on faire la même chose avec $dz$, $dx$ et $dy$ si on a une relation $z = f(x, y)$?
+
+<div class = "proposition">
+Si $z = f(x, y)$ où $f$ est une fonction numérique (de $\mathbb{R}^2$ dans $\mathbb{R}$), alors la <alert>différentielle totale</alert> de $z$ est
+$$
+dz = \frac{\partial f}{\partial x} dx + \frac{\partial f}{\partial y} dy = \frac{\partial z}{\partial x} dx + \frac{\partial z}{\partial y} dy
+$$
+</div>
+
+## Différentielle Totale
+
+On peut retrouver ce résultat par analogie avec les différentielles de fonctions univariées:
+$$
+dy = \frac{dy}{dx} dx 
+$$
+Les deux différences majeures concernent le:
+- nombre de différentielles (une par variables dépendante): $dx \to dx, dy, \dots$ 
+- les coefficients multiplicatifs (dérivées partielles au lieu de dérivées droites): $\frac{dy}{dx} \to \frac{\partial z}{\partial x}, \frac{\partial z}{\partial y} \dots$
+
+## Exercice 
+
+Calculer la différentielle totale des fonctions suivantes:
+
+- $z = \frac{x^2 - y^2}{x^2 + y^2}$
+- $z = x^3 y^2 + \sin^2(y) + 3x$
+- $PV = nRT$ (en prenant successivement $P$, $V$ et $T$ commes variables réponses)
+
+## Différentielle logarithmique
+
+Dans certains cas (produits, puissances), il est parfois plus facile de calculer une différentielles totale en échelle logarithmique (pratique pour des incertitudes relatives)
+
+$$
+\begin{align}
+PV = nRT & \Leftrightarrow \ln(P) + \ln(V) = \ln(nR) + \ln(T) \\
+         & \Rightarrow \frac{dP}{P} + \frac{dV}{V} = \frac{dT}{T} \\
+\\
+P = V^\gamma & \Leftrightarrow \ln(P) = \gamma \ln(V) \\
+             & \Rightarrow \frac{dP}{P} = \gamma \frac{dV}{V} \\
+             & \Rightarrow dP = \frac{P}{V}dV \\
+             & \Rightarrow dP= V^{\gamma -1} dV
+\end{align}
+$$
+
+## Application (I)
+
+On considère un cylindre droit de hauteur $h = 50$ cm et de rayon $r=10$ cm et de volume $V$. On s'intéresse à la variation de volume quand on augmente $h$ de $2$ cm et diminue $r$ de $1$ cm. 
+
+- Calculer exactement la variation de volume $\Delta V$
+- Calculer la variation de volume $\Delta V$ de façon approchée (en l'approchant par la différentielle $dV$)
+- Calculer la variation de volume relative $\frac{\Delta V}{V}$ (de façon approchée) 
+
+## Application (II) {.build}
+
+On effectue une transformation adiabatique et réversible sur un gaz parfait pour le faire passer de l'état $(P_0, V_0)$ à l'état $(P_1, V_1)$. 
+
+On sait que $\delta Q = dU - dW$, que pour ce gaz l'énergie interne dépend uniquement de la témperature ($dU = n C_v dT$) et que le travail des forces de pression s'écrit $dW = PdV$. On a donc 
+
+$$
+0 = \frac{\delta Q}{T} = n C_v \frac{dT}{T} + P \frac{dV}{T} = nC_v \frac{dT}{T} + nR \frac{dV}{V}
+$$
+
+De plus $\frac{dT}{T} = \frac{dP}{P} + \frac{dV}{V}$ et $R / C_v = \gamma - 1$ donc 
+$$
+\begin{align}
+0 = n C_v \left[ \frac{dT}{T} +  (\gamma - 1)\frac{dV}{V} \right] = nC_v \left[ \frac{dP}{P} + \gamma \frac{dV}{V} \right]
+\end{align}
+$$
+
+## Application (III)
+
+Au final, on arrive à 
+$$
+\frac{dP}{P} + \gamma \frac{dV}{V} = 0 
+$$
+qui peut se réécrire 
+$$
+PV^{\gamma} = Constante
+$$
+
+Et on retrouve la loi de Laplace pour les détentes adiabatiques.  
