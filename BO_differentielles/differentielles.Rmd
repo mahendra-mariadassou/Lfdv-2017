@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ## Définition et propriété fondamentale
 
 <div class = "definition">
-La différentielle de $x$ notée $dx$ (parfois $\Delta x$ en physique) correspond à une variation **infitésimale** ($\simeq$ toute petite) de $x$
+La différentielle de $x$ notée $dx$ (parfois $\Delta x$ en physique) correspond à une variation **infinitésimale** ($\simeq$ toute petite) de $x$
 </div>
 
 <div class = "proposition">
@@ -124,9 +124,9 @@ et on définit les <alert>dérivées partielles</alert> de $f$ à partir de ces 
 <div class = "definition">
 Soit $f: \mathbb{R}^2 \to \mathbb{R}$. Les dérivées partielles de $f$ par rapport à $x$ et $y$ en $(x_0, y_0)$ sont $h'(x_0)$ et $g'(y_0)$ où $g$ et $h$ sont définies par $g(x) = f(x, y_0)$ et $h(y) = g(x_0, y)$. Elles sont notées 
 $$
-\frac{\partial f}{\partial x}(x_0, y_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0)
+\frac{\partial f}{\partial x}(x_0, y_0) = g'(x_0) \quad \text{et} \quad \frac{\partial f}{\partial y}(x_0, y_0) = h'(x_0)
 $$
-Les fonctions correspondantes sont notées $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial x}$. 
+Les fonctions correspondantes sont notées $\frac{\partial f}{\partial x}$ et $\frac{\partial f}{\partial y}$. 
 </div>
 
 **Remarque** Si $z = f(x,y)$, on peut aussi écrire $\frac{\partial z}{\partial x}$ et $\frac{\partial z}{\partial y}$. 
