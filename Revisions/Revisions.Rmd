@@ -96,6 +96,7 @@ Par convention, $0! = 1$.
 </div>
 <br>
 
+
 **Remarque** On note que $n! = n \times (n-1)!$. 
 
 ## La factorielle (II)
@@ -572,7 +573,7 @@ Attention à l'**intervalle** auquel appartient $\theta$!!
 
 <div class="columns-2">
 
-```{r, cos, fig.width = 5, fig.height = 5, echo = FALSE, fig.align='center'}
+```{r, cos, fig.width = 4, fig.height = 5, echo = FALSE, fig.align='center'}
 par(mar = c(0, 0, 0, 0))
 x <- seq(-pi, pi, length.out = 200)
 plot(x, cos(x), col = "red", type = "l", 
@@ -589,7 +590,7 @@ text(par("usr")[ 1 ], par("usr")[ 4 ], "Cos", adj = c( 0, 1 ), col = "grey20", c
 ```
 
 
-```{r, arccos, fig.width = 3.8, fig.height = 5, echo = FALSE, fig.align='center'}
+```{r, arccos, fig.width = 4, fig.height = 5, echo = FALSE, fig.align='center'}
 par(mar = c(0, 0, 0, 0))
 x <- seq(-1, 1, length.out = 200)
 plot(x, acos(x), col = "red", type = "l", 
@@ -611,7 +612,7 @@ text(par("usr")[ 2 ], par("usr")[ 4 ], "Arccos", adj = c( 1, 1 ), col = "grey20"
 
 <div class="columns-2">
 
-```{r, sin, fig.width = 5, fig.height = 5, echo = FALSE, fig.align='center'}
+```{r, sin, fig.width = 4.5, fig.height = 5, echo = FALSE, fig.align='center'}
 par(mar = c(0, 0, 0, 0))
 x <- seq(-pi, pi, length.out = 200)
 plot(x, sin(x), col = "red", type = "l", 
@@ -628,7 +629,7 @@ text(par("usr")[ 1 ], par("usr")[ 4 ], "Sin", adj = c( 0, 1 ), col = "grey20", c
 ```
 
 
-```{r, arcsin, fig.width = 3.8, fig.height = 5, echo = FALSE, fig.align='center'}
+```{r, arcsin, fig.width = 4.5, fig.height = 5, echo = FALSE, fig.align='center'}
 par(mar = c(0, 0, 0, 0))
 x <- seq(-1, 1, length.out = 200)
 plot(x, asin(x), col = "red", type = "l", 
