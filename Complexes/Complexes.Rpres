@@ -1,7 +1,7 @@
 Complexes
 ========================================================
 author: Mahendra Mariadassou
-date: 14 Novembre 2016
+date: 14 Novembre 2017
 width: 1280
 height: 720
 css: ../CSS/custom_licence_fdv.css
@@ -28,7 +28,7 @@ Objectifs
 - Avoir une visio géométrique de $\mathbb{C}$
 - Connaître les formules de Moivre et d'Euler
 - Savoir retrouver les égalités trigonométriques
-- Trouver une racine carré dans $\mathbb{C}$. 
+- Trouver une racine carré dans $\mathbb{C}$.
 
 Définition et généralités
 ========================================================
@@ -50,7 +50,7 @@ Terminologie
 ========================================================
 
 <div class="definition">
-L'écriture d'un complexe $z$ sous forme $z = a + ib$ (avec $a$ et $b$ <alert>réels</alert>) est dite <em>écriture sous forme algébrique</em> (ou <em>cartésienne</em>), par opposition à la forme exponentielle introduite plus tard. 
+L'écriture d'un complexe $z$ sous forme $z = a + ib$ (avec $a$ et $b$ <alert>réels</alert>) est dite <em>écriture sous forme algébrique</em> (ou <em>cartésienne</em>), par opposition à la forme exponentielle introduite plus tard.
 </div>
 
 <br>
@@ -75,7 +75,7 @@ $$\bar{z} = a -ib$$
 
 **Remarques**
 - Un complexe $z$ est un réel si et seulement si $Im(z) = 0$.
-- Un complexe $z$ dont la partie réelle est nulle ($Re(z) = 0$) est dit *imaginaire pur*. On note $i\mathbb{R}$ l'ensemble des imaginaires purs. 
+- Un complexe $z$ dont la partie réelle est nulle ($Re(z) = 0$) est dit *imaginaire pur*. On note $i\mathbb{R}$ l'ensemble des imaginaires purs.
 
 Conjugaison, réels et imaginaire purs
 ========================================================
@@ -121,12 +121,12 @@ Soit $z, z', z''$ trois nombres complexes:
 Interprétation géométrique
 ========================================================
 
-On peut voir un nombre complexe $z$ comme un couple $(a, b)$ de nombres réels. On peut donc représenter les complexes comme des points dans le plan $\mathcal{P}$ muni du repère orthonormé $(O, \vec{i}, \vec{j})$. 
+On peut voir un nombre complexe $z$ comme un couple $(a, b)$ de nombres réels. On peut donc représenter les complexes comme des points dans le plan $\mathcal{P}$ muni du repère orthonormé $(O, \vec{i}, \vec{j})$.
 
 <div class="proposition">
 Soit $M$ un point de coordonnées $(a, b)$ dans le plan $\mathcal{P}$ muni du repère $(O, \vec{i}, \vec{j})$. On associe à $M$ le nombre complexe $z_M = a + ib$. $z_M$ est appelé <em>affine (complexe)</em> du point $M$. <br>
 Réciproquement, à tout complexe $z = a + ib$, on peut associer son <em>point image</em> $M(z) \in \mathcal{P}$ de coordonnées $(a, b)$. <br>
-Enfin, si $\vec{\alpha}$ est un vecteur du plan de coordonnées $(a, b)$, on lui associe son <em>affine complexe</em> $z_{\vec{\alpha}} = a + ib$. 
+Enfin, si $\vec{\alpha}$ est un vecteur du plan de coordonnées $(a, b)$, on lui associe son <em>affine complexe</em> $z_{\vec{\alpha}} = a + ib$.
 </div>
 
 Pour les propriétés qui suivent, faites des dessins pour les visualiser.
@@ -134,7 +134,7 @@ Pour les propriétés qui suivent, faites des dessins pour les visualiser.
 Interprétation géométrique (II)
 ========================================================
 <div class="proposition">
-Soit $A, B$ deux points du plan, on a 
+Soit $A, B$ deux points du plan, on a
 $$z_\vec{AB} = z_B - z_A$$
 </div>
 
@@ -175,7 +175,7 @@ Soit $A$, $B$ et $C$ 3 points distincts du plan d'affixes $a$, $b$ et $c$. Montr
 <li> $A$, $B$ et $C$ sont alignés si et seulement si $\frac{b-a}{c-a} \in \mathbb{R}$</li>
 <li> Le triangle $ABC$ est rectangle en $A$ si et seulement si $Re((b -a) (\overline{c - a})) = 0$ </li>
 </ul>
-Dans les deux cas, on pourra faire un dessin pour avoir une intuition géométrique des conditions (vecteurs colinéaires ou perpendiculaires) et essayer de les traduires en termes de condition sur les nombre complexes. 
+Dans les deux cas, on pourra faire un dessin pour avoir une intuition géométrique des conditions (vecteurs colinéaires ou perpendiculaires) et essayer de les traduires en termes de condition sur les nombre complexes.
 </div>
 
 Module d'un complexe
@@ -184,12 +184,12 @@ Module d'un complexe
 <div class="definition">
 Soit $z = a + ib$ un nombre complexe sous forme algébrique. Le <em>module</em> de $z$, noté $|z|$ est la distance entre le point $O$ (d'affixe $0$) et le point $M(z)$ (d'affixe $z$), c'est à dire
 $$|z| = OM(z) = \sqrt{a^2 + b^2}$$
-De même, si $z$ est l'affixe d'un vecteur $\vec{\alpha}$, alors $|z| = \|\vec{\alpha}\|$ où $\|\vec{\alpha}\|$ désigne la <em>norme</em> du vecteur $\vec{\alpha}$. 
+De même, si $z$ est l'affixe d'un vecteur $\vec{\alpha}$, alors $|z| = \|\vec{\alpha}\|$ où $\|\vec{\alpha}\|$ désigne la <em>norme</em> du vecteur $\vec{\alpha}$.
 </div>
 
 <br>
 
-Le module est la généralisation à $\mathbb{C}$ de la valeur absolue sur $\mathbb{R}$. C'est pour ça qu'on utilise la même notation. 
+Le module est la généralisation à $\mathbb{C}$ de la valeur absolue sur $\mathbb{R}$. C'est pour ça qu'on utilise la même notation.
 
 Module d'un complexe: géométrie
 ========================================================
@@ -241,7 +241,7 @@ Inégalité triangulaire
 ========================================================
 
 <div class="proposition">
-Soit $z$ et $z'$ deux complexes. On a 
+Soit $z$ et $z'$ deux complexes. On a
 $$ |z + z'| \leq |z| + |z'|$$
 </div>
 
@@ -251,12 +251,12 @@ Inégalité triangulaire: preuve géométrique
 ========================================================
 left: 60%
 
-Soit $O$ le point d'affixe $0$, $A$ celui d'affixe $z$ et $B$ celui d'affixe $z+z'$. 
+Soit $O$ le point d'affixe $0$, $A$ celui d'affixe $z$ et $B$ celui d'affixe $z+z'$.
 
-L'inégalité triangulaire dans le triangle $ABO$ donne 
+L'inégalité triangulaire dans le triangle $ABO$ donne
 $$ OB \leq OA + AB $$
 
-Or $OB = |z + z'|$, $OA = |z|$ et $AB = |z'|$ donc on a bien 
+Or $OB = |z + z'|$, $OA = |z|$ et $AB = |z'|$ donc on a bien
 $$ |z + z'| \leq |z| + |z'|$$
 
 ***
@@ -276,7 +276,7 @@ Nombres complexes de module 1
 ========================================================
 
 <div class="definition">
-L'ensemble des nombres complexes de module $1$ se note $\mathbb{U}$. Il correspond géométriquement à l'ensemble des affixes des points du <em>cercle unité</em> (de centre $O$ et de rayon $1$). 
+L'ensemble des nombres complexes de module $1$ se note $\mathbb{U}$. Il correspond géométriquement à l'ensemble des affixes des points du <em>cercle unité</em> (de centre $O$ et de rayon $1$).
 </div>
 
 <br>
@@ -286,22 +286,22 @@ Soit $z$ un nombre de complexe de module $1$, il existe un réel $\theta$ (en fa
 $$z = \cos(\theta) + i\sin(\theta)$$
 </div>
 
-<br> 
+<br>
 
-C'est immédiat avec ce qu'on a vu en trigonométrie. Comme $z = a + ib$ est de module $1$ on a $a^2 + b^2 = 1$ et $a$ et $b$ peuvent donc s'écrire comme le $\cos$ et le $\sin$ d'un angle $\theta$ bien choisi. 
+C'est immédiat avec ce qu'on a vu en trigonométrie. Comme $z = a + ib$ est de module $1$ on a $a^2 + b^2 = 1$ et $a$ et $b$ peuvent donc s'écrire comme le $\cos$ et le $\sin$ d'un angle $\theta$ bien choisi.
 
 Argument d'un nombre complexe
 ========================================================
 
 <div class="definition">
-Soit $z$ un nombre complexe <alert>non nul</alert>. Le nombre $z / |z|$ est de module $1$. On appelle <em>argument</em> de $z$, noté $\text{arg}(z)$ tout nombre $\theta$ tel que 
+Soit $z$ un nombre complexe <alert>non nul</alert>. Le nombre $z / |z|$ est de module $1$. On appelle <em>argument</em> de $z$, noté $\text{arg}(z)$ tout nombre $\theta$ tel que
 $$ \frac{z}{|z|} = \cos(\theta) + i \sin(\theta)$$
 </div>
 
 **Remarques**
-- Il y a une **infinité** d'arguments, l'argument n'est défini qu'à $2\pi$ près. 
+- Il y a une **infinité** d'arguments, l'argument n'est défini qu'à $2\pi$ près.
 - On parle d'**un** argument, pas de **l'**argument d'un complexe
-- Si on se restreint à un intervalle $I$ de longueur $2\pi$ (par exemple $]-\pi, \pi]$), l'argument est bien unique dans $I$. 
+- Si on se restreint à un intervalle $I$ de longueur $2\pi$ (par exemple $]-\pi, \pi]$), l'argument est bien unique dans $I$.
 
 Argument d'un nombre complexe: propriété
 ========================================================
@@ -322,9 +322,9 @@ On rappelle que la rotation $R(O, \alpha)$ est l'application de $\mathcal{P} \to
 - $OM = OM'$
 - $(\vec{OM}, \vec{OM'}) = \alpha$
 
-On sait que $\mathcal{P}$ est identifié à $\mathbb{C}$. On peut donc se demander s'il existe un lien entre l'affixe $z$ de $M$ et celle $z'$ de $M'$. 
+On sait que $\mathcal{P}$ est identifié à $\mathbb{C}$. On peut donc se demander s'il existe un lien entre l'affixe $z$ de $M$ et celle $z'$ de $M'$.
 
-La réponse est oui. Si $z_\alpha$ est un nombre complexe tel que $|z_\alpha| = 1$ et que $\alpha$ est un argument de $z_\alpha$, alors $z' = z_\alpha z$. Autrement dit, multiplier par un nombre complexe de module $1$ et d'argument $\alpha$ revient à faire une rotation de centre $O$ et d'angle $\alpha$ sur les images. 
+La réponse est oui. Si $z_\alpha$ est un nombre complexe tel que $|z_\alpha| = 1$ et que $\alpha$ est un argument de $z_\alpha$, alors $z' = z_\alpha z$. Autrement dit, multiplier par un nombre complexe de module $1$ et d'argument $\alpha$ revient à faire une rotation de centre $O$ et d'angle $\alpha$ sur les images.
 
 Argument: exercices
 ========================================================
@@ -342,21 +342,21 @@ Exponentielle complexe
 ========================================================
 
 <div class="definition">
-Soit $\theta \in \mathbb{R}$, on note 
+Soit $\theta \in \mathbb{R}$, on note
 $$e^{î\theta} = \cos(\theta) + i\sin(\theta)$$
 </div>
 
-<br> 
+<br>
 
 <div class="proposition">
 Soit $\theta, \theta' \in \mathbb{R}$, on a
 $$e^{î\theta + i\theta'} = e^{î(\theta + \theta')} = e^{î\theta} \times  e^{i\theta'}$$
 </div>
 
-<br> 
+<br>
 
 **Remarques**
-La définiton de $e^{i\theta}$ peut sembler arbitraire mais la proposition précédente montre que c'est la "bonne" définition: c'est celle qui étend les propriétés de l'exponentielle des réels purs aux imaginaires purs. 
+La définiton de $e^{i\theta}$ peut sembler arbitraire mais la proposition précédente montre que c'est la "bonne" définition: c'est celle qui étend les propriétés de l'exponentielle des réels purs aux imaginaires purs.
 
 Exponentielle complexe et conjugaison, argument
 ========================================================
@@ -375,24 +375,24 @@ Soit $z$ un complexe non nul et $\theta$ un réel. $\theta$ est un argument de $
 <br>
 
 <div class="proposition">
-Soit $z$ un complexe non nul. Il existe un couple $(\rho, \theta) \in \mathbb{R}_+^\star \times \mathbb{R}$ tel que 
+Soit $z$ un complexe non nul. Il existe un couple $(\rho, \theta) \in \mathbb{R}_+^\star \times \mathbb{R}$ tel que
 $$ z= \rho e^{i\theta}$$
 </div>
 
 <br>
 
-- **Remarque** Il existe une infinité de couples $(\rho, \theta)$ mais ils sont liés les uns aux autres, comme le montre la proposition suivante. 
+- **Remarque** Il existe une infinité de couples $(\rho, \theta)$ mais ils sont liés les uns aux autres, comme le montre la proposition suivante.
 
 Forme exponentielle
 ========================================================
 <div class="proposition">
-Soit $z, z'$ deux nombres complexes non nuls tels que 
+Soit $z, z'$ deux nombres complexes non nuls tels que
 $$ z= \rho e^{i\theta} \text{ et } z= \rho' e^{i\theta'} \text{ avec } \rho, \rho' > 0$$
-Alors, on a 
+Alors, on a
 $$ z = z' \Leftrightarrow \begin{cases} \rho = \rho' \\ \exists k \in \mathbb{Z} \text{ tel que } \theta' = \theta + 2k\pi \end{cases}$$
 </div>
 
-<br> 
+<br>
 
 <div class="proposition">
 <ul>
@@ -405,11 +405,11 @@ Exponentielle complexe
 ========================================================
 
 <div class="definition">
-Soit $z = a+ib$ un nombre complexe sous forme algébrique. On pose 
+Soit $z = a+ib$ un nombre complexe sous forme algébrique. On pose
 $$ e^z= e^a e^{ib} = e^a (\cos(b) + i\sin(b)) $$
 </div>
 
-<br> 
+<br>
 
 <div class="proposition">
 Soit $z, z'$ deux nombres complexes et $n \in \mathbb{Z}$. On a:
@@ -420,7 +420,7 @@ Soit $z, z'$ deux nombres complexes et $n \in \mathbb{Z}$. On a:
 </ul>
 </div>
 
-<br> 
+<br>
 
 **Remarques** La définition et la proposition montre que l'exponentielle complexe étend bien l'exponentielle réelle de façon cohérente sur $\mathbb{C}$ (on l'avait déjà vu pour $i\mathbb{R}$)
 
@@ -437,14 +437,14 @@ Soit $z$ un nombre complexe.
 </ul>
 </div>
 
-<br> 
+<br>
 
-**Remarque** Contrairement aux nombres réels positifs, $z^x$ n'est pas bien défini quand $z$ est complexe (alors que pour $a > 0$, on a $a^x = e^{x\ln(a)})$. On retiendra donc que $z^x$ (avec $z$ complexe) n'est bien défini **que pour** $x \in \mathbb{Z}$. 
+**Remarque** Contrairement aux nombres réels positifs, $z^x$ n'est pas bien défini quand $z$ est complexe (alors que pour $a > 0$, on a $a^x = e^{x\ln(a)})$. On retiendra donc que $z^x$ (avec $z$ complexe) n'est bien défini **que pour** $x \in \mathbb{Z}$.
 
 Exponentielle complexe: exercices
 ========================================================
 
-Dans les exercices suivants, l'objectif est de se ramener à des sommes connues (Sommes des termes d'une suite géométrique, Binôme de Newton). On peut par exemple essayer de calculer $A_n + iB_n$ avant d'isoler ses parties réelles et imaginaires. On peut aussi noter que $\cos(k\theta) + i\sin(k\theta) = (e^{i\theta})^k$. 
+Dans les exercices suivants, l'objectif est de se ramener à des sommes connues (Sommes des termes d'une suite géométrique, Binôme de Newton). On peut par exemple essayer de calculer $A_n + iB_n$ avant d'isoler ses parties réelles et imaginaires. On peut aussi noter que $\cos(k\theta) + i\sin(k\theta) = (e^{i\theta})^k$.
 
 Calculer, pour $n \in \mathbb{N}$ et $\theta \in \mathbb{R}$:
 - $A_n = \sum_{k=0}^n \cos(k\theta)$ et $B_n = \sum_{k=0}^n \sin(k\theta)$
@@ -456,15 +456,15 @@ Application à la trigonométrie
 On l'a vu dans la définition de l'exponentielle complexe mais il existe un lien fort entre les fonctions trigonométriques et l'exponentielle complexe. Ce lien est formalisé par les **formules d'Euler**
 
 <div class="proposition">
-Soit $\theta$ un nombre réel. On a 
+Soit $\theta$ un nombre réel. On a
 $$\cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2} \text{ et } \sin(\theta) = \frac{e^{i\theta} - e^{-i\theta}}{2i}$$
 </div>
 
-<br> 
+<br>
 Un autre lien fort qui existe est la **formule de Moivre**:
 
 <div class="proposition">
-Soit $\theta$ un nombre réel et $n \in \mathbb{Z}$. On a 
+Soit $\theta$ un nombre réel et $n \in \mathbb{Z}$. On a
 $$(\cos(\theta) + i\sin(\theta))^n = (e^{i\theta})^n = \cos(n\theta) + i\sin(n\theta)$$
 </div>
 
@@ -474,25 +474,25 @@ Application à la trigonométrie (II)
 Il est plus aisé de retrouver les formules d'additions à partir de la définition de l'exponentielle complexe que de les apprendre par coeur. En effet:
 
 $$\begin{align}
-\cos(a+b) & = Re(e^{i(a+b)}) = Re(e^{ia} \times e^{ib}) \\ 
+\cos(a+b) & = Re(e^{i(a+b)}) = Re(e^{ia} \times e^{ib}) \\
 & = Re((\cos(a)\cos(b) - \sin(a)\sin(b)) + i(\cos(a)\sin(b) + \sin(a)\cos(b)) ) \\
 & = \cos(a)\cos(b) - \sin(a)\sin(b) \\
 \end{align}$$
 
-On montre de même que 
+On montre de même que
 $$ \sin(a+b) = \cos(a)\sin(b) + \sin(a)\cos(b)$$
 
 Toutes les autres formules en découlent.
 
-Linéarisation 
+Linéarisation
 ========================================================
 
 L’idée est d’exprimer $\cos^n(x)\sin^p(x)$ pour $x \in \mathbb{R}$ et $n,p \in \mathbb{N}$ en fonction des $\cos(kx)$ et des $\sin(kx)$. Pour ce faire on utilise les formules d’Euler.
 
 On commence par écrire
-$$\cos^n(x)\sin^p(x) = \left( \frac{e^{i\theta} + e^{-i\theta}}{2}\right)^n \left( \frac{e^{i\theta} - e^{-i\theta}}{2i} \right)^p$$ 
+$$\cos^n(x)\sin^p(x) = \left( \frac{e^{i\theta} + e^{-i\theta}}{2}\right)^n \left( \frac{e^{i\theta} - e^{-i\theta}}{2i} \right)^p$$
 
-Ensuite, on développe (en utilisant le binôme de Newton) et on utiliser les formules d'Euler dans l'autre sens pour simplifier. 
+Ensuite, on développe (en utilisant le binôme de Newton) et on utiliser les formules d'Euler dans l'autre sens pour simplifier.
 
 Linéarisation: Exemple
 ========================================================
@@ -512,20 +512,20 @@ Transformation de \(\cos(nx)\)
 
 C'est la transformation inverse de la précédente. On veut exprimer $\cos(nx)$ en fonction de $\cos(x)$ et $\sin(x)$. Pour cela, on applique la formule de Moivre:
 $$\cos(nx) = Re(\cos(nx) + i\sin(nx)) = Re((\cos(x) + i\sin(x))^n)$$
-Il suffit alors de développer en utilisant le binôme de Newton et de ne garder que la partie réelle. 
+Il suffit alors de développer en utilisant le binôme de Newton et de ne garder que la partie réelle.
 
 Transformation de \(\cos(nx)\): exemple
 ========================================================
 
-Pour $n = 3$, on a 
-$$\begin{align} 
+Pour $n = 3$, on a
+$$\begin{align}
 (\cos(x) + i\sin(x))^3 & = \cos^3(x) + 3i\cos^2(x)\sin(x) - 3\cos(x)\sin^2(x) -i\sin^3(x) \\
 & = \cos^3(x) - 3\cos(x)\sin^2(x) + i(3\cos^2(x)\sin(x)  - \sin^3(x)) \\
 \end{align}
 $$
 
 On en déduit
-$$\begin{align} 
+$$\begin{align}
 \cos(3x)& = \cos^3(x) - 3\cos(x)\sin^2(x) \\
 \sin(3x)& = 3\cos^2(x)\sin(x)  - \sin^3(x) \\
 \end{align}
@@ -544,14 +544,14 @@ Linéarisation, transformation: exemples
 Calcul d'une racine carrée complexe
 ========================================================
 
-Soit $Z$ un nombre complexe, on cherche à calculer une racine carrée de $Z$ c'est à dire **un** nombre complexe $z$ tel que $z^2 = Z$. 
+Soit $Z$ un nombre complexe, on cherche à calculer une racine carrée de $Z$ c'est à dire **un** nombre complexe $z$ tel que $z^2 = Z$.
 
-Comme dans $\mathbb{R}$, si $z$ est solution, alors $-z$ mais contrairement à $\mathbb{R}$, on ne peut pas parler de **la** racine carrée puisque la condition $z > 0$ n'a **pas de sens** pour un complexe. 
+Comme dans $\mathbb{R}$, si $z$ est solution, alors $-z$ mais contrairement à $\mathbb{R}$, on ne peut pas parler de **la** racine carrée puisque la condition $z > 0$ n'a **pas de sens** pour un complexe.
 
 <div class="proposition">
 Soit $Z$ un nombre complexe <alert>quelconque</alert>. L'équation d'inconnue complexe $z$:
 $$z^2 = Z$$
-a <alert>toujours</alert> deux solutions (éventuellement confondues). 
+a <alert>toujours</alert> deux solutions (éventuellement confondues).
 <br>
 Si $Z = \rho e^{i\theta}$ avec $\rho \geq 0$, ces deux solutions sont:
 $$z_1 = \sqrt{\rho}e^{i\theta/2} \text{ et } z_2 = -z_1 = -\sqrt{\rho}e^{i\theta/2}$$
@@ -569,7 +569,7 @@ Si $Z$ est donné sous forme algébrique $Z = A + iB$ (avec $A, B$ réels), on v
 La première donne:
 $$z^2 = A + iB \Leftrightarrow (a^2-b^2) + 2iab = A + iB \Leftrightarrow \begin{cases} a^2 - b^2 & = & A \\ 2ab & = & B \end{cases}$$
 
-La deuxième donne 
+La deuxième donne
 $$a^2 + b^2 = \sqrt{A^2 + B^2}$$
 
 Calcul d'une racine carrée complexe: forme algébrique
@@ -578,12 +578,12 @@ Calcul d'une racine carrée complexe: forme algébrique
 On peut résoudre le premier système:
 $$
 \begin{align*}
-\begin{cases} a^2 - b^2 & = & A \\ a^2 + b^2 & = & \sqrt{A^2 + B^2} \end{cases} & \Leftrightarrow \begin{cases} 2a^2 & = & \sqrt{A^2 + B^2} + A \\ 2b^2 & = & \sqrt{A^2 + B^2} - A\end{cases} \\ 
+\begin{cases} a^2 - b^2 & = & A \\ a^2 + b^2 & = & \sqrt{A^2 + B^2} \end{cases} & \Leftrightarrow \begin{cases} 2a^2 & = & \sqrt{A^2 + B^2} + A \\ 2b^2 & = & \sqrt{A^2 + B^2} - A\end{cases} \\
 & \Leftrightarrow \begin{cases} a & = & \pm \sqrt{\frac{\sqrt{A^2 + B^2} + A}{2}} \\ b & = & \pm \sqrt{\frac{\sqrt{A^2 + B^2} - A}{2}} \end{cases}
 \end{align*}
 $$
 
-On a donc $4$ possibilités pour $(a, b)$. Le signe de $B = 2ab$ permet de n'en conserver que deux des 4. 
+On a donc $4$ possibilités pour $(a, b)$. Le signe de $B = 2ab$ permet de n'en conserver que deux des 4.
 
 Calcul d'une racine carrée complexe: Exemple
 ========================================================
@@ -597,23 +597,23 @@ Et d'autre part $|z|^2 = a^2 + b^2 = |5 - 12i| = \sqrt{25 + 144} = \sqrt{169} = 
 $$\begin{cases} a^2 - b^2 & = & 5 \\ a^2 + b^2 & = & 13 \end{cases} \Leftrightarrow \begin{cases} a^2 & = & 9 \\ b^2 & = & 4 \end{cases}$$
 
 Qui donne $a = \pm 3$ et $b = \pm 2$. Comme $ab = 6 < 0$, les deux solutions sont:
-$$z_1 = 3-2i \text{ et } z_2 = -3 + 2i$$. 
+$$z_1 = 3-2i \text{ et } z_2 = -3 + 2i$$.
 
 Trinôme de degré 2 dans C
 ========================================================
 
 <div class="proposition">
 Soit $(a, b, c) \in \mathbb{C}$ avec <alert>$a \neq 0$</alert>. On considère l'équation $(E)$:
-$$ az^2 + bz + c = 0$$. 
+$$ az^2 + bz + c = 0$$.
 Cette équation est équivalente à l'équation suivante
 $$ \left(z + \frac{b}{2a} \right)^2 = \frac{\Delta}{4a^2}$$
-où $\Delta = b^2 - 4ac$. 
+où $\Delta = b^2 - 4ac$.
 <br>
 En notant $\alpha$ une racine carrée de $\Delta$ (qui existe toujours), les solutions de $(E)$ sont:
 $$ z_1 = \frac{-b + \alpha}{2a} \text{ et } z_1 = \frac{-b - \alpha}{2a}$$
 </div>
 <br>
-**Remarque** Contrairement aux équations de degré 2 dans $\mathbb{R}$, les équations de degré $2$ dans $\mathbb{C}$ ont **toujours** deux solutions (potentiellement confondues). 
+**Remarque** Contrairement aux équations de degré 2 dans $\mathbb{R}$, les équations de degré $2$ dans $\mathbb{C}$ ont **toujours** deux solutions (potentiellement confondues).
 
 Trinôme de degré 2 dans C: racines
 ========================================================
@@ -624,10 +624,10 @@ Avec les notations précédentes, on a $z_1 z_2 = c/a$ et $z_1 + z_2 =  - b/a$
 
 <br>
 
-**Remarques** 
-- La proposition précédente est utile pour trouver des nombres dont on connaît la **somme** $S$ et le **produit** $P$: il suffit de trouver les racines du polynôme $X^2 -SX + P$. 
-- Un usage plus pragmatique consiste à vérifier vos calculs: une fois trouvées les deux racines d'un trinôme en passant par le discriminant, vous pouvez vérifier leur cohérence avec la proposition précédente. 
-- Un autre usage pragmatique consiste à accélérer les calculs: si vous trouvez une racine évidente $z_1$, l'autre est forcément égale à $c/(az_1)$. Par exemple $1$ est racine évidente de $X^2 - 3X + 2$, l'autre est forcément $2$. 
+**Remarques**
+- La proposition précédente est utile pour trouver des nombres dont on connaît la **somme** $S$ et le **produit** $P$: il suffit de trouver les racines du polynôme $X^2 -SX + P$.
+- Un usage plus pragmatique consiste à vérifier vos calculs: une fois trouvées les deux racines d'un trinôme en passant par le discriminant, vous pouvez vérifier leur cohérence avec la proposition précédente.
+- Un autre usage pragmatique consiste à accélérer les calculs: si vous trouvez une racine évidente $z_1$, l'autre est forcément égale à $c/(az_1)$. Par exemple $1$ est racine évidente de $X^2 - 3X + 2$, l'autre est forcément $2$.
 
 Exercice
 ========================================================
@@ -638,10 +638,10 @@ La Places des Vosges a une superficie de 19600 m$^2$ et un périmètre de 560 m�
 
 <br> On note $l$ et $L$ les dimensions la place. D'après l'énoncé $lL = 19600$ et $2(l+L) = 560$ donc $l+L = 280$. On sait que $l$ et $L$ sont solutions de l'équation (d'inconnue $x$):
 $$(x-l)(x-L) = 0$$
-Cette équation peut se réécrire 
+Cette équation peut se réécrire
 $$x^2 - (l+L)x +lL = 0$$
 En substituant avec les valeurs de l'énoncé, $l$ et $L$ sont solutions de l'équation
-$$x^2 - 280x + 19600 = 0$$ 
+$$x^2 - 280x + 19600 = 0$$
 En résolvant, on obtient $l=L=140$. On pourrait pu aller plus vite en utilisant l'information que la place des Vosges est carrée...
 
 
