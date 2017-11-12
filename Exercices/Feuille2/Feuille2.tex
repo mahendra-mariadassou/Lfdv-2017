@@ -48,7 +48,7 @@
 \def\Classe{TS3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% ZONE VERTE : 
+%%% ZONE VERTE :
 %%% ALIGNER LES EQUATIONS A GAUCHE
 \makeatletter
 \newenvironment*{fleqn}{
@@ -69,7 +69,7 @@
 \newcommand{\Exo}{\medskip
   {\bf Exercice \arabic{nexo} : }
   \addtocounter{nexo}{1}}
-\newcommand{\Pb}{{\bf Problème \arabic{nexo} : } 
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
 \addtocounter{nexo}{1} \bigskip}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
@@ -96,50 +96,82 @@
 
 % \section*{Corrigé du devoir 1}
 
-\Exo \textbf{Formule de factorisation}
+\Exo \textbf{Formules trigonométriques (I)}
 
-Soit $\theta \in \mathbb{R}$, l'exponentielle complexe est définie de la façon suivante:
-\begin{equation*}
-e^{i\theta} = \cos(\theta) + i \sin(\theta)
-\end{equation*}
-
-On admet (pour l'instant) que l'exponentielle complexe vérifie les propriétés usuelles de l'exponentielle:
-\begin{equation*}
-\forall a, b \in \mathbb{R}, e^{i(a+b)} = e^{ia} + e^{ib}
-\end{equation*}
-
-
+Calculer les valeurs exactes des quantités suivantes:
 \begin{enumerate}
-\item En utilisant la formule de l'exponentielle complexe, montrer que pour tout $a,b \in \mathbb{R}$: 
-  \begin{align*}
-    \cos(a+b) & = \cos(a)\cos(b) - \sin(a)\sin(b) \\
-    \sin(a+b) & = \sin(a)\cos(b) + \cos(a)\sin(b) \\
-  \end{align*}
-\item Soit $p, q, x, y$ des réels. Résoudre le système d'inconnues $x$ et $y$:
-  \begin{equation*}
-    \begin{cases}
-      p & = x + y \\
-      q & = x - y \\
-    \end{cases}
-  \end{equation*}
-\item À l'aide du système précédent, exprimer $\cos(a)\cos(b)$ en fonction de $\cos(a+b)$ et de $\cos(a-b)$. Faire de même avec $\sin(a)\sin(b)$. On pourra poser $x = \cos(a)\cos(b)$, $y = \sin(a)\sin(b)$ et choisir $p$ et $q$ astucieusement. 
-\item Exprimer $\sin(a)\cos(b)$ en fonction de $\sin(a+b)$ et de $\sin(a-b)$. Faire de même avec $\cos(a)\sin(b)$. 
+\item $\cos(\pi/12)$
+\item $\sin(\pi/12)$
+\item $\cos(\pi/8)$
+\item $\sin(\pi/9)$
 \end{enumerate}
 
+\Exo \textbf{Formules trigonométriques (II)}
+
+Résoudre dans $\R$ les (in)équations suivantes
+
+\begin{enumerate}
+\item $\cos(x) + \sin(x) \geq 1$
+\item $\cos(x) + 3\sin(x) \geq 1$
+\item $\cos(2x) + 2\sin(x) =  0$
+\item $\sin(2x) - 2\sin(x) =  0$
+\item $\cos(x) + \cos(2x) + \cos(3x) = 0$
+\item $\cos(3x) - \sin(2x) = 0$ [difficile]
+\end{enumerate}
+
+\Exo \textbf{Tangente}
+
+Donner le nombre de solutions dans $[0, \pi]$ de l'équation
+\[
+\tan(x) + \tan(2x) + \tan(3x) + \tan(4x) = 0
+\]
+
+\Exo \textbf{Fonctions trigonométriques réciproques}
+
+Résoudre dans $\mathbb{R}$ (sauf mention explicite du contraire) les équations trigonométriques suivantes:
+\begin{enumerate}
+\item $10\cos(8\theta) = -5$
+\item $2\sin(\theta/4) = \sqrt{3}$
+\item $2\sin(\theta/4) = \sqrt{3}$ dans $[0, 16\pi]$
+\item $10 + 7\tan(4\theta) = 3$ dans $[-\pi, 0]$.
+\item $3 - 4\sin(4\theta) = 5$ dans $[-3\pi/2, -\pi/2]$
+\item $2\cos^2(x) - 3\cos(x) + 1 = 0$ dans $[0, 2\pi]$
+\end{enumerate}
+
+\Exo \textbf{Inéquations}
+
+Résoudre dans $\mathbb{R}$ (sauf mention explicite du contraire) les équations suivantes:
+\begin{enumerate}
+\item $|\cos(x)| \geq |\sin(x)|$
+\item $\ln(\cos^2(x)) = 0$
+\item $2\ln(\cos(x)) = 0$
+\item $\sqrt{1 - \cos^2(x)} = \frac{\sqrt{3}}{2}$
+\item $e^{\cos(x)} \leq 1$
+\end{enumerate}
 
 \Exo {$\boldsymbol{\arcsin}$}
 
-On cherche à calculer $X = \displaystyle \arcsin\left( - \sqrt{\frac{2 - \sqrt{2}}{4}}\right)$. 
+On cherche à calculer $X = \displaystyle \arcsin\left( - \sqrt{\frac{2 - \sqrt{2}}{4}}\right)$.
 \begin{enumerate}
 \item Montrer que pour tout $x \in \mathbb{R}$
   \begin{equation*}
     \sin^2(x)  = \frac{1 - \cos(2x)}{2}
   \end{equation*}
-\item Appliquer la formule précédente à $x = \frac{\pi}{8}$. 
-\item En déduire la valeur de $X$. 
-\item (Vérifier que vous n'avez pas fait de fautes, par exemple avec une calculatrice). 
+\item Appliquer la formule précédente à $x = \frac{\pi}{8}$.
+\item En déduire la valeur de $X$.
+\item Vérifier que vous n'avez pas fait de fautes, par exemple avec une calculatrice.
 \end{enumerate}
 
+\Exo \textbf{Produit de cosinus}
+
+Soit $a \in (0, \pi)$. Calculer pour tout $n \in \N^\star$
+\[
+\prod_{k=1}^n \cos\left(\frac{a}{2^k}\right)
+\]
+On pourra utiliser $\sin(2x) = 2\cos(x)\sin(x)$. En déduire
+\[
+\lim_{n \to \infty} \sum_{k=1}^n \ln\left( \cos \left( \frac{a}{2^k} \right) \right)
+\]
 
 
 \end{document}

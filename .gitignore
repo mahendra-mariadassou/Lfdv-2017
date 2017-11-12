@@ -9,3 +9,5 @@ Administratif
 */*_files
 */*.md
 */*-figure
+*/*/*pdf
+*/*/*gitignore
