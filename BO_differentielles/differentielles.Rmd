@@ -258,3 +258,22 @@ PV^{\gamma} = Constante
 $$
 
 Et on retrouve la loi de Laplace pour les détentes adiabatiques.  
+
+## Mesure d'incertitude
+
+À l'aide des différentielles logarithmiques, relier les incertitudes relatives, *i.e.* de la forme $\frac{\Delta V}{V}$,
+
+- du volume d'une sphère et de son rayon
+- de la surface d'un disque et de son rayon
+- du volume d'un cube et de son côté
+- de la surface d'un carré et de son côté
+- du volume d'un cône et de son rayon
+- du volume d'un cône et de sa hauteur
+
+## Coordonnées cartésiennes et polaires
+
+- On considère un rectangle de côté $dx$ et $dy$. Quelle est sa surface?
+
+- On considère une petite par de gateau de rayon $dr$ et 
+
+
