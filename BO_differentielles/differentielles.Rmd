@@ -270,10 +270,18 @@ Et on retrouve la loi de Laplace pour les détentes adiabatiques.
 - du volume d'un cône et de son rayon
 - du volume d'un cône et de sa hauteur
 
-## Coordonnées cartésiennes et polaires
+## Plus de calculs (I)
 
-- On considère un rectangle de côté $dx$ et $dy$. Quelle est sa surface?
+Calculer les dérivées partielles des fonctions $f(x,y)$ suivantes
 
-- On considère une petite par de gateau de rayon $dr$ et 
+- $f(x, y) = (x^2 - 3xy + y^4)/(2x + 3y)$
+- $f(x, y) = e^{5\cos(xy)}$
+- $f(x, y) = (x^2 + xy + y^2)\cos(xy)$
+- $f(x, y) = 2xy/e^{x+y}$
 
+## Plus de calculs (II)
 
+- Calculer toutes les dérivées d'ordre $\leq 2$ de la fonction $f(x,y) = x^2 + 3xy^5 + \cos(xy)$
+- Calculer $\frac{\partial^2 f}{\partial x \partial y}$ pour $f(x,y) = \cos(ax^py^q) + \sin(bx^ry^s)$ avec $(a,b)$ des réels et $p, q, r, s$ des entiers positifs. 
+- Trouver les points qui vérifient simultanément $\frac{\partial f}{\partial x} = 0$ et $\frac{\partial f}{\partial y} = 0$ pour $f(x,y) = x^2 + xy + y^2$ et $f(x,y) = x^3y + xy^2$
+- Calculer les dérivées partielles $\frac{\partial f}{\partial x}$, $\frac{\partial^2 f}{\partial x \partial y}$, $\frac{\partial^2 f}{\partial z^2}$, $\frac{\partial^2 f}{\partial x \partial z}$ et $\frac{\partial^3 f}{\partial x \partial y \partial z}$ pour $f(x, y, z) = (x^2 + xy + yz)e^{x+2y}$
