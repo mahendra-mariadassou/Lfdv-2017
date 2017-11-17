@@ -216,8 +216,8 @@ PV = nRT & \Leftrightarrow \ln(P) + \ln(V) = \ln(nR) + \ln(T) \\
 \\
 P = V^\gamma & \Leftrightarrow \ln(P) = \gamma \ln(V) \\
              & \Rightarrow \frac{dP}{P} = \gamma \frac{dV}{V} \\
-             & \Rightarrow dP = \frac{P}{V}dV \\
-             & \Rightarrow dP= V^{\gamma -1} dV
+             & \Rightarrow dP = \gamma\frac{P}{V}dV \\
+             & \Rightarrow dP= \gamma V^{\gamma -1} dV
 \end{align}
 $$
 
@@ -233,7 +233,7 @@ On considère un cylindre droit de hauteur $h = 50$ cm et de rayon $r=10$ cm et 
 
 On effectue une transformation adiabatique et réversible sur un gaz parfait pour le faire passer de l'état $(P_0, V_0)$ à l'état $(P_1, V_1)$. 
 
-On sait que $\delta Q = dU - dW$, que pour ce gaz l'énergie interne dépend uniquement de la témperature ($dU = n C_v dT$) et que le travail des forces de pression s'écrit $dW = PdV$. On a donc 
+On sait que $\delta Q = dU - dW$, que pour ce gaz l'énergie interne dépend uniquement de la témperature ($dU = n C_v dT$) et que le travail des forces de pression s'écrit $dW = -PdV$. On a donc 
 
 $$
 0 = \frac{\delta Q}{T} = n C_v \frac{dT}{T} + P \frac{dV}{T} = nC_v \frac{dT}{T} + nR \frac{dV}{V}
