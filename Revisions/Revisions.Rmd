@@ -711,7 +711,7 @@ Attention, si on demande les solutions dans un intervalle donnée (par exemple $
 
 <div class="proposition">
 Soit $(a, b) \in \mathbb{R}^2$. Il existe $(R, \psi) \in \mathbb{R}^2$ tel que:
-$$\forall x\in\mathbb{R},  \quad a\cos(x) + b\sin(x) = R\cos(x + \psi)$$
+$$\forall x\in\mathbb{R},  \quad a\cos(x) + b\sin(x) = R\cos(x - \psi)$$
 </div>
 
 
