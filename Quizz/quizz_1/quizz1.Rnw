@@ -159,8 +159,8 @@ f:
 
 Écrire sous forme exponentielle les nombres suivants / Write the following complex number in exponential form:
 \begin{itemize}
-\item $z = \cos(\theta)(\cos(\theta) + i\sin(\theta))$
-\item $z = \sin(\theta)(\cos(\theta) + i\sin(\theta))$
+\item $z_1 = \cos(\theta)(\cos(\theta) + i\sin(\theta))$
+\item $z_2 = \sin(\theta)(\cos(\theta) + i\sin(\theta))$
 \end{itemize}
 
 \bigskip
@@ -169,8 +169,8 @@ f:
 
 Déterminer les racines carrées complexes des nombres suivants / Compute the square roots of the following complex numbers:
 \begin{itemize}
-\item $z = 2i$ (en passant par la forme exponentielle / use exponential form)
-\item $z = 2+i$ (en restant sous forme algébrique / use rectangular form)
+\item $Z_1 = 2i$ (en passant par la forme exponentielle / use exponential form)
+\item $Z_2 = 2+i$ (en restant sous forme algébrique / use rectangular form)
 \end{itemize}
 
 \end{document}
