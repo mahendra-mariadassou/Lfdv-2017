@@ -170,7 +170,7 @@ f:
 Déterminer les racines carrées complexes des nombres suivants / Compute the square roots of the following complex numbers:
 \begin{itemize}
 \item $Z_1 = 2i$ (en passant par la forme exponentielle / use exponential form)
-\item $Z_2 = 2+i$ (en restant sous forme algébrique / use rectangular form)
+\item $Z_2 = 3+4i$ (en restant sous forme algébrique / use rectangular form)
 \end{itemize}
 
 \end{document}

@@ -50,7 +50,7 @@
 \def\Classe{TS3}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% ZONE VERTE : 
+%%% ZONE VERTE :
 %%% ALIGNER LES EQUATIONS A GAUCHE
 \makeatletter
 \newenvironment*{fleqn}{
@@ -86,7 +86,7 @@ require(patchSynctex)
 \newcommand{\Exo}{\medskip
   {\bf Exercice \arabic{nexo} : }
   \addtocounter{nexo}{1}}
-\newcommand{\Pb}{{\bf Problème \arabic{nexo} : } 
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
 \addtocounter{nexo}{1} \bigskip}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
@@ -117,114 +117,119 @@ require(patchSynctex)
 
 Résoudre les équations (en $x \in \R$) suivantes:
 \begin{equation*}
-  \frac{1}{\floor{x+1}} = \frac{1}{2}  
+  \frac{1}{\floor{x+1}} = \frac{1}{2}
 \end{equation*}
 
 \begin{equation*}
   \sqrt{|x+1|} = 3
 \end{equation*}
 
-On raisonne par équivalence. 
+\textcolor{gray}{
+On raisonne par équivalence.
 \begin{align*}
   \frac{1}{\floor{x+1}} = \frac{1}{2} \Leftrightarrow \floor{x+1} = 2 \Leftrightarrow 2 \leq x < 3 \Leftrightarrow 1 \leq x < 2
 \end{align*}
-
-et 
-
+et
 \begin{align*}
   \sqrt{|x+1|} = 3 \Leftrightarrow |x+1| = 9 \Leftrightarrow \begin{cases} x+1 & = 9 \\ x+1 & = -9 \end{cases} \Leftrightarrow \begin{cases} x & = 8 \\ x & = -10 \end{cases}
 \end{align*}
-
+}
 
 \bigskip
 
-\Exo \textbf{Inéquations}
+\Exo \textbf{Équations trigonométriques}
 
-Résoudre les inéquations (en $x \in \R$) suivantes:
+Résoudre les équations (en $x \in \R$) suivantes
 \begin{eqnarray*}
-  10^{-x} & \leq & 1/2^{10} \\
-  \exp(3x + 4) & \geq & 10 \\  
+  2^{\cos^2(\theta)} & = & \sqrt{2} \\
+  2\ln\cos(\theta) & = & 0 \\
 \end{eqnarray*}
 
-
-On raisonne par équivalence en appliquant les fonctions $\log$ ou $\ln$ qui sont croissantes sur $\mathbb{R}_+^\star$. 
+\textcolor{gray}{
+On raisonne par équivalence en appliquant la fonctions $\log$ en base $2$.
 \begin{align*}
-  10^{-x} \leq & 1/2^{10} \Leftrightarrow -x \leq \log(1/2^{10}) \Leftrightarrow x \geq -10\log(1/2) \Leftrightarrow x \geq 10\log(2)
+2^{\cos^2(\theta)} = \sqrt{2} & \Leftrightarrow \cos^2(\theta) = 1/2 \Leftrightarrow \cos(\theta) = \begin{cases} \cos(\theta) & = \frac{\sqrt{2}}{2} \\ \cos(\theta) & = -\frac{\sqrt{2}}{2} \end{cases} \\
+                              & \Leftrightarrow \begin{cases} \cos(\theta) & = \cos(\pi/4) \\ \cos(\theta) & = \cos(3\pi/4) \end{cases} \\
+                              & \Leftrightarrow \begin{cases} \theta & = \pi/4 + 2k\pi \\ \theta & = -\pi/4 + 2k\pi \\ \theta & = 3\pi/4 + 2k\pi \\ \theta & = -3\pi/4 + 2k\pi \end{cases}
 \end{align*}
-
-et 
-
+qu'on peut résumer en $\theta \in \left\{ \pi/4 + k\pi/2 \right\}$.\\
+Pour la deuxième, on raisonne également par équivalence en appliquant la fonction exponentielle:
 \begin{align*}
-  \exp(3x + 4) \geq  10 \Leftrightarrow 3x + 4 \geq \ln(10) \Leftrightarrow x \geq \frac{\ln(10) - 4}{3}
+ 2\ln\cos(\theta) = 0 \Leftrightarrow \ln\cos(\theta) = 0 \Leftrightarrow \cos(\theta) = 1 \Leftrightarrow \theta = 0 +2k\pi
 \end{align*}
-
+\textbf{Attention:}, on pourrait être tenté d'écrire $2\ln\cos(\theta) = \ln(\cos^2(\theta))$ et de raisonner par équivalence à partir de là mais les deux membres de l'égalité n'ont \textbf{pas le même domaine de définition} et on obtiendrait un résultat erroné.
+}
 
 \bigskip
 
-\Exo \textbf{Majorant, Minorant, etc}
+\Exo \textbf{Différentielle}
 
-On considère l'ensemble $S = \left\{\frac{1}{n}, n \in \mathbb{N}^\star \right\}$. 
+On considère la fonction $f$ définie par:
 
-\begin{enumerate}
-\item S est-il majoré? Si oui, donner $\sup(S)$. $\sup(S)$ est-il un élément de $S$?
-\item S est-il minoré? Si oui, donner $\inf(S)$. $\inf(S)$ est-il un élément de $S$?
-\end{enumerate}
+\[
+f:
+\begin{array}{rcl}
+\R^2   & \to     & \R \\
+(u, v) & \mapsto & e^{u^2 + v^2}
+\end{array}
+\]
 
-Soit $n \in \mathbb{N}^\star$, on a 
-\begin{equation*}
-1 \leq n < +\infty \Leftrightarrow 1 \geq \frac{1}{n} \geq 0
-\end{equation*}
-
-Donc $S$ est minoré par $0$ et majoré par $1$. $1 = \frac{1}{1}$ est un élément de $S$, c'est donc son maximum et aussitôt sa borne supérieure. Montrons que $\inf(S) = 0$. 
-
-Raisonnons par l'absurde et supposons que ce n'est pas le cas. Il existe alors un minorant $m$ de $S$ tel que $m > 0$. Soit $n = \floor{\frac{1}{m}}+2$. Par définition, $n \geq \frac{1}{m} - 1 + 2 > \frac{1}{m}$ et on a donc $\frac{1}{n} < m$, ce qui est absurde puisque $1/n \in S$ et $m$ est censé être un minorant de $S$. On déduit que $\inf(S) = 0$. Et $0$ n'est pas un élément de $S$ puisqu'il n'existe aucun entier $n$ tel que $\frac{1}{n} = 0$. 
-
-
-\Exo \textbf{Injection, Surjection, Bijection}
-
-On considère les ensembles 
 \begin{itemize}
-\item $E = \{ \text{Table}, \text{Chaise}, \text{Armoire}, \text{Étagère} \}$
-\item $F = \{ \text{HENSVIK}, \text{LISABO}, \text{BILLY}, \text{VILMAR} \}$. 
+\item Calculer les dérivées partielles de $f$
+\item En déduire la différentielle totale en $(0, 0)$
 \end{itemize}
 
-\begin{enumerate}
-\item Donner un exemple de bijection de $E$ dans $F$. 
-\item On enlève BILLY de $F$. Peut-on encore construire une injection, une surjection, une bijection de $E$ dans $F$?
-\item On enlève Armoire de $E$. Peut-on encore construire une injection, une surjection, une bijection de $E$ dans $F$?
-\end{enumerate}
+\textcolor{gray}{
+Les dérivées partielles sont données par
+\[
+\frac{\partial f}{\partial u} = 2ue^{u^2 + v^2} \quad \text{et} \quad \frac{\partial f}{\partial v} = 2ve^{u^2 + v^2}
+\]
+En appliquant la formule de la différentielle totale, on obtient
+\begin{align*}
+df & = \left. \frac{\partial f}{\partial u}\right|_{0, 0} du + \left. \frac{\partial f}{\partial v}\right|_{0, 0} dv \\
+   & = 0 \times du + 0 \times dv
+   & = 0
+\end{align*}
+}
 
-\begin{enumerate}
-\item On peut construire de nombreuses bijections de $E$ dans $F$. En voici une (on représente le graphe de la fonction).
-<<bijection, out.width="0.5\\linewidth">>=
-x <- c("Table", "Chaise", "Armoire", "Étagère")
-y <- c("HENSVIK", "LISABO", "BILLY", "VILMAR")
-df <- data.frame(x, y)
-library(ggplot2)
-ggplot(df, aes(x, y)) + geom_point(size = 5) + labs(x = "E", y = "F") + theme_bw() + theme(axis.text = element_text(size = 16))
-@
+\bigskip
 
-\item Si on enlève BILLY de $F$, on peut encore construire des surjections (voir exemple suivant) mais plus d'injections: il y a au plus 3 images dans $F$ pour 4 antécédents dans $E$ donc 2 éléments de $E$ auront forcément la même image. 
-<<surjection, out.width="0.5\\linewidth">>=
-x <- c("Table", "Chaise", "Armoire", "Étagère")
-y <- c("HENSVIK", "LISABO", "BILLY", "VILMAR")
-df <- data.frame(x = x, y = c(y[-3], "HENSVIK"))
-library(ggplot2)
-ggplot(df, aes(x, y)) + geom_point(size = 5) + labs(x = "E", y = "F") + theme_bw() + theme(axis.text = element_text(size = 16))
-@
+\Exo \textbf{Passage en forme exponentielle}
 
-\item Si on enlève Armoire de $E$, on peut encore construire des injections (voir exemple suivant) mais plus de surjections: les 3 éléments de $E$ ont au plus 3 images alors qu'il y a 4 éléménts dans $F$, certains ne peuvent donc pas avoir pas d'antécédents. 
-<<injection, out.width="0.5\\linewidth">>=
-x <- c("Table", "Chaise", "Étagère")
-y <- c("HENSVIK", "LISABO", "BILLY", "VILMAR")
-df <- data.frame(x = c(x, "Table"), y = sample(y), invisible = c(rep(TRUE, 3), FALSE))
-library(ggplot2)
-ggplot(df, aes(x, y, alpha = invisible)) + geom_point(size = 5) + labs(x = "E", y = "F") + theme_bw() + theme(axis.text = element_text(size = 16)) + scale_alpha_discrete(range = c(0, 1), guide="none")
-@
+Écrire sous forme exponentielle les nombres suivants
+\begin{itemize}
+\item $z_1 = \cos(\theta)(\cos(\theta) + i\sin(\theta))$
+\item $z_2 = \sin(\theta)(\cos(\theta) + i\sin(\theta))$
+\end{itemize}
 
-\end{enumerate}
+\textcolor{gray}{
+On peut écrire $z_1 = \cos(\theta) e^{i\theta}$ et $z_2 = \sin(\theta) e^{i\theta}$ et on pourrait être tenté de s'arrêter là. Mais on rappelle qu'une expression du type $\rho e^{i\theta}$ n'est une forme exponentielle \textbf{que si} $\rho > 0$. Il faut donc distinguer suivant le signe de $\cos(\theta)$ (pour $z_1$) et $\sin(\theta)$ (pour $z_2$). En particulier
+\begin{itemize}
+\item Si $\theta \in [-\pi/2, \pi/2] + 2k\pi$, $\cos(\theta) \geq 0$ et $z_1 = \cos(\theta) e^{i\theta}$
+\item Si $\theta \notin [-\pi/2, \pi/2] + 2k\pi$, $\cos(\theta) \leq 0$ et $z_1 = (-\cos(\theta)) (-e^{i\theta}) = |\cos(\theta)| e^{i(\theta + \pi)}$
+\item Si $\theta \in [0, \pi] + 2k\pi$, $\sin(\theta) \geq 0$ et $z_2 = \sin(\theta) e^{i\theta}$
+\item Si $\theta \notin [0, \pi] + 2k\pi$, $\sin(\theta) \leq 0$ et $z_2 = (-\sin(\theta)) (-e^{i\theta}) = |\sin(\theta)| e^{i(\theta + \pi)}$
+\end{itemize}
+On peut aussi déceler le problème en calculant module et argument. Le module de $z_1$ est $|\cos(\theta)|$ qui n'est pas toujours égal à $\cos(\theta)$...
+}
 
+\Exo \textbf{Racine Carrée}
 
+Déterminer les racines carrées complexes des nombres suivants:
+\begin{itemize}
+\item $Z_1 = 2i$ (en passant par la forme exponentielle)
+\item $Z_2 = 3+4i$ (en restant sous forme algébrique)
+\end{itemize}
 
+\textcolor{gray}{
+On commence par mettre $Z_1$ sous forme exponentielle comme suggéré $Z_1 = 2e^{i\pi/2}$ et on tire une racine carrée particulière: $z_1 = \sqrt{2}e^{i\pi/4} = 1 + i$. On sait par ailleurs si $z_1$ est racine, $-z_1$ aussi. Les deux racines de $Z_1$ sont donc $1 + i$ et $-(1+i)$.
+Pour $Z_2$, on cherche les racines sous la forme $z=a+ib$ avec $a$ et $b$ dans $\R$. Les deux contraintes $|z|^2 = |Z_2|$ et $z^2 = Z_2$ se traduisent en
+\begin{align*}
+\begin{cases} a^2 + b^2 & = \sqrt{3^2+4^2} = 5 \\ a^2 - b^2 & = 3 \\ 2ab = 4 \end{cases} \Leftrightarrow
+\begin{cases} 2a^2 & = 8 \\ 2b^2 & = 2 \\ ab = 2 \end{cases}
+\begin{cases} a & = \pm 2 \\ b & = \pm 1 \\ ab = 2 \end{cases}
+\end{align*}
+On a donc 4 couples possibles pour $(a,b)$, à savoir $(2, 1)$, $(-2, 1)$, $(2, -1)$ et $(-2, -1)$. Mais la contrainte $ab = 2$ nous indique que $a$ et $b$ doivent être de même signe. Au final, les deux racines de $Z_2$ sont donc $2+i$ et $-(2+i)$.
+}
 
 \end{document}
