@@ -7,10 +7,9 @@ rsync -avz ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Complexes/Complexes.
 rsync -avz ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Complexes/Complexes_files  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Complexes/
 rsync -avz ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Calculus/Calculus.html  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Calculus/
 rsync -avz ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus/Calculus.pdf  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Calculus/
-
-# rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_2/Calculus_2.html  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_2/
-# rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_2/Calculus_2_files  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_2/
-# rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_2/Calculus_2.pdf  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_2/
+rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Calculus_2/Calculus_2.html  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Calculus_2/
+rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Calculus_2/Calculus_2_files  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Calculus_2/
+rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2017/Calculus_2/Calculus_2.pdf  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2017/Calculus_2/
 # rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_3/Calculus_3.html  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_3/
 # rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_3/Calculus_3_files  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_3/
 # rsync -avz --delete-after ~/Documents/Cours/Cours/Licence_FdV/Calculus2016/Calculus_3/Calculus_3.pdf  migale:/projet/web/htdocs/migale/mmariadasso/public_html/Licence_FdV/2016/Calculus_3/

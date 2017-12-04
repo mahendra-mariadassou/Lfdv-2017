@@ -1,7 +1,7 @@
 ---
 title: "Analyse de fonctions (II)"
 author: "Mahendra Mariadassou"
-date: "6 décembre 2016"
+date: "4 décembre 2017"
 output:
   ioslides_presentation:
     css: ../CSS/custom_licence_fdv.css
