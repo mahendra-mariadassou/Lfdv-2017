@@ -1,0 +1,216 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+\usepackage{hyperref}
+%\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight 25.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Partiel de Mathématiques (partie analyse)}
+\def\Date{18 décembre 2017}
+\def\Classe{TS3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Force synctex
+\synctex=1
+
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+opts_knit$set(concordance = TRUE, self.contained=TRUE)
+require(patchSynctex)
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+Sauf \textbf{mention explicite du contraire}, les réponses doivent être justifiées (éventuellement de façon concise). Pour les exercices sans justification, les réponses erronées donnent lieu à des points négatifs. Le barème est donné à titre \textbf{indicatif}.
+
+%% \section*{Test 1}
+
+\Exo \textbf{2 points}
+
+Ma marque de biscuits préférée a récemment changé sa tarification. Le nombre de biscuits par paquets a augmenté de 25\% et le prix d'un paquet a augmenté de 50\%. Quelle est l'augmentation du prix unitaire d'un biscuit?
+
+\Exo \textbf{Architecture Éyptienne, 2 points}
+
+On dispose d'une corde avec 13 noeuds équidistants. Comment peut-on utiliser la corde (et uniquement la corde) pour vérifier qu'un angle est droit?
+
+\Exo \textbf{2 points}
+
+Trouver l'ensemble des nombres complexes $z$ tels que $|z-1-i| = |z+1+i|$. On exprimera cet ensemble comme un élément géométrique du plan complexe $\C$
+
+\Exo \textbf{Binôme de Newton, 2 points}
+
+En exprimant $k {n \choose k}$ sous une forme différente, calculer
+\[
+\sum_{k=0}^n k {n \choose k}
+\]
+
+\Exo \textbf{2 points}
+
+On considère la fonction $f(x) = \cos(x) + \sin(x)$. Trouver toutes les solutions de l'équation $f(x) = 0$.
+
+\Exo \textbf{2 points}
+
+Résoudre dans $\R$ les équations suivantes
+\begin{enumerate}
+\item $\cos(\sin(x)) = 0$
+\item $\ln(\tan^2(x)) = 0$
+\end{enumerate}
+
+\Exo \textbf{Désintégration, 3 points}
+
+La \emph{demi-vie} $\tau$ d'un isotope radioactif est le temps nécessaire pour que la moitié des noyaux des atomes initialement présents de cet isotope (on note $N_0$ ce nombre initial) se désintègrent naturellement. On admet que le nombre d'atomes au temps $t$ est donné par $N(t) = N_0 \times 2^{-t/\tau}$.
+
+On dispose d'une mole de Césium 137 ($\prescript{137}{}{\mathbf{Cs}}$) de demi-vie $\tau_C = 30$ ans et de 8 moles d'Hydrogène 3 ($\prescript{3}{}{\mathbf{H}}$ aussi appelé tritium) de demi-vie $\tau_H = 12$ ans qu'on laisse se désintégrer naturellement\footnote{Les demi-vies exactes sont $\tau_C = 30.04$ et $\tau_H = 12.32$ mais les calculs tombent moins bien...}. Combien de temps faut-il attendre pour qu'il reste autant d'atomes de Césium que de trillium?
+
+\Exo \textbf{Récurrence et limite, 4 points}
+
+On considère la suite $u_n$ définie par $u_0 = 1$ et pour tout $n \geq 1$, $u_{n+1} = u_n^2 - u_n^3/ 2$.
+
+\begin{enumerate}
+\item Montrer que pour tout $n \geq 1$, $0 \leq u_n \leq 2^{-n}$
+\item En déduire $\lim_{+\infty} u_n$.
+\end{enumerate}
+
+\Exo \textbf{Linéarisation, 4 points}
+
+Linéariser $\cos^2(x)\sin^2(x)$
+
+\Exo \textbf{5 points, pas de justification}
+
+Remplir le tableau suivant en mettant \texttt{NA} quand la valeur n'est pas définie. Aucune justification n'est demandée.
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    $x$ & $\cos(x)$ & $\sin(x)$ & $\cos(\arccos(x))$ & $\arccos(\cos(x))$ & $\sin(\arcsin(x))$ & $\arcsin(\sin(x))$ \hspace{0em} \\
+    \hline \hline
+    $\displaystyle -\frac{5\pi}{4}$ & & & & & & \\
+    \hline \hline
+    $\displaystyle -\frac{\pi}{2}$ & & & & & & \\
+    \hline \hline
+    $\displaystyle 0$ & & & & & & \\
+    \hline \hline
+    $\displaystyle +\frac{\pi}{2}$ & & & & & & \\
+    \hline \hline
+    $\displaystyle +\frac{5\pi}{4}$ & & & & & & \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\Exo \textbf{Étoile de la mort, 3 points}
+
+On considère que l'Étoile de la mort II\footnote{Celle de \emph{Return of the Jedi}} est une sphère de rayon $R = 375$km\footnote{\url{http://www.futura-sciences.com/sciences/dossiers/astronomie-secrets-star-wars-631/page/4/}}.
+
+Échaudé par la destruction de la première, Darth Vador décide lui rajouter un blindage de 3750 mètres. Quelle est la variation \emph{relative} de volume de l'Étoile de la mort II? On se contentera d'un résultat approché s'appuyant sur les différentielles.
+
+\Exo \textbf{Canette, 3 points}
+
+On considère les canettes d'une célèbre marque de soda comme des cylindre de rayon $r=60$ mm et de hauteur $h=120$ mm. La marque décide d'en proposer une version "slim" de rayon $54$ mm. Comment doit-elle augmenter la hauteur pour garder un volume constant?
+
+On se contentera d'un résultat approché s'appuyant sur la formule de la différentielle totale.
+
+\Exo \textbf{Limites, 4 points}
+
+Calculer les limites suivantes:
+
+\begin{enumerate}
+\item $\displaystyle \lim_{x \to 0} \frac{1 - \cos(x)}{\sin^2(x)}$
+\item $\displaystyle \lim_{x \to 0+} \left[ 1 + \tan^2(x)\right]^{1/x^2}$
+\item $\displaystyle \lim_{x \to 1} \frac{x^2 - x - 2}{\sqrt{x} - 1}$
+\item $\displaystyle \lim_{x \to 0} \frac{1}{x} \left \lfloor \frac{x}{2} \right \rfloor$
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,341 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+%\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight 25.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Correction du partiel de Mathématiques (partie analyse)}
+\def\Date{18 décembre 2017}
+\def\Classe{TS3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Force synctex
+\synctex=1
+
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+opts_knit$set(concordance = TRUE, self.contained=TRUE)
+require(patchSynctex)
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+Sauf \textbf{mention explicite du contraire}, les réponses doivent être justifiées (éventuellement de façon concise). Pour les exercices sans justification, les réponses erronées donnent lieu des points négatifs.
+
+%% \section*{Test 1}
+
+\Exo \textbf{2 points}
+
+Ma marque de biscuits préférée a récemment changé sa tarification. Le nombre de biscuits par paquets a augmenté de 25\% et le prix d'un paquet a augmenté de 50\%. Quelle est l'augmentation du prix unitaire d'un biscuit?
+
+\textcolor{gray}{Notons $x$ unitaire d'un biscuit avant changement et $y$ celui après changement. D'après l'énoncé,
+$y = 1.5 x / 1.25 = 1.2x$. Le prix unitaire d'un biscuit a donc augmenté de 20\%.
+}
+
+\Exo \textbf{Architecture Éyptienne, 2 points}
+
+On dispose d'une corde avec 13 noeuds équidistants. Comment peut-on utiliser la corde (et uniquement la corde) pour vérifier qu'un angle est droit?
+
+\textcolor{gray}{Les 13 noeuds délimitent 12 unités de longueur qui permettent de construire un triangle $T$ dont les côtés ont pour longueurs $3$ et $4$ et $5$. Comme $5^2 = 25 = 16 + 9 = 4^2 + 3^2$, ce triangle a le bon goût d'être rectangle et permet donc de vérifier qu'un angle est droit.}
+
+\Exo \textbf{2 points}
+
+Trouver l'ensemble des nombres complexes $z$ tels que $|z-1-i| = |z+1+i|$. On exprimera cet ensemble comme un élément géométrique du plan complexe $\C$
+
+\textcolor{gray}{Dans le plan complexe, on note $A$ le point d'affixe $1+i$, $B$ celui d'affixe $-1 - i$ et $M$ celui d'affixe $z$. On alors
+\begin{equation*}
+|z-1-i| = |z+1+i| \Leftrightarrow |z - (1+i)| = |z - (-1 - i)| \Leftrightarrow |AM| = |BM|
+\end{equation*}
+Donc $M$ est dans l'ensemble solution si et seulement si il est sur la médiatrice du segment $[AB]$. Un rapide dessin montre qu'il s'agit de la droite d'équation $y = -x$, c'est à dire que l'ensemble solution est $\{ z \in \C; Re(z) = - Im(z)\}$.
+}
+
+\Exo \textbf{Binôme de Newton, 2 points}
+
+En exprimant $k {n \choose k}$ sous une forme différente, calculer
+\[
+\sum_{k=0}^n k {n \choose k}
+\]
+
+\textcolor{gray}{En utilisant la formule, vue en DM, $k {n \choose k} = n {n-1 \choose k-1}$ et en remarquant que le terme correspondant à $k=0$ ne contribue pas à la somme, on peut réécrire
+\[
+\sum_{k=0}^n k {n \choose k} = \sum_{k=1}^n k {n \choose k} = \sum_{k=1}^n n {n-1 \choose k-1} = n \sum_{j=0}^{n-1} {n-1 \choose j} = n 2^{n-1}
+\]
+L'avant-dernière égalité correspond au changement d'indice $j = k-1$ et la dernière à l'égalite, aussi vue en DM, $\sum_{k=0}^n {n \choose k} = 2^n$.
+}
+
+\Exo \textbf{2 points}
+
+On considère la fonction $f(x) = \cos(x) + \sin(x)$. Trouver toutes les solutions de l'équation $f(x) = 0$.
+
+\textcolor{gray}{On s'appuie sur la formule de factorisation vue en cours. $f(x)$ est de la forme $a\cos(x) + b\cos(x)$ avec $a=b=1$. On pose donc $R = \sqrt{a^2 + b^2} = \sqrt{2}$ et on est amené à trouver un angle $\phi$ qui vérifie
+\[
+\begin{cases} \cos(\phi) & = a/R = 1/\sqrt{2} \\ \sin(\phi) & = b/R = 1/\sqrt{2} \end{cases}
+\]
+$\phi = \pi/4$ est un tel angle (on a bien $\cos(\pi/4) = \cos(\pi/4) = 1/\sqrt{2}$) et l'expression de départ peut donc se réécrire
+\[
+\cos(x) + \sin(x) = \sqrt{2} \left[ \cos(x)\cos(\pi/4) + \sin(x)\sin(\pi/4) \right] = \sqrt{2} \cos(x - \pi/4)
+\]
+qui s'annule pour
+\[
+\begin{cases} x - \pi/4 & = \pi/2 + 2k\pi \\ x - \pi/4 & = -\pi/2 + 2k\pi \end{cases} \Leftrightarrow
+\begin{cases} x & = 3\pi/4 + 2k\pi \\ x & = -\pi/4 + 2k\pi \end{cases} \Leftrightarrow x = -\frac{\pi}{4} + 2k\pi \quad (k \in \Z)
+\]
+}
+
+\Exo \textbf{2 points}
+
+Résoudre dans $\R$ les équations suivantes
+\begin{enumerate}
+\item $\cos(\sin(x)) = 0$
+\item $\ln(\tan^2(x)) = 0$
+\end{enumerate}
+
+\textcolor{gray}{On raisonne par équivalence pour les deux équations. Pour la première:
+\[
+\cos(\sin(x)) = 0 \Leftrightarrow \sin(x) = \pi/2 + k\pi \quad (k \in \Z)
+\]
+Or $\sin(x) \in [-1, 1]$ et on peut facilement vérifier que pour tout $k$, $\pi/2 + k\pi \notin [-1, 1]$. L'équation n'a donc pas de solution.
+Concernant la seconde, l'expresion est bien définie dès que $x \neq \frac{\pi}{2} + k\pi$ et on a alors
+\[
+\ln(\tan^2(x)) = 0 \Leftrightarrow \tan^2(x) = 1 \Leftrightarrow
+\begin{cases} \tan(x) & = 1 \\ \tan(x) &= -1 \end{cases} \Leftrightarrow
+\begin{cases} x & = \frac{\pi}{4} + \pi \\ x &= -\frac{\pi}{4} + k\pi \end{cases} \Leftrightarrow
+x = \frac{pi}{4} + k\frac{\pi}{2} \quad (k \in \Z)
+\]
+}
+
+\Exo \textbf{Désintégration, 3 points}
+
+La \emph{demi-vie} $\tau$ d'un isotope radioactif est le temps nécessaire pour que la moitié des noyaux des atomes initialement présents de cet isotope (on note $N_0$ ce nombre initial) se désintègrent naturellement. On admet que le nombre d'atomes au temps $t$ est donné par $N(t) = N_0 \times 2^{-t/\tau}$.
+
+On dispose d'une mole de Césium 137 ($\prescript{137}{}{\mathbf{Cs}}$) de demi-vie $\tau_C = 30$ ans et de 8 moles d'Hydrogène 3 ($\prescript{3}{}{\mathbf{H}}$ aussi appelé tritium) de demi-vie $\tau_H = 12$ ans qu'on laisse se désintégrer naturellement\footnote{Les demi-vies exactes sont $\tau_C = 30.04$ et $\tau_H = 12.32$ mais les calculs tombent moins bien...}. Combien de temps faut-il attendre pour qu'il reste autant d'atomes de Césium que de trillium?
+
+\textcolor{gray}{La quantité d'atomes de Césium au temps $t$ (exprimés en années) vaut $1 \times 2^{-t/30}$ et celle de tritium vaut $8 \times 2^{-t/12}$. On cherche donc à résoudre l'équation (d'inconnue $t$) $2^{-t/30} =  8 \times 2^{-t/12}$. On raisonne par équivalence et on applique la fonction $\log_2$ (logarithme en base $2$):
+\begin{align*}
+2^{-t/30} =  8 \times 2^{-t/12} & \Leftrightarrow -\frac{t}{30} = \log_2(8) -\frac{t}{12} \Leftrightarrow -\frac{t}{30} + \frac{t}{12} = 3 \Leftrightarrow \frac{5t}{60} - \frac{2t}{60} = 3 \\
+& \Leftrightarrow \frac{3t}{60} = 3 \Leftrightarrow t = 60
+\end{align*}
+Autrement dit, il faut attendre $60$ ans pour avoir les mêmes quantités de Césium 137 et de tritium.
+}
+
+\Exo \textbf{Récurrence et limite, 4 points}
+
+On considère la suite $u_n$ définie par $u_0 = 1$ et pour tout $n \geq 1$, $u_{n+1} = u_n^2 - u_n^3/ 2$.
+
+\begin{enumerate}
+\item Montrer que pour tout $n \geq 1$, $0 \leq u_n \leq 2^{-n}$
+\item En déduire $\lim_{+\infty} u_n$.
+\end{enumerate}
+
+\textcolor{gray}{On va montrer par récurrence que pour tout $n \geq 1$, $0 \leq u_n \leq 2^{-n}$.\\
+\textbf{Initialisation:} Pour $n = 1$, on a $u_1 = 1/2$ qui est bien compris entre $0$ et $2^{-1} = 1/2$.\\
+\textbf{Hérédité:} On suppose que $u_n \in [0, 2^{-n}]$, montrons que $u_{n+1} \in [0, 2^{-(n+1)}]$.
+\begin{itemize}
+\item Pour tout $x \in [0, 1]$ (et donc pour $x \in [0, 2^{-n}]$), on a $x^3 \leq x^2$ et donc $x^2 - x^3/2 \geq 0$. En particulier, $u_n^2 - u_n^3 / 2 \geq 0$.
+\item Pour tout $x \geq 0$, on a $x^3/2 \geq 0$ et donc $x^2 - x^3/2 \leq x^2$. En particulier, comme $u_n \geq 0$
+\[
+u_{n+1} = u_n^2 - u_n^3/2 \leq u_n^2 \leq (2^{-n})^2 = 2^{-2n} \leq 2^{-(n+1)}
+\]
+où la dernière égalité vient du fait que $n\geq 1$ et donc $2n \geq n+1$.
+\end{itemize}
+On a donc bien $0 \leq u_{n+1} \leq 2^{-(n+1)}$ et la propriété est donc vraie pour tout $n \geq 1$ par récurrence. On sait enfin que $\lim_{+\infty} 2^{-n} = 0$. Par théorème d'encadrement, on a donc $\lim_{+\infty} u_n = 0$.
+}
+
+\Exo \textbf{Linéarisation, 4 points}
+
+Linéariser $\cos^2(x)\sin^2(x)$
+
+\textcolor{gray}{On utilise la méthode vue en cours, basée sur les formules d'Euler, et on fait les calculs sans se tromper.
+\begin{align*}
+\cos^2(x)\sin^2(x) & = \left( \frac{e^{ix} + e^{-ix}}{2} \right)^2 \left( \frac{e^{ix} - e^{-ix}}{2i} \right)^2 \\
+& = \frac{1}{2^2(2i)^2}\left(e^{2ix} + 2 + e^{-2ix} \right) \left(e^{2ix} - 2 + e^{-2ix} \right) \\
+& = -\frac{1}{16}\left(e^{4ix} - 2e^{2ix} + 1 + 2e^{2ix} - 4 + e^{-2ix} + 1 - 2e^{-2ix} + e^{-4ix}\right) \\
+& = -\frac{1}{16}\left(e^{4ix} -2 + e^{-4ix}\right) \\
+& = -\frac{1}{16}\left(\textcolor{red}{e^{4ix}} + \textcolor{red}{e^{-4ix}} -2\right) \\
+& = -\frac{1}{16}\left(\textcolor{red}{2\cos(4x)} -2\right) \\
+& = \frac{1 - \cos(4x)}{8}
+\end{align*}
+On pouvait aussi reconnaître une égalité remarquable pour dire $(e^{ix} + e^{-ix})(e^{ix} - e^{-ix}) = e^{2ix} + e^{-2ix}$ et faire moitié moins de calculs...
+}
+
+\Exo \textbf{5 points, pas de justification}
+
+Remplir le tableau suivant en mettant \texttt{NA} quand la valeur n'est pas définie. Aucune justification n'est demandée.
+
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+    $x$ & $\cos(x)$ & $\sin(x)$ & $\cos(\arccos(x))$ & $\arccos(\cos(x))$ & $\sin(\arcsin(x))$ & $\arcsin(\sin(x))$ \hspace{0em} \\
+    \hline \hline
+    $\displaystyle -\frac{5\pi}{4}$ & $-1/\sqrt{2}$ & $1/\sqrt{2}$ & NA & $3\pi/4$ & NA & $-\pi/4$ \\
+    \hline \hline
+    $\displaystyle -\frac{\pi}{2}$ & 0 & -1 & NA & $\pi/2$ & NA & $-\pi/2$ \\
+    \hline \hline
+    $\displaystyle 0$ & 1 & 0 & 0 & 0 & 0 & 0 \\
+    \hline \hline
+    $\displaystyle +\frac{\pi}{2}$ & 0 & -1 & NA & $\pi/2$ & NA & $\pi/2$ \\
+    \hline \hline
+    $\displaystyle +\frac{5\pi}{4}$ & $-1/\sqrt{2}$ & $1/\sqrt{2}$ & NA & $3\pi/4$ & NA & $-\pi/4$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\Exo \textbf{Étoile de la mort, 3 points}
+
+On considère que l'Étoile de la mort II\footnote{Celle de \emph{Return of the Jedi}} est une sphère de rayon $R = 375$km\footnote{\url{http://www.futura-sciences.com/sciences/dossiers/astronomie-secrets-star-wars-631/page/4/}}.
+
+Échaudé par la destruction de la première, Darth Vador décide lui rajouter un blindage de 3750 mètres. Quelle est la variation \emph{relative} de volume de l'Étoile de la mort II? On se contentera d'un résultat approché s'appuyant sur les différentielles.
+
+\textcolor{gray}{Le volume $V$ d'une sphère de rayon $R$ est donné par $V = \frac{4}{3}\pi R^3$. En uilisant la différentielle logarithmique, on a donc $\frac{dV}{V} = 3\frac{dR}{R}$. Le blindage de 3.75km correspond à une variation relative de $\frac{\Delta R}{R} = 3.75 / 375 = 0.01$. En utilisant l'approximation des variations relatives par les différentielles, on a donc
+\[
+\frac{\Delta V}{V} \sim 3 \frac{\Delta R}{R} = 0.03
+\]
+Le volume de l'Étoile de la mort augmente donc de (environ) 3\% suite à l'ajout du blindage. Pour information, la valeur exacte est 3.03\%, l'approximation est très bonne dans cet exemple.
+}
+
+\Exo \textbf{Canette, 3 points}
+
+On considère les canettes d'une célèbre marque de soda comme des cylindre de rayon $r=60$ mm et de hauteur $h=120$ mm. La marque décide d'en proposer une version "slim" de rayon $54$ mm. Comment doit-elle augmenter la hauteur pour garder un volume constant?
+
+On se contentera d'un résultat approché s'appuyant sur la formule de la différentielle totale.
+
+\textcolor{gray}{Le volume de la canette est donné par $V = \pi r^2 h$. Les dérivées partielles de $V$ par rapport à $r$ et $h$ sont
+\[
+\frac{\partial V}{\partial r} = 2\pi r h \quad \quad \frac{\partial V}{\partial h} = \pi r^2
+\]
+La différentielle totale est donc
+\begin{align*}
+dV & = \frac{\partial V}{\partial r} dr + \frac{\partial V}{\partial h} dh \\
+   & = 2\pi r h dr + \pi r^2 dh \\
+   & = \pi r (2h dr + r dh)
+\end{align*}
+Pour que le volume total soit constant, il faut que $dV = 0$. Étant donné que $r \neq 0$, il faut donc $2h dr + r dh = 0$, ce qui revient à $dh = - 2h dr /r$. Avec les données du problèmes en approchant des petites variations par des différentielles, on obtient $dh = 2 \times 120 \times 6 / 60 = 24$mm. Il faut donc augmenter la hauteur des canettes de (environ) 24 mm pour garder un volume constant. Pour comparaison, la vraie valeur est 28.1mm, l'approximation est un peu grossière dans cette exemple.
+}
+
+\Exo \textbf{Limites, 4 points}
+
+Calculer les limites suivantes:
+
+\begin{enumerate}
+\item $\displaystyle \lim_{x \to 0} \frac{1 - \cos(x)}{\sin^2(x)}$
+\item $\displaystyle \lim_{x \to 0+} \left[ 1 + \tan^2(x)\right]^{1/x^2}$
+\item $\displaystyle \lim_{x \to 1} \frac{x^2 - x - 2}{\sqrt{x} - 1}$
+\item $\displaystyle \lim_{x \to 0} \frac{1}{x} \left \lfloor \frac{x}{2} \right \rfloor$
+\end{enumerate}
+
+\textcolor{gray}{Comme vu en cours, on essaie de se ramener à des limites connues pour la première limite.
+\begin{align*}
+\frac{1 - \cos(x)}{\sin^2(x)} & = \frac{1 - \cos(x)}{x^2} \times \left( \frac{x^2}{\sin^2(x)} \right) \\
+                              & = \frac{1 - \cos(x)}{x^2} \times \left( \frac{\sin(x)}{x} \right)^{-2}
+\end{align*}
+Et on sait que $\lim_0 \frac{1 - \cos(x)}{x^2} = 1/2$ et $\lim_0 \frac{\sin(x)}{x} = 1$. Par théorème d'opérations, on a donc $\lim_0 \frac{1 - \cos(x)}{\sin^2(x)} = 1/2$.\\
+On fait pareil pour la deuxième limite.
+\begin{align*}
+(1 + \tan^2(x))^{1/x^2} & = \exp\left( \frac{\ln(1 + \tan^2(x))}{x^2} \right) = \exp\left( \frac{\ln(1 + \tan^2(x))}{\tan^2(x)} \frac{\tan^2(x)}{x^2} \right) \\
+                        & = \exp\left( \frac{\ln(1 + \tan^2(x))}{\tan^2(x)} \left( \frac{\sin(x)}{x} \right)^2 \frac{1}{\cos^2(x)}\right)
+\end{align*}
+$\tan^2(x) \to 0$ quand $x \to 0$ et $\ln(1+X)/X \to 1$ quand $X \to 0$ (ici $X = \tan^2(x)$) donc par théorème de composition, $\frac{\ln(1 + \tan^2(x))}{\tan^2(x)} \to 1$ quand $x \to 0$. De même, $\sin(x)/x \to 1$ et $1/\cos^2(x) \to 1$. Par théorème d'opérations, on a donc $\ln(1 + \tan^2(x))/ x^2 \to 1$. Finalement, par théorème de composition, on a
+$\lim_{0+} (1 + \tan^2(x))^{1/x^2} = e^{1} = e$.\\
+L'énoncé de la troisième limite était erroné, ce n'était pas une forme indéterminée... On va calculer les limites à gauche et à droite de la quantité demandé. On a $\lim_1 (x^2 - x - 2) = -2$ et $\lim_{1^+} \sqrt{x} - 1 = 0^+$ et $\lim_{1^-} \sqrt{x} - 1 = 0^-$. La quantité $\frac{x^2 - x - 2}{\sqrt{x} - 1}$ admet donc une limite à gauche en $1$ (il s'agit de $+\infty$) et une limite à droite $(-\infty)$. Comme ces deux limites sont différentes, la quantité n'admet pas de limite en $1$.\\
+Pour la quatrième limite, il faut bien se rappeler de la définition de partie entière. La quantité $f(x) = \frac{1}{x} \left \lfloor \frac{x}{2} \right \rfloor$ n'est pas définie en $0$, on va étudier sa limite à droite et sa limite à gauche.
+\begin{itemize}
+\item \textbf{limite à droite} Pour $x \in (0, 2)$, on a $\lfloor x/2 \rfloor = 0$ et la fonction $f$ est identiquement nulle sur $(0,2)$. On a donc $\lim_{0^+} f(x) = 0$.
+\item \textbf{limite à gauche} Pour $x \in (-1, 0)$, on a $\lfloor x/2 \rfloor = -1$ et la fonction $f$ est donc égale à $-1/x$ sur $(-2, 0)$. On a donc $\lim_{0^-} f(x) = +\infty$.
+\end{itemize}
+Comme ces deux limites sont différentes, $f(x)$ n'admet pas de limite en $0$.
+}
+
+\end{document}
