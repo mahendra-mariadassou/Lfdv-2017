@@ -1,7 +1,7 @@
 ---
 title: "Calcul Différentiel"
 author: "Mahendra Mariadassou"
-date: "22 mars 2018"
+date: "22 janvier 2018"
 output:
   ioslides_presentation:
     css: ../CSS/custom_licence_fdv.css
@@ -72,7 +72,7 @@ $$
 ## Différentielles et dérivées (II)
 
 - La dérivée peut se concevoir comme le <alert>taux de variation</alert> de $b$ par rapport $a$, c'est à dire comme le quotient 
-$\displaystyle \frac{\text{d}a}{\text{d}b}$ dans la limite où les variations $\text{d}a$ et $\text{d}b$ sont très petites. 
+$\displaystyle \frac{\text{d}b}{\text{d}a}$ dans la limite où les variations $\text{d}a$ et $\text{d}b$ sont très petites. 
 - l'idée <alert>principale</alert> de la dérivée est la suivante
 <div class = "proposition">
 Si les différentielles sont suffisamment petites, alors elles sont proportionnelles entre elles et le coefficient de multiplication est la dérivée:

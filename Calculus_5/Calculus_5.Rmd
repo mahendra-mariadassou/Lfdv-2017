@@ -1,7 +1,7 @@
 ---
 title: "Intégration"
 author: "Mahendra Mariadassou"
-date: "24 avril 2017"
+date: "5 février 2018"
 output:
   ioslides_presentation:
     css: ../CSS/custom_licence_fdv.css

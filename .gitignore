@@ -11,3 +11,8 @@ Administratif
 */*-figure
 */*/*pdf
 */*/*gitignore
+*/*/*.md
+*/*/cache
+*/*/*.log
+*/*/*.tex
+*/*/*.synctex.gz
