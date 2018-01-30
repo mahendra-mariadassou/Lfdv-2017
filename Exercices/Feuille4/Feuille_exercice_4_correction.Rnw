@@ -1,0 +1,539 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight26.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Feuille d'exercices \og DL \fg{}}
+\def\Date{30 janvier 2018}
+\def\Classe{L1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Exercices}
+
+\Exo \textbf{Formule de Taylor}
+
+Soit $f$ une fonction dérivable $n$ fois sur un intervalle $I$ autour de $0$. Soit $x \in I$ un point proche de $0$. En utilisant la formule de Taylor, exprimer $f(x+a)$ en fonction de $f$ et des ses dérivées successives en $a$ ($f(a)$, $f'(a)$, etc). On utilisera un terme d'erreur de la forme $o(x^n)$, \emph{i.e.} $f(x) = \dots + o(x^n)$.
+
+La formule de Taylor dans le cas général est la suivante (généralement appliquée en $x$ mais $x$ est une variable muette que je note ici $y$ pour minimiser les confusions avec la suite):
+\begin{fleqn}
+  \begin{align*}
+    f(y) = f(a) + f'(a)(y-a) + f''(a) \frac{(y-a)^2}{2!} + f^{(3)}(a) \frac{(y-a)^3}{3!} + \dots + f^{(n)}(a) \frac{(y-a)^n}{n!} + o((y-a)^n)
+  \end{align*}
+\end{fleqn}
+
+En l'appliquant en $y = a + x$, on obtient:
+\begin{fleqn}
+  \begin{align*}
+    f(a + x) & = f(a) + f'(a)(x+ a - a) + f''(a) \frac{(x+a - a)^2}{2!} + \dots + f^{(n)}(a) \frac{(x+a -a)^n}{n!} + o((x+a-a)^n) \\
+    & = f(a) + f'(a)x + f''(a) \frac{x^2}{2!} + \dots + f^{(n)}(a) \frac{x^n}{n!} + o(x^n)
+  \end{align*}
+\end{fleqn}
+C'est cette forme simple qui était demandée.
+
+
+\Exo \textbf{DL usuels (calculs)}
+
+Calculer un DL à l'ordre 3 des fonctions suivantes (en $0$). On pourra essayer de se ramener à un DL connu.
+\begin{enumerate}
+\item Pour plus de détails sur ce DL, se reporter au corrigé précédent.
+\begin{fleqn}
+  \begin{align*}
+    \sqrt{9 + x} = \sqrt{9} \sqrt{1 + x/9} = 3\left( 1 + \frac{1}{2} \frac{x}{9} - \frac{1}{8} \left(\frac{x}{9}\right)^2 + \frac{1}{16} \left(\frac{x}{9}\right)^3 + o\left( \left( \frac{x}{9} \right)^3 \right) \right) = \\ 3 + \frac{x}{6} - \frac{x^2}{216} + \frac{x^3}{3888} + o(x^3)
+    \end{align*}
+\end{fleqn}
+\item $\frac{1 - \cos(x)^2}{\sin(x)} = \frac{\sin^2(x)}{\sin(x)} = \sin(x) = x - \frac{x^3}{6} + o(x^3)$
+\item Le DL de $\exp(\sin(x))$ est proche de celui fait ensemble en classe pour illustrer la composition de DLs. On rappelle que le DL de $\exp(x)$ est \begin{fleqn}
+  \begin{align*}
+    \exp(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3)
+  \end{align*}
+\end{fleqn}
+Celui de $\sin(x)$ est rappelé à la ligne précédente. $\sin(x)$ tend
+vers $0$ en $0$, on peut donc composer le DL de $\sin(x)$ avec celui
+de $\exp(x)$. En faisant la composition, on trouve:
+\begin{fleqn}
+  \begin{align*}
+    \exp(\sin(x)) & = 1 + \sin(x) + \frac{\sin(x)^2}{2} + \frac{\sin(x)^3}{6} + o(\sin(x)^3) \\
+    & = 1 + \left( x - \frac{x^3}{6} + o(x^3) \right) + \frac{1}{2} \left( x - \frac{x^3}{6} + o(x^3) \right)^2 + \frac{1}{6} \left( x - \frac{x^3}{6} + o(x^3) \right)^3 \\ & + o\left( \left( x - \frac{x^3}{6} + o(x^3) \right)^3 \right) \\
+    & = 1 + \left( x - \frac{x^3}{6} \right) + \frac{1}{2} \left( x - \frac{x^3}{6} \right)^2 + \frac{1}{6} \left( x - \frac{x^3}{6} \right)^3 + o\left( x^3 \right)
+  \end{align*}
+\end{fleqn}
+La deuxième ligne est présente uniquement pour expliciter les calculs, il vaut mieux éviter de l'écrire en pratique et passer directement à la troisième (dans laquelle on a regroupé les termes d'erreur ensemble). Les développements intérmédiaires donnent
+\begin{itemize}
+  \item{} $( x - \frac{x^3}{6} )^2 = x^2 + o(x^3)$
+  \item{} $( x - \frac{x^3}{6} )^3 = x^3 + o(x^3)$
+  \end{itemize}
+Il suffit alors de recoller les morceaux, de trier les puissances de $x$ et de regrouper les $o(x^3)$ pour trouver:
+\begin{fleqn}
+  \begin{align*}
+     \exp(\sin(x)) = 1 + \left(x - \frac{x^3}{6}\right) + \frac{1}{2}x^2 + \frac{1}{6}x^3 + o(x^3) = 1 + x + \frac{x^2}{2} + o(x^3)
+  \end{align*}
+\end{fleqn}
+\end{enumerate}
+
+\vspace{1cm}
+
+\Exo \textbf{Limites}
+
+A l'aide de développements limités, calculer les limites suivantes
+\begin{enumerate}
+\item $\lim_{x \to 0} [\cos(x)]^{1/\tan{x}}$. Il s'agit d'une forme indéterminée $1^\infty$, on passe donc au logarithme (ou on l'écrit sous forme exponentielle):
+\begin{fleqn}
+  \begin{align*}
+    [\cos(x)]^{1/\tan{x}} & = \exp{\frac {\ln{\cos(x)}}{\tan(x)}} = \exp{ \frac{\ln(1 - x^2/2 + o(x^2))}{x + o(x)}}
+  \end{align*}
+\end{fleqn}
+$\ln(1+x)$ admet le DL suivant en $0$: $\ln(1+x) = x + o(x)$, on a donc $\ln(1 - x^2/2 + o(x^2)) = -x^2/2 + o(x^2)$. En réinjectant dans l'expression précédente, on obtient:
+\begin{fleqn}
+  \begin{align*}
+    [\cos(x)]^{1/\tan{x}} & = \exp{ \frac{\ln(1 - x^2/2 + o(x^2))}{x + o(x)}} = \exp{ \frac{- x^2/2 + o(x^2)}{x + o(x)}} \\
+    & = \exp{\frac{-x/2 + o(x)}{1 + o(1)}} \underset{x \to 0}{\rightarrow} \exp(0) = 1
+  \end{align*}
+\end{fleqn}
+
+\item $\lim_{x \to 0} \frac{\sqrt{1 - 2x^2} - (1 -x^2)}{x^4}$. Il s'agit d'une forme indéterminée (les deux termes tendent vers $0$). Le dénominateur est équivalent à $x^4$, il faut donc faire un DL à l'ordre 4 du numérateur pour lever l'indétermination. Si on substitue $y =  - 2x^2$ dans le DL d'ordre 2 (en $y$) suivant $\sqrt{1 + y} = 1 + y/2 - y^2/8 + o(y^2)$, on obtient un DL d'ordre 4 en $x$:
+\begin{fleqn}
+  \begin{align*}
+    \sqrt{1 - 2x^2} & = \sqrt{1 + y} = 1 + \frac{y}{2} - \frac{y^2}{8} + o(y^2) \\
+    & = 1 + \frac{-2x^2}{2} - \frac{(-2x^2)^2}{8} + o((-2x^2)) \\
+    & = 1 - x^2 - \frac{x^4}{2} + o(x^4)
+  \end{align*}
+\end{fleqn}
+En injectant dans le quotient de départ, on obtient donc:
+\begin{fleqn}
+  \begin{align*}
+    \frac{\sqrt{1 - 2x^2} - (1 -x^2)}{x^4} & = \frac{1 - x^2 - \frac{x^4}{2} + o(x^4) - (1 - x^2)}{x^4} \\
+    = \frac{ - x^4/2 + o(x^4)}{x^4} = -1/2 + o(1) \underset{x \to 0}{\rightarrow} -1/2
+  \end{align*}
+\end{fleqn}
+
+\item $\lim_{x \to +\infty} x (\sqrt{1 + \frac{1}{x} + \sqrt{\frac{1}{x}}} - 1)$. Cet exercice n'est pas corrigé ici. Il est à faire à la maison et sera ramassé jeudi prochain. Voici quelques indications pour résoudre l'exercice.
+  \begin{enumerate}
+  \item Poser $y = \sqrt{\frac{1}{x}}$ et réécrire $f(x) = \sqrt{1 + \frac{1}{x} + \sqrt{\frac{1}{x}}} - 1$ en fonction de $y$.
+  \item En déduire un DL de $f(x)$ en fonction de $y$ (indice: quelle est la limite de $y$ quand $x$ tend vers $+\infty$?)
+  \item En déduire un DL de $f(x)$ en fonction de $x$ (faire attention à bien trier les termes, du plus grand au plus petit).
+  \item En déduire la limite demandée.
+  \end{enumerate}
+\end{enumerate}
+
+\Exo \textbf{Quotients de DLs}
+
+\emph{Rappeler les DL en $0$ à l'ordre 5 de $\sin(x)$ et à l'ordre $4$ de $\cos(x)$.}
+
+Les DLs en question (dans le cours) sont (attention à ne pas omettre le $o(x^n)$):
+
+\begin{align*}
+\sin(x) & =  x - \frac{x^3}{3!} + \frac{x^5}{5!} + o(x^5) \text{ en fait, on pourrait même mettre } o(x^6) \text{ dans cette expression.} \\
+\cos(x) & =  1 - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^4)
+\end{align*}
+
+\emph{En déduire des DL en $0$ à l'ordre $4$ de $\displaystyle \frac{x}{\sin(x)}$ et $\displaystyle \frac{1}{\cos(x)}$.}
+
+On commence par réécrire les expressions sous la forme $(1 + X)^{-1}$ avec $X$ petit puis on appliquera le DL de $(1 + X)^{-1} = 1 - X + X^2 - X^3 + X^4 + \dots$.
+
+\begin{align*}
+\frac{\sin(x)}{x} & =  1 - \frac{x^2}{3!} + \frac{x^4}{5!} + o(x^4) \\
+ & = 1 + X
+\end{align*}
+où $X = - \frac{x^2}{3!} + \frac{x^4}{5!} + o(x^4)$ est petit quand $x$ est petit. On substitue et on obtient:
+\begin{align*}
+\frac{x}{\sin(x)} & =  (1 + X)^{-1} \\
+ & = 1 - X + X^2 + o(X^2) \\
+\end{align*}
+
+Le terme dominant de $X$ est $\frac{x^2}{6}$, autrement dit $X = \frac{x^2}{6}(1 + o(1))$. Les puissances suivantes sont donc de la forme $X^2 = \frac{x^4}{36}(1 + o(1))$ et $X^3 = \frac{x^6}{216}(1+o(1)) = o(x^4)$. En particulier, pour avoir un DL de $\frac{x}{\sin(x)}$ en $x$
+d'ordre 4, il suffit de faire un DL de $(1+X)^{-1}$ en $X$ d'ordre 2 et de substituer. On commence par faire un DL en $x$ à l'ordre 4 de $X^2$. Dans le DL, on se contente de garder les termes de degré inférieur à $4$, les autres rentrent dans le $o(x^4)$.
+
+\begin{align*}
+  X^2 & = \left(- \frac{x^2}{3!} + \frac{x^4}{5!} + o(x^4)\right)^2 = \frac{x^4}{36} + o(x^4) \\
+  1 - X + X^2 & = 1 - \left(- \frac{x^2}{3!} + \frac{x^4}{5!}\right) + \frac{x^4}{36} + o(x^4) \\
+  & = 1 + \frac{x^2}{6} + \frac{7x^4}{360} + o(x^4)
+\end{align*}
+
+Et donc au final
+\begin{align*}
+  \frac{x}{\sin(x)} &= 1 + \frac{x^2}{6} + \frac{7x^4}{360} + o(x^4)
+\end{align*}
+
+On applique le même raisonnement pour $\frac{1}{\cos(x)}$.
+
+\begin{align*}
+\cos(x) & =  1 - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^4) \\
+& = 1 + X
+\end{align*}
+avec $X = \left(  - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^4) \right)$ qui est petit quand $x$ est petit. En appliquant le même raisonnement, on se rend compte qu'un DL de $(1+X)^{-1}$ en $X$ à l'ordre 2 donne un DL de $\frac{1}{\cos(x)}$ en $x$ à l'ordre $4$.
+\begin{align*}
+  \frac{1}{\cos(x)} & = (1 + X)^{-1} = 1 - X + X^2 + o(X^2) \\
+  X^2 & = \left(  - \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^4) \right)^2  = \frac{x^4}{4} + o(x^4) \\
+  1 - X + X^2 + o(X^2) & = 1 - \left(  - \frac{x^2}{2!} + \frac{x^4}{4!} \right) + \frac{x^4}{4} + o(x^4) \\
+  & = 1 + \frac{x^2}{2} + \frac{5x^4}{24} + o(x^4)
+\end{align*}
+
+Et donc au final
+\begin{equation*}
+  \frac{1}{\cos(x)} = 1 + \frac{x^2}{2} + \frac{5x^4}{24} + o(x^4)
+\end{equation*}
+
+
+
+\Exo \textbf{DL et limites}
+
+\emph{Calculer les limites suivantes à l'aide de DLs en $0$ en évitant les calculs superflus (c'est à dire, en faisant les DLs à l'ordre qui permet de lever la forme indéterminée):}
+
+\begin{equation*}
+\lim_{x \to 0} \frac{e^{x^2} - \cos(x)}{x^2}
+\end{equation*}
+Le dénominateur est de degré $2$ (c'est un infiniment petit d'ordre $2$ en $0$), il suffit donc de faire un DL d'ordre $2$ du numérateur pour lever l'indétermination.
+
+Au voisinage de $0$,
+\begin{align*}
+  \exp(x) & = 1 + x + o(x) \\
+  \exp(x^2) & = 1 + x^2 + o(x^2) \\
+  \cos(x) & = 1 - \frac{x^2}{2} + o(x^2) \\
+  \exp(x^2) - \cos(x) & = (1 + x^2) - \left(1 - \frac{x^2}{2}\right) + o(x^2) \\
+  & = \frac{3x^2}{2}  + o(x^2)
+\end{align*}
+
+D'où on déduit
+\begin{equation*}
+  \frac{e^{x^2} - \cos(x)}{x^2} = \frac{3x^2/2 + o(x^2)}{x^2} = \frac{3}{2} + o(1) \xrightarrow[x\to 0]{} \frac{3}{2}
+\end{equation*}
+
+\begin{equation*}
+\lim_{x \to 0} \lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x}
+\end{equation*}
+Le dénominateur est de degré $1$ (c'est un infiniment petit d'ordre $1$ en $0$), il suffit donc de faire un DL d'ordre $1$ du numérateur pour lever l'indétermination.
+
+Au voisinage de $0$,
+\begin{align*}
+  \ln(1+x) & = x + o(x) \\
+  \sin(x) & = x + o(x) \\
+  \ln(1+x) - \sin(x) & = o(x)
+\end{align*}
+
+D'où on déduit
+\begin{equation*}
+\frac{\ln(1+x) - \sin(x)}{x} = \frac{o(x)}{x} = o(1) \xrightarrow[x\to 0]{} 0
+\end{equation*}
+
+\begin{equation*}
+\lim_{x \to 0} \frac{\cos(x) - \sqrt{1 - x^2}}{x^4}
+\end{equation*}
+Le dénominateur est de degré $4$ (c'est un infiniment petit d'ordre $4$ en $0$), il suffit donc de faire un DL d'ordre $4$ du numérateur pour lever l'indétermination.
+
+Au voisinage de $0$,
+\begin{align*}
+  \cos(x) & = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4) \\
+  \sqrt{1 - x} & = 1 - \frac{x}{2} - \frac{x^2}{8} + o(x^2) \\
+  \sqrt{1 - x^2} & = 1 - \frac{x^2}{2} - \frac{x^4}{8} + o(x^4) \\
+  \cos(x) - \sqrt{1 - x^2} & = \left( 1 - \frac{x^2}{2} + \frac{x^4}{24} \right) - \left(1 - \frac{x^2}{2} - \frac{x^4}{8}\right) + o(x^4) \\
+  & = \frac{x^4}{24} + \frac{x^4}{8} + o(x^4) = \frac{x^4}{6} + o(x^4)
+\end{align*}
+
+D'où on déduit
+\begin{equation*}
+\frac{\cos(x) - \sqrt{1 - x^2}}{x^4} = \frac{\frac{x^4}{6} + o(x^4)}{x^4} = \frac{1}{6} + o(1) \xrightarrow[x\to 0]{} \frac{1}{6}
+\end{equation*}
+
+\Exo \textbf{Développement asymptotique}
+
+\emph{On cherche à montrer que $\displaystyle \sqrt{x + \sqrt{x^2 + 1}} - \sqrt{x + \sqrt{x^2 - 1}} = \frac{1}{2\sqrt{2} x^{3/2}} + o(x^{-3/2})$ quand $x$ tend vers l'infini. On pose $f(x) = \sqrt{x + \sqrt{x^2 + 1}}$ et $g(x) = \sqrt{x + \sqrt{x^2 - 1}}$.}
+
+On commence par faire un développement de $f(x)$. On va chercher les termes successifs du développement.
+
+\begin{align*}
+  f(x) & = \sqrt{x + \sqrt{x^2 + 1}} = \sqrt{x + x\sqrt{1 + \frac{1}{x^2}}} = \sqrt{x}\sqrt{1 + \sqrt{1 + \frac{1}{x^2}}} \\
+  \sqrt{1 + \sqrt{1 + \frac{1}{x^2}}} & \xrightarrow[x\to \infty]{} \sqrt{2}
+\end{align*}
+Donc $f(x) = \sqrt{2x}(1 + o(1))$ au voisinage de $+\infty$. Pour aller plus loin, on va raffiner la limite vers $\sqrt{2}$. On commence par faire un développement de $\sqrt{1 + \frac{1}{x^2}}$. On pose $X = \frac{1}{x^2}$ qui tend vers $0$ quand $x \to +\infty$ et on fait un DL en 0 de $\sqrt{1 + X}$.
+
+\begin{align*}
+  \sqrt{1 + \frac{1}{x^2}} & = \sqrt{1 + X} = 1 + \frac{X}{2} + o(X) = 1 + \frac{1}{2x^2} + o\left(\frac{1}{x^2}\right) \\
+  \sqrt{1 + \sqrt{1 + \frac{1}{x^2}}} & = \sqrt{2 + \frac{1}{2x^2} + o\left(\frac{1}{x^2}\right)} = \sqrt{2} \sqrt{1 + \frac{1}{4x^2} + o\left(\frac{1}{x^2}\right)}
+\end{align*}
+En posant $X = \frac{1}{4x^2} + o\left(\frac{1}{x^2}\right)$, on peut faire un développement asymptotique de $\sqrt{1 + \frac{1}{4x^2} + o\left(\frac{1}{x^2}\right)}$.
+
+\begin{align*}
+  \sqrt{1 + \frac{1}{4x^2} + o\left(\frac{1}{x^2}\right)} & = \sqrt{1 + X} = 1 + \frac{X}{2} + o(X) = 1 + \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \\
+  \sqrt{1 + \sqrt{1 + \frac{1}{x^2}}} & = \sqrt{2} \left( 1 + \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right) \\
+  f(x) = \sqrt{x} \sqrt{1 + \sqrt{1 + \frac{1}{x^2}}} &= \sqrt{2x} \left( 1 + \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right)
+\end{align*}
+
+On montre exactement de la même façon:
+\begin{equation*}
+  g(x) = \sqrt{x} \sqrt{1 + \sqrt{1 - \frac{1}{x^2}}} = \sqrt{2x} \left( 1 - \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right)
+\end{equation*}
+
+D'où on déduit
+\begin{align*}
+ \sqrt{x + \sqrt{x^2 + 1}} - \sqrt{x + \sqrt{x^2 - 1}} & = f(x) - g(x) \\
+ & = \sqrt{2x} \left( 1 + \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right) - \sqrt{2x} \left( 1 - \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right) \\
+ & = \sqrt{2x}\left[ \frac{1}{8x^2} + \frac{1}{8x^2} + o\left(\frac{1}{x^2}\right) \right] \\
+ & = \frac{1}{2\sqrt{2} x^{3/2}} + o\left(\frac{1}{x^{3/2}}\right)
+\end{align*}
+
+\Exo \textbf{DL et limtes (II)}
+
+\emph{On cherche à calculer la limite suivante: $l = \lim_{x \to \frac{\pi}{2}} [ \sin(x) ]^{\tan(x)}$}.
+
+On essaie de se ramener à une limite en $0$ (plus pratique pour faire des DLs) en posant $h = \frac{\pi}{2} - x$ (qui tend vers $0$ quand $x \to \frac{\pi}{2}$). On commence par réécrire l'expression $[ \sin(x) ]^{\tan(x)}$ en fonction de $h$. Par définition de $h$, on a $x = \frac{\pi}{2} - h$, on a donc:
+
+\begin{align*}
+  f(h) ( = [ \sin(x) ]^{\tan(x)} ) = \sin \left(\frac{\pi}{2} - h \right) ^{\tan\left(\frac{\pi}{2} -h \right)}
+\end{align*}
+
+En utilisant la propriété trigonométrique classique $\sin(\frac{\pi}{2} - x) = \cos(h)$ (qui implique aussi $\cos(\frac{\pi}{2} - x) = \sin(h)$), on obtient
+
+\begin{align*}
+  \sin \left(\frac{\pi}{2} - h \right) & = \cos(h) \\
+  \tan\left(\frac{\pi}{2} -h \right) & = \frac{\sin \left(\frac{\pi}{2} - h \right)}{\cos \left(\frac{\pi}{2} - h \right)} = \frac{\cos(h)}{\sin(h)} = \frac{1}{\tan(h)} \\
+  f(h) & = [\cos(h)]^{1/\tan{h}}
+\end{align*}
+
+Il s'agit d'une forme indéterminée, on passe sous forme exponentielle pour essayer de lever l'indétermination.
+
+\begin{align*}
+  f(h) &= \exp\left( \frac{\ln(\cos(h))}{\tan(h)} \right)
+\end{align*}
+
+Au voisinage de $0$, $\tan(h) = h + o(h)$, il suffit donc de faire un DL de $\ln(\cos(h))$ à l'ordre 1 pour lever l'indétermination. On va utiliser la composition des DLs.
+
+\begin{align*}
+  \cos(h) & = 1 + o(h) \\
+  \ln(1 + x) & = x + o(x) \\
+  \ln(1 + o(h)) & = o(h) \\
+  \ln(\cos(h)) & = o(h)
+\end{align*}
+
+On déduit qu'au voisinage de $0$,
+\begin{equation*}
+  \exp\left( \frac{\ln(\cos(h))}{\tan(h)} \right) = \exp \left( \frac{o(h)}{h + o(h)}\right) = \exp \left( \frac{o(1)}{1 + o(1)}\right) \xrightarrow[h \to 0]{} \exp(0) = 1
+\end{equation*}
+
+Au final,
+\begin{equation*}
+  l = \lim_{x \to \frac{\pi}{2}} [ \sin(x) ]^{\tan(x)} = \lim_{h \to 0} [\cos(h)]^{1/\tan{h}} = 1
+\end{equation*}
+
+
+\Exo \textbf{Pour aller plus loin, approximation de $\cos(x)$}
+
+\emph{Touver $a,b \in \mathbb{R}$ tels que, au voisinage de $0$,
+\begin{equation*}
+  f(x) = \cos(x) - \frac{1+ax^2}{1+bx^2} = o(x^n)
+\end{equation*}
+avec $n$ maximal}
+
+On commence par faire un DL en 0 à l'ordre $6$ de $f(x)$. On remarque aussi qu'en substituant $y = bx^2$ dans un DL en 0 à l'ordre 3 en $y$ de $(1 + y)^{-1}$, on obtient un DL à l'ordre $6$ de $(1 + bx^2)^{-1}$, on se contente donc de cet ordre (pour éviter les cacluls inutiles).
+
+\begin{align*}
+  \cos(x) & = 1 - \frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} + o(x^6) \\
+  (1 + y)^{-1} & = 1 - y + y^2 - y^3 + o(y^3) \\
+  (1 + bx^2)^{-1} & = 1 - bx^2 + b^2x^4 - b^3x^6 + o(x^6) \\
+  \frac{1+ax^2}{1 + bx^2} & = (1 + ax^2)(1 - bx^2 + b^2x^4 - b^3x^6 + o(x^6)) \\
+  & = 1 + (a-b)x^2 + (-ab + b^2)x^4 + (ab^2 -b^3)x^6 + o(x^6) \\
+\end{align*}
+
+D'où on déduit
+\begin{align*}
+  f(x) & = \left( 1 - \frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} \right) - \left( 1 + (a-b)x^2 + (-ab + b^2)x^4 + (ab^2 -b^3)x^6 \right) + o(x^6) \\
+  & = \left( -\frac{1}{2} - a + b \right)x^2 + \left(\frac{1}{24} + ab - b^2 \right)x^4 + \left(-\frac{1}{720} - ab^2 + b^3 \right)x^6 + o(x^6) \\
+\end{align*}
+
+Résoudre l'exercice revient à annuler (\emph{dans l'ordre}) le plus de coefficients dans le DL de $f(x)$. On cherche donc à résoudre le plus grand des systèmes parmi
+
+\begin{equation*}
+  \begin{cases}
+    a - b & = -\frac{1}{2}
+  \end{cases}
+  \quad\quad
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    ab - b^2 & = -\frac{1}{24}
+  \end{cases}
+  \quad\quad
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    ab - b^2 & = -\frac{1}{24} \\
+    ab^2 - b^3 & = -\frac{1}{720}
+  \end{cases}
+\end{equation*}
+
+Le premier des systèmes est un système à 1 équations et deux inconnues, on se convaint facilement qu'il admet une infinité de solutions, on essaie donc directement de résoudre le deuxième.
+
+\begin{equation*}
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    b(a - b) & = -\frac{1}{24}
+  \end{cases}
+  \Leftrightarrow
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    -\frac{1}{2}b & = -\frac{1}{24}
+  \end{cases}
+  \Leftrightarrow
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    b & = \frac{1}{12}
+  \end{cases}
+  \Leftrightarrow
+  \begin{cases}
+    a - b & = -\frac{1}{2} \\
+    b & = \frac{1}{12}
+  \end{cases}
+  \Leftrightarrow
+  \begin{cases}
+    a & = -\frac{5}{12} \\
+    b & = \frac{1}{12}
+  \end{cases}
+\end{equation*}
+Pour passer du premier système au deuxième, on a substitué $a-b$ par $-\frac{1}{2}$.
+
+En injectant les valeurs obtenues dans le troisième système, on se rend compte qu'on ne peut satisfaire la dernière équation: $ab^2 - b^3 = -1/288 \neq -1/720$. On peut donc uniquement annuler les coefficients de $x^2$ et $x^4$. Au final, on obtient
+
+\begin{equation*}
+  \cos(x) - \frac{1 - \frac{5x^2}{12}}{1 + \frac{x^2}{12}} = o(x^4)
+\end{equation*}
+
+On a obtenu de la sorte une approximation simple à calculer de $\cos(x)$ pour les petites valeurs de $x$:
+\begin{equation*}
+    \cos(x) = \frac{12 - 5x^2}{12 + x^2} + o(x^4)
+\end{equation*}
+
+
+\Exo \textbf{Pour les braves}
+
+\emph{Calculer la limite $l$ définie par:
+\begin{equation*}
+  l = \lim_{x \to +\infty} \left( \frac{\ln(1+x)}{\ln{x}} \right)^x
+\end{equation*}}
+
+Il s'agit d'une forme indéterminée de la forme $1^\infty$. On passe en forme exponentielle pour essayer de lever l'indétermination.
+\begin{align*}
+  \left( \frac{\ln(1+x)}{\ln{x}} \right)^x & = \exp \left( x \ln\left[ \frac{\ln(1+x)}{\ln{x}} \right]\right)
+\end{align*}
+On cherche donc à calculer la limite en $+\infty$ de $x \ln\left[ \frac{\ln(1+x)}{\ln{x}} \right]$. On va passer par les DL.
+
+Au voisinage de $+\infty$, $1/x$ est proche de $0$. On peut donc écrire:
+\begin{align*}
+  \ln(1 + x) &= \ln(x) + \ln \left(1 + x^{-1}\right) \\
+  \ln(1 + y) &= y + o(y) \quad \text{ pour y proche de } 0 \\
+  \ln \left(1 + x^-1\right) & = x^{-1} + o(x^{-1}) \\
+  \frac{\ln(1+x)}{\ln{x}} & = \frac{\ln(x) + x^{-1} + o(x^{-1})}{\ln(x)} \\
+  & = 1 + \frac{1}{x\ln(x)} + o\left( \frac{1}{x\ln(x)}\right) \\
+  \ln\left( \frac{\ln(1+x)}{\ln{x}} \right) & = \ln \left( 1 + \frac{1}{x\ln(x)} + o\left( \frac{1}{x\ln(x)}\right) \right) \\
+  & = \frac{1}{x\ln(x)} + o\left( \frac{1}{x\ln(x)}\right) \\
+\end{align*}
+
+D'où on tire
+\begin{align*}
+  x \ln\left( \frac{\ln(1+x)}{\ln{x}} \right) & = \frac{1}{\ln(x)} + o\left( \frac{1}{\ln(x)}\right) \xrightarrow[x\to\infty]{} 0
+\end{align*}
+et finalement
+\begin{align*}
+  \left( \frac{\ln(1+x)}{\ln{x}} \right)^x = \exp \left[ x \ln\left( \frac{\ln(1+x)}{\ln{x}} \right) \right] & \xrightarrow[x\to\infty]{} \exp(0) = 1
+\end{align*}
+
+On peut raffiner un peu pour trouver le terme suivant du développement asymptotique:
+\begin{align*}
+  \left( \frac{\ln(1+x)}{\ln{x}} \right)^x & = \exp \left[ x \ln\left( \frac{\ln(1+x)}{\ln{x}} \right) \right] \\
+  & = \exp\left( \frac{1}{\ln(x)} + o\left( \frac{1}{\ln(x)}\right) \right) \\
+  & = 1 + \frac{1}{\ln(x)} + o\left( \frac{1}{\ln(x)}\right) \quad \text{ car } e^y = 1 + y + o(y) \quad \text{ pour $y$ petit}
+\end{align*}
+
+
+\end{document}
