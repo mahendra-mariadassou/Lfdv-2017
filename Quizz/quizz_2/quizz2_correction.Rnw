@@ -1,0 +1,213 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+%\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+%%% Correction
+\newcommand{\correction[1]}{\textcolor{gray}{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight26.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Test ``Limites et Dérivées'': corrigé}
+\def\Date{30 janvier 2018}
+\def\Classe{TS3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Force synctex
+\synctex=1
+
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE, fig.align = "center"
+)
+opts_knit$set(concordance = TRUE, self.contained=TRUE)
+require(patchSynctex)
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+%% \section*{Test 1}
+
+\Exo \textbf{Calcul \emph{à la main} de la dérivée de $x \mapsto x^n$}
+
+Soit $a$ et $x$ deux nombres réels et $n$ un entier naturel non nul.
+
+\begin{enumerate}
+\item Montrer que $x^n - a^n = (x - a) \sum_{k=0}^{n-1} x^k a^{n-1-k}$ et en déduire $\lim_{x \to a} \frac{x^n - a^n}{x - a}$
+\item Retrouver ainsi que la fonction $x \mapsto x^n$ est dérivable et expliciter sa dérivée.
+\end{enumerate}
+
+\textcolor{gray}{
+On commence par développer la somme et regarder ce que donne l'expression de droite pour de petites valeurs de $n$
+\begin{align*}
+n = 2 & \quad a^2 - b^2 = (a - b)(a+b) \\
+n = 3 & \quad a^3 - b^3 = (a - b)(a^2+ab+b^2) \\
+n = n & \quad a^n - b^n = (a - b)(a^{n-1}+a^{n-2}b+\dots+ab^{n-2} + b^{n-1}) \\
+\end{align*}
+On va la démontrer directement en développant le terme de droite
+\begin{align*}
+(a - b)(a^{n-1}+a^{n-2}b+\dots+ab^{n-2} + b^{n-1}) & = a(a^{n-1}+a^{n-2}b+\dots+ab^{n-2} + b^{n-1}) \\
+& - b(a^{n-1}+a^{n-2}b+\dots+ab^{n-2} + b^{n-1}) \\
+& = a^n + a^{n-1}b + \dots + a^{2}b^{n-2} + ab^{n-1} \\
+& \qquad\; - a^{n-1}b - \dots - a^{2}b^{n-2} - ab^{n-1} - b^n \\
+& = a^n - b^n
+\end{align*}
+On s'en sert ensuite pour calculer la limite demandée
+\begin{equation*}
+\lim_{x \to a} \frac{x^n - a^n}{x - a} = \lim_{x \to a} (x^{n-1} + x^{n-2}a + \dots + x a^{n-2} + a^{n-1}) = na^{n-1}
+\end{equation*}
+car on a une somme de $n$ termes qui tendent tous vers $a^{n-1}$. En particulier, si on considère la fonction $f(x)=x^n$, on retrouve bien que pour tout $x \in \mathbb{R}$
+\begin{equation*}
+\lim_{h \to 0} \frac{f(x+h) - f(x)}{h} = \lim_{h \to 0} \frac{(x+h)^n - x^n}{h} = \lim_{h \to 0} \frac{(x+h)^n - x^n}{(x+h) - h} = nx^{n-1}
+\end{equation*}
+et donc $f$ est dérivable sur $\mathbb{R}$ de dérivée $f'(x) = nx^{n-1}$.
+}
+
+
+\bigskip
+
+\Exo \textbf{Calculs de dérivées}
+
+Calculez les dérivées des fonctions suivantes sur leur domaine de définition:
+
+\begin{enumerate}
+\item $f(w) = \sqrt{w^3 + 8w^2}$
+\item $h(x) = \arctan(1 - e^{2x})$
+\item $g(z) = z^z$
+\item $A(y) = 1/\sqrt{1+y^2}$
+\end{enumerate}
+
+\textcolor{gray}{
+On commence par réécrire les fonctions sous une forme simple (si besoin) puis on utilise la formule de composition.\\
+Pour $g(w)$, on pose $u(w) = w^3 + 8w^2$ et on obtient
+\begin{equation*}
+f'(w) = \frac{d\sqrt{u}}{du} \times \frac{du}{dw} = \frac{1}{2\sqrt{u}} \times (3w^2 + 16w) = \frac{3w^2 + 16w}{2\sqrt{w^3 + 8w^2}}
+\end{equation*}
+Pour $h(x)$, on pose $u(x) = 1 - e^{2x}$ et on obtient
+\begin{equation*}
+h'(x) = \frac{d\arctan{u}}{du} \times \frac{du}{dx} = \frac{1}{1 + u^2} \times (-2e^{2x}) = \frac{-2e^{2x}}{1 + (1 - e^{2x})^2}
+\end{equation*}
+Pour $g(z)$, on commence par réécrire $z^z = e^{z\ln(z)}$ puis on pose $u(z) = z\ln(z)$. On a alors
+\begin{equation*}
+g'(z) = \frac{de^u}{du} \times \frac{du}{dz} = e^u \times (\ln(z) + 1) = (\ln(z) + 1) z^z
+\end{equation*}
+Pour $A(y)$, on pose $u(y) = 1 + y^2$ et on a alors
+\begin{equation*}
+A'(y) = \frac{d(u)^{-1/2}}{du} \times \frac{du}{dz} = -\frac{1}{2} u^{-3/2} \times 2y = \frac{-y}{(1+y^2)^{3/2}}
+\end{equation*}
+}
+
+
+\Exo \textbf{Limites et dérivées}
+
+En essayant de faire apparaître des taux d'accroissement, calculez les
+limites suivantes:
+\begin{fleqn}
+  \begin{equation*}
+    \begin{array}{l}
+      \displaystyle \lim_{x \to 6} \frac{\sin(\pi x)}{\ln(x - 5)} \\ [1cm]
+      \displaystyle \lim_{x \to b} \frac{x^a - b^a}{a^x - a^b} \quad (a,b > 0)
+    \end{array}
+  \end{equation*}
+\end{fleqn}
+
+\textcolor{gray}{
+En remarquant que $\sin(6\pi) = 0$ et que $\ln(6 - 5) = \ln(1) = 0$, on fait apparaître les taux d'accroissement comme demandé
+\begin{equation*}
+\frac{\sin(\pi x)}{\ln(x - 5)} = \frac{\sin(\pi x) - \sin(6\pi)}{x - 6} \times \frac{x - 6}{\ln(x - 5) - \ln(6 - 5)} \to \frac{f'(6)}{g'(6)} = {\pi\cos(6\pi)} \times \frac{1}{6 - 5} = \pi
+\end{equation*}
+avec $f(x) = \sin(\pi x)$ et $g(x) = \ln(x - 5)$.
+De même, pour la deuxième limite, si on note $f(x) = x^a$ et $g(x) = a^x$ de dérivées respectives $f'(x) = ax^{a-1}$ et $g'(x) = \ln(a)a^x$, on a
+\begin{equation*}
+\lim_{x \to b} \frac{x^a - b^a}{a^x - a^b} \quad (a,b > 0) = \lim_{x \to b} \frac{f(x) - f(b)}{x - b} \frac{x -b}{g(x) - g(b)} = \frac{f'(b)}{g'(b)} = \frac{a b^{a-1}}{\ln(a) a^b} = \frac{b^{a-1}}{\ln(a) a^{b-1}}
+\end{equation*}
+}
+
+\end{document}

@@ -30,9 +30,11 @@ knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
 
 Le but des développements limités est de faire des <alert>approximations</alert> en <alert>négligeant</alert> certaines quantités. On va voir ici qu'on néglige toujours une quantité <alert>par rapport</alert> à une autre.
 
-On va formaliser cette intuition avec la notion de négligeabilité et les notations de Landau. 
+On va formaliser cette intuition avec la notion de <alert>négligeabilité</alert> et les notations de Landau. 
 
 # Négligeabilité
+
+## Définition
 
 <div class = "definition">
 On dit que $f$ est <alert>négligeable</alert> devant $g$ au voisinage de $a \in \bar{\mathbb{R}}$ s'il existe une fonction $\varepsilon$ définie au voisinage de $a$ telle que $\varepsilon(x) \to 0$ quand $x \to a$ et 
@@ -79,7 +81,7 @@ Montrer que
 
 Une bonne règle heuristique à retenir pour s'assurer que le résultat approché est peu différent du résultat exact dans une somme est la suivante:
 
-- Pour faire une approximation, on néglige un terme devant les autres <alert>à l'intéreieur d'une somme</alert>
+- Pour faire une approximation, on néglige un terme devant les autres <alert>à l'intérieur d'une somme</alert>
 
 ## Exemple (I)
 
@@ -268,7 +270,7 @@ Dériver $b^{DL}(a)$ 3 fois en $a_0$ et montrer qu'au point de référence $a_0$
 
 - $\frac{\text{d} b^{DL}}{\text{d}a}(a_0) = \alpha$
 - $\frac{\text{d}^2 b^{DL}}{\text{d}a^2}(a_0) = 2 \times \beta$
-- $\frac{\text{d}^3 b^{DL}}{\text{d}a^3}(a_0) = 3 \times 2 \times \gamma $
+- $\frac{\text{d}^3 b^{DL}}{\text{d}a^3}(a_0) = 3 \times 2 \times \gamma$
 
 En déduire les valeurs de $\alpha$, $\beta$, $\gamma$
 
@@ -311,7 +313,7 @@ $$
 
 En appliquant la procédure vue dans l'exemple, calculer un $DL_3$ des fonctions suivantes
 
-- $v = \tan(u)$ lorsque $u$ est proche de $\frac{pi}{6}$
+- $v = \tan(u)$ lorsque $u$ est proche de $\frac{\pi}{6}$
 - $v = \ln(u)$ lorsque $u$ est proche de $2$
 - $A = 1 + t + 2t^2 + 3t^3$ lorsque $t$ est proche de $1$. Montrer que dans ce cas-là, le DL est en fait rigoureusement égal à $A$ mais écrit sous une autre forme
 - $A = 1 + t + 2t^2 + 3t^3$ lorsque $t$ est proche de $0$. Commenter le résultat

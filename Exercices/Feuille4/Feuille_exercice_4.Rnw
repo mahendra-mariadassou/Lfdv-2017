@@ -1,0 +1,196 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight26.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Feuille d'exercices \og DL \fg{}}
+\def\Date{30 janvier 2018}
+\def\Classe{L1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Exercices}
+
+\Exo \textbf{Formule de Taylor}
+
+Soit $f$ une fonction dérivable $n$ fois sur un intervalle $I$ autour de $0$. Soit $x \in I$ un point proche de $0$. En utilisant la formule de Taylor, exprimer $f(x+a)$ en fonction de $f$ et des ses dérivées successives en $a$ ($f(a)$, $f'(a)$, etc). On utilisera un terme d'erreur de la forme $o(x^n)$, \emph{i.e.} $f(x) = \dots + o(x^n)$.
+
+\begin{fleqn}
+  \begin{align*}
+    f(x) =
+  \end{align*}
+\end{fleqn}
+
+\Exo \textbf{DL usuels (calculs)}
+
+Calculer un DL à l'ordre 3 des fonctions suivantes (en $0$). On pourra essayer de se ramener à un DL connu.
+\begin{enumerate}
+\item $\sqrt{9 + x} =$
+\item $\frac{1 - \cos(x)^2}{\sin(x)} =$
+\item $\exp(\sin(x)) =$
+\end{enumerate}
+
+\Exo \textbf{Limites}
+
+A l'aide de développements limités, calculer les limites suivantes
+\begin{enumerate}
+\item $\lim_{x \to 0} [\cos(x)]^{1/\tan{x}}$
+\item $\lim_{x \to 0} \frac{\sqrt{1 - 2x^2} - (1 -x^2)}{x^4}$
+\item $\lim_{x \to +\infty} x (\sqrt{1 + \frac{1}{x} + \sqrt{\frac{1}{x}}} - 1)$ (on pourra considérer une variable intérmédiaire et raisonner en deux temps).
+\end{enumerate}
+
+\Exo \textbf{Quotients de DLs}
+
+Rappeler les DL en $0$ à l'ordre 5 de $\sin(x)$ et à l'ordre $4$ de $\cos(x)$. En déduire des DL en $0$ à l'ordre $4$ de $\displaystyle \frac{x}{\sin(x)}$ et $\displaystyle \frac{1}{\cos(x)}$.
+
+\Exo \textbf{DL et limites}
+
+Calculer les limites suivantes à l'aide de DLs en $0$ en évitant les calculs superflus (c'est à dire, en faisant les DLs à l'ordre qui permet de lever la forme indéterminée):
+
+\begin{equation*}
+\lim_{x \to 0} \frac{e^{x^2} - \cos(x)}{x^2} \quad\quad  \lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x} \quad \quad \lim_{x \to 0} \frac{\cos(x) - \sqrt{1 - x^2}}{x^4}
+\end{equation*}
+
+
+\Exo \textbf{Développement asymptotique}
+
+On cherche à montrer que $\displaystyle \sqrt{x + \sqrt{x^2 + 1}} - \sqrt{x + \sqrt{x^2 - 1}} = \frac{1}{2\sqrt{2} x^{3/2}} + o(x^{-3/2})$ quand $x$ tend vers l'infini. On pose $f(x) = \sqrt{x + \sqrt{x^2 + 1}}$ et $g(x) = \sqrt{x + \sqrt{x^2 - 1}}$.
+
+\begin{enumerate}
+\item Identifier le terme dominant de $f(x)$ (c'est à dire la fonction simple $h(x)$ telle $\displaystyle \lim_{x \to +\infty} \frac{f(x)}{h(x)}=1)$
+\item Calculer un développement asymptotique de $f(x)$ en $+\infty$ de la forme $f(x) = h(x)[1 + \dots + o(x^{\alpha})]$ en réfléchissant bien à la valeur de $\alpha$ requise pour montrer le résultat demandé.
+\item Faire de même pour $g(x)$
+\item Conclure.
+\end{enumerate}
+
+\Exo \textbf{DL et limtes (II)}
+
+On cherche à calculer la limite suivante: $l = \lim_{x \to \frac{\pi}{2}} [ \sin(x) ]^{\tan(x)}$. On considère pour cela la fonction suivante, définie pour $h$ au voisinage de $0^+$:
+
+\begin{fleqn}
+  \begin{align*}
+    f(h) =  \sin \left(\frac{\pi}{2} - h \right) ^{\tan\left(\frac{\pi}{2} -h \right)}
+  \end{align*}
+\end{fleqn}
+
+Montrer que $f(h) = [\cos(h)]^{1/\tan{h}}$. En déduire la limite $l$ à l'aide de DLs. On pourra passer en forme exponentielle et composer les DL en $0$ de $\cos(x)$ et $\ln(1 - x)$.
+
+\Exo \textbf{Pour aller plus loin, approximation de $\cos(x)$}
+
+Touver $a,b \in \mathbb{R}$ tels que, au voisinage de $0$,
+\begin{equation*}
+  f(x) = \cos(x) - \frac{1+ax^2}{1+bx^2} = o(x^n)
+\end{equation*}
+
+avec $n$ maximal. (Indice: On peut écrire le DL de $f(x)$ en $0$ en fonction de $a$ et $b$ et chercher les valeurs qui annulent le maximum de coefficients dans ce DL).
+
+\Exo \textbf{Pour les braves}
+
+Calculer la limite $l$ définie par:
+\begin{equation*}
+  l = \lim_{x \to +\infty} \left( \frac{\ln(1+x)}{\ln{x}} \right)^x
+\end{equation*}
+
+Donner un équivalent (c'est à dire faire un développement asymptotique au premier ordre non nul) en $+\infty$ de
+\begin{equation*}
+  \left( \frac{\ln(1+x)}{\ln{x}} \right)^x - l
+\end{equation*}
+
+
+
+
+\end{document}
