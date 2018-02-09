@@ -83,7 +83,7 @@ $$
 \hline
 \text{Fonction } f & \text{Primitive } F \\
 \hline
-x^\alpha \quad (\alpha \neq 1) & x^{\alpha+1} / {(\alpha + 1})  \\
+x^\alpha \quad (\alpha \neq -1) & x^{\alpha+1} / {(\alpha + 1})  \\
 \hline
 1 / x & \ln(x) \\
 \hline 
@@ -135,7 +135,7 @@ u'(x) \sin(u(x)) & -\cos(u(x)) \\
 \hline
 \end{array}
 $$
-Le but du jeu est bien sûr d'identifier la **bonne** fonction $u(x)$ qui permet de se ramener au tableau précédent. 
+Le but du jeu est bien sûr d'identifier la **bonne** fonction $u(x)$ qui permet de se ramener au tableau précédent et attention à la <alert>valeur absolue</alert> dans la primitive de $u'/u$
 
 ## Exercice (I)
 
@@ -152,7 +152,7 @@ $$
 
 ## Exercice (II)
 
-En utilisant le théorème fondamental, calculer les intégrales suivantes:
+Calculer ces intégrales (en reconnaissant parfois des formes décrites dans **Recherche de Primitives (II)**) :
 $$
 \begin{align*}
 \int_{1}^2 (1 - x + x^2 - x^3)dx & & \int_0^{\pi} \sin(x)dx \\
@@ -162,6 +162,9 @@ $$
 \int_0^2 e^x dx & & \int_1^e \frac{\ln(x)}{x}dx
 \end{align*}
 $$
+
+
+
 # L'intégrale comme une somme
 
 ## Intégrale et Somme
@@ -541,7 +544,7 @@ $$
 Cette quantité est atteinte par $f$ en au moins un point de $[a, b]$. 
 </div>
 
-C'est l'équivalent du théorème des acroisseements finis, reformulés avec des intégrales. 
+C'est l'équivalent du théorème des acroissements finis, reformulé avec des intégrales plutôt qu'avec des dérivées. 
 
 # Techniques de calcul
 
