@@ -1,0 +1,335 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+%%%%%%%%%%%%%% Colors %%%%%%%%%%%%%%%%%%%%%
+\definecolor{darkred}{RGB}{139,0,0}
+\newcommand{\darkred}[1]{\textcolor{darkred}{#1}}
+\definecolor{lightred}{RGB}{219,112,147}
+\newcommand{\lightred}[1]{\textcolor{lightred}{#1}}
+\definecolor{darkgreen}{RGB}{0,100,0}
+\newcommand{\darkgreen}[1]{\textcolor{darkgreen}{#1}}
+\definecolor{lightgreen}{RGB}{144,238,144}
+\newcommand{\lightgreen}[1]{\textcolor{lightgreen}{#1}}
+\definecolor{darkblue}{RGB}{0,0,139}
+\newcommand{\darkblue}[1]{\textcolor{darkblue}{#1}}
+\definecolor{lightblue}{RGB}{173,216,230}
+\newcommand{\lightblue}[1]{\textcolor{lightblue}{#1}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight26.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Feuille d'exercices \og Intégrations \fg{}}
+\def\Date{13 février 2018}
+\def\Classe{L1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+library(dplyr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+@
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+% \section{Exercices}
+
+Les intégrales sont souvent présentées comme un moyen de calculer des \textbf{aires} mais elles peuvent servir plus généralement à calculer d'autres quantités: longueur, volume, etc.
+
+Dans la majorité des cas, la procédure à suivre pour calculer la quantité d'intérêt est similaire:
+
+\begin{enumerate}
+\item On décompose cette quantité en \emph{éléments élémentaires} très simple. C'est ce qui est fait quand on décompose une aire en une multitude de petits rectangles.
+\item On calcule la quantité d'intérêt (longeur, surface, volume, etc) pour chaque élément élémentaire. Par exemple, un rectangle de largeur $dx$ et de hauteur $f(x)$ a pour surface $f(x)dx$
+\item On somme sur tous les éléments élémentaires qui composent notre quantité. C'est comme ça qu'on obtient $\int_{x_0}^{x_1} f(x)dx$ dans le cas d'un calcul d'aire.
+\end{enumerate}
+
+L'étape crucial est évidemment celle de \emph{décomposition}: une décomposition astucieuse va rendre le calcul final de l'intégrale aisé.
+
+\section{Calcul d'Aire}
+
+C'est l'application la plus directe du cours, il n'y a quasiment pas d'adaptation à faire.
+
+\Exo \textbf{En coordonnées cartésiennes}
+
+Calculer la surface (en {bleu clair}) comprise entre courbes d'équations {$y = 3\sqrt{x}$} (rouge sombre) et {$y = 3x$} (vert sombre). (Indice: on peut commencer par calculer les surfaces indiquées en {rouge clair} et {vert clair})
+
+<<difference, out.width="0.5\\linewidth", fig.align="center", fig.width=9, fig.height=4>>=
+par(mfrow = c(1, 3))
+f <- function(x) { 3*sqrt(x) }
+g <- function(x) { 3*x }
+## plot 1
+df <- data.frame(x = seq(0, 2, length.out = 2001)) %>% mutate(f = f(x), g = g(x))
+polygon.df <- df %>% filter(x <= 1)
+plot(f ~ x, data = df, type = "l", col = "red")
+abline(h = 0, v = 0)
+segments(x0 = 1, y0 = 0, y1 = 3, lty = 3)
+segments(x0 = 0, y0 = 3, x1 = 1, lty = 3)
+with(polygon.df, polygon(x = c(x, rev(x)), y = c(f, rev(g)), col = "lightblue"))
+points(g ~ x, data = df, col = "darkgreen", type = "l", lwd = 2)
+points(f ~ x, data = df, col = "darkred", type = "l", lwd = 2)
+## plot 2
+plot(f ~ x, data = df, type = "l", col = "darkred", lwd = 2)
+abline(h = 0, v = 0)
+segments(x0 = 1, y0 = 0, y1 = 3, lty = 3)
+segments(x0 = 0, y0 = 3, x1 = 1, lty = 3)
+with(polygon.df, polygon(x = c(x, 1, 0), y = c(f, 0, 0), col = "palevioletred"))
+## plot 2
+plot(f ~ x, data = df, type = "l", col = "transparent", lwd = 2)
+points(g ~ x, data = df, col = "darkgreen", type = "l", lwd = 2)
+abline(h = 0, v = 0)
+segments(x0 = 1, y0 = 0, y1 = 3, lty = 3)
+segments(x0 = 0, y0 = 3, x1 = 1, lty = 3)
+with(polygon.df, polygon(x = c(x, 1, 0), y = c(g, 0, 0), col = "lightgreen"))
+@
+
+\Exo \textbf{En coordonnées paramétriques}
+
+Il arrive que l'équation d'une courbe ne soit pas donnée sous la forme $y = f(x)$ pour $x \in [x_0, x_1]$ mais sous la forme $\begin{cases} y(t) & = f(t) \\ x(t) & = g(t) \end{cases}$ avec $t \in [t_0, t_1]$.
+
+C'est un cas particulier du changement de variable. On commence par remarquer que $dx = g'(t) dt$. Si on considère un élément élémentaire de surface $dS$, on a toujours $dS = y dx$ qui peut se réécrire $dS = f(t) g'(t) dt$. L'intégrale devient donc
+
+$$I = \int_{x_0 = g(t_0)}^{x_1 = g(t_1)} y(x) dx = \int_{t_0}^{t_1} f(t) g'(t) dt$$
+
+<<aire-cycloide, out.width="0.5\\linewidth", fig.align="center", fig.width=8, fig.height=4.5>>=
+x <- function(t) { t - sin(t)}
+y <- function(t) { 1 - cos(t)}
+df <- data.frame(t = seq(0, 2*pi, length.out = 2001)) %>% mutate(x = x(t), y = y(t))
+plot(y ~ x, data = df, type = "l", col = "darkred", lwd = 2, asp = 1, ylim = c(0, 2), axes = FALSE,
+     ylab = NA, xlab = NA)
+abline(h = 0, v = 0)
+segments(x0 = c(0, 2*pi), y0 = 0, y1 = -0.15)
+text(x = c(0, 2*pi), y = 0, labels = c(expression(0), expression(2*pi)), adj = c(0, 1), cex = 2, xpd = TRUE)
+with(df %>% filter(x >= 0.95*pi, x <= 1.05*pi), polygon(x = c(0.95*pi, x, 1.05*pi, 0.95*pi),
+                                                        y = c(0, y, 0, 0),
+                                                        col = "palevioletred"))
+text(x = pi, y = 0, labels = expression(dx == { g * minute }(t)*dt), pos = 1, cex = 2)
+text(x = 0.95*pi, y = 1, labels = expression(y == f(t)), pos = 2, cex = 2)
+text(x = pi, y = 2, labels = expression(dS), pos = 3, col = "palevioletred", cex = 2)
+points(x = x(1.5*pi), y = y(1.5*pi), col = "darkred", pch = 19, cex = 2)
+text(x = x(1.5*pi), y = y(1.5*pi), labels = expression((list(x,y)) == (list(g(t), f(t)))), col = "darkred", pch = 19, cex = 2, pos = 1, xpd = TRUE)
+@
+
+\textbf{Note:} On ne sait pas écrire $y$ en fonction de $x$ (il existe bien un $h$ telle que $y = h(x)$ mais on ne connaît pas $h$ sans faire de calcul). En revanche on sait que $y(t) = f(t)$ et que $y(x(t)) = h(x(t)) = h \circ g (t)$, on a donc forcément $f = h \circ g$.
+
+On considère la cycloïde d'équation $\begin{cases} y(t) & = 1 - \cos(t) \\ x(t) & = t - \sin(t) \end{cases}$ pour $t \in [0, 2\pi]$ (representée plus haut). C'est (une période de) la trajectoire d'un point fixé à une roue de vélo qui roule à vitesse constante en ligne droite.
+
+Calculer l'aire sous la courbe de la cycloïde.
+
+\section{Calcul de Longueur}
+
+\Exo \textbf{En coordonnées cartésiennes}
+
+On considère un arc de courbe $\mathcal{C}$ d'équation $y = f(x)$, pour $x \in [x_0, x_1]$ et on cherche à déterminer la longueur de cet arc.
+
+Au lieu de décomposer une aire en petits rectangles, on va décomposer notre courbe en petits segments et calculer la longueur élémentaire $dl$ de chaque segment.
+
+<<longueur-chainette, out.width="0.5\\linewidth", fig.align="center", fig.width=9, fig.height=9>>=
+f <- function(x) { (exp(x) + exp(-x))/2 }
+df <- data.frame(x = seq(-1.5, 1.5, length.out = 2001)) %>% mutate(y = f(x))
+plot(y ~ x, data = df, type = "l", col = "darkred", lwd = 2, axes = FALSE, ylim = c(0, max(df$y)),
+     ylab = NA, xlab = NA)
+abline(h = 0, v = 0)
+points(x = c(0, 1), y = f(c(0, 1)), pch = 19, col = "darkred", cex = 2)
+text(x = c(0, 1), y = f(c(0, 1)), labels = c("A", "B"), col = "darkred", cex = 2, pos = 3)
+points(x = c(0.5, 0.7), y = f(c(0.5, 0.7)), pch = 19, col = "darkgreen", cex = 2)
+text(x = c(0.5, 0.7), y = f(c(0.5, 0.7)), labels = c("M", "M'"), pch = 19, col = "darkgreen", cex = 2, pos = 3)
+text(x = c(0, 1), y = 0, labels = c(expression(x[0]), expression(x[1])), cex = 2, pos = 1)
+text(x = c(0.5), y = 0, labels = c("x"), cex = 2, adj = c(1, 1))
+text(x = c(0.6), y = 0, labels = c("x+dx"), cex = 2, adj = c(0, 1))
+segments(x0 = c(0.5, 0.7), y0 = 0, y1 = f(c(0.5, 0.7)), lty = 2)
+segments(x0 = 0.5, x1 = 0.7, y0 = f(0.5), y1 = f(0.7), col = "darkgreen", lwd = 3)
+text(x = 0.6, y = f(0.6), labels = "dl", col = "darkgreen", pos = 3, cex= 1.5)
+segments(x0 = c(0.5, 0.7), x1 = c(0.7, 0.7), y0 = f(0.5), y1 = f(c(0.5, 0.7)), col = "darkgreen", lwd = 2)
+text(x = 0.6, f(0.5), labels = "dx", col = "darkgreen", pos = 1, cex = 1.5)
+text(x = 0.7, (f(0.5) + f(0.7))/2, labels = "dy", col = "darkgreen", pos = 4, cex = 1.5)
+@
+
+On remarque que l'arc de courbe $(MM')$ peut être approché par le segment $MM'$ qui a pour longueur
+
+\[ dl = \sqrt{dx^2 + dy^2} = \sqrt{dx^2 \left( 1 + \left(\frac{dy}{dx}\right)^2 \right)} = \sqrt{1 + (y')^2} dx \]
+
+On en déduit que la longueur de la courbe est donnée par
+\begin{equation*}
+L = \int_{x_0}^{x_1} \sqrt{1 + (f')^2(x)} dx
+\end{equation*}
+
+Calculer la longueur de la chaînette d'équation $y = \frac{e^x + e^{-x}}{2}$, dont la courbe est représentée plus haut, rentre les points $A = (0, 1)$ et $B = (1, f(1))$. La courbe de $f$ est la forme adoptée par une chaînette qu'on attrape par ses deux extrémités et qu'on laisse pendre.
+
+\textbf{Indice:} On pourra comparer $f^2$ et $1+(f')^2$ pour simplifier les calculs.
+
+\Exo \textbf{En coordonnées paramétriques}
+
+On suppose que la courbe est donnée sous forme paramétrique $\begin{cases} y(t) & = f(t) \\ x(t) & = g(t) \end{cases}$ avec $t \in [t_0, t_1]$. Cette fois encore, le segment $MM'$ a pour longueur élémentaire $dl = \sqrt{dx^2 + dy^2}$ mais c'est la suite du calcul qui change. On commence par noter que $dx = g'(t)dt$ et $dy = f'(t)dt$, on a donc
+
+\begin{equation*}
+dl = \sqrt{dx^2 + dy^2} = \sqrt{dt^2 \left( \left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2 \right)} = \sqrt{(g')^2 + (f')^2} dt
+\end{equation*}
+
+On en déduit que la longueur de la courbe est donnée par
+\begin{equation*}
+L = \int_{t_0}^{t_1} \sqrt{(f')^2(t) + (g')^2(t)} dt
+\end{equation*}
+
+En reprenant l'équation du cycloïde, calculer la longeur d'un arc de cycloïde.
+
+\textbf{Indice:} On pourra exprimer $1 - \cos(t)$ en fonction de $\sin(t/2)$ pour se débarasser de la racine.
+
+
+\section{Valeur Moyenne}
+
+On a vu en cours que la \emph{valeur moyenne} d'une fonction $f$ sur un intervalle $[a, b]$ est définie par $\bar{f} = \frac{1}{b-a} \int_a^b f(x)dx$. Du point de vue de l'aire sous la courbe entre $a$ et $b$, $f$ et $\bar{f}$ ont le même comportement.
+
+La notion de valeur moyenne est particulièrement utile pour les fonctions périodiques, avec la valeur moyenne calculée sur une période, pour savoir à quelle fonction constante comparer la fonction périodique.
+
+\Exo \textbf{Fonctions Trigonométriques}
+
+Calculer la valeur moyenne sur une période de $\cos$, $\sin$, $1 + \cos$ et $1 + \sin$. Les résultats vous paraîssent-ils cohérents?
+
+\Exo \textbf{Fonctions Puissances}
+
+\begin{enumerate}
+\item Calculer la valeur moyenne sur $[0,1]$, notée $I_n$ de la fonction $x \mapsto x^n$.
+\item Quelle est la limite en $+\infty$ de $I_n$, cela vous paraît-il cohérent?
+\end{enumerate}
+
+\Exo \textbf{Valeur Efficace}
+
+La notion de valeur moyenne est utile dans certaines conditions mais pas toujours informative. Les exercices précédents montrent par exemple que la valeur moyenne d'un signal sinusoidale est nulle mais l'électricité délivrée dans les habitations (220V, 50Hz) ne se comporte pas pour autant comme un courant constant de tension nulle...
+
+Dans ce contexte, la notion pertinente est celle de \emph{valeur efficace} $F$, définie comme la racine de la valeur moyenne de la fonction au carrée, ou en termes mathématiques:
+\[
+F = \sqrt{\bar{f^2}} = \sqrt{\frac{1}{b-a} \int_a^b f^2(x)dx}
+\]
+
+En utilisant la définition précédente, calculer la valeur efficace de $\cos$ sur une période.
+
+\section{Calcul de Volume}
+
+Dans cette partie, on se limitera à des \emph{volumes de révolution}, c'est à dur les volumes qu'on peut obtenir en faisant tourner une surface autour d'un axe:
+
+\begin{center}
+\includegraphics[width = 0.5\linewidth]{../../Images_externes/Surface_revolution.png}
+\end{center}
+
+De nombreux solides réguliers sont obtenus de cette manière:
+\begin{itemize}
+\item Faire tourner un disque autour d'un de ses rayons donne une sphére
+\item Faire tourner un rectangle autour d'un de ses côtés donne un cylindre
+\item Faire tourner un triangle autour d'un de ses côtés donne un cône
+\item etc
+\end{itemize}
+et on se limite à la méthode des disques qui consiste à découper le solide en une multitude de disques élémentaires:
+
+\begin{center}
+\includegraphics[width = 0.25\linewidth]{../../Images_externes/disques.png}
+\end{center}
+
+On peut ensuite calculer le volume $dV$ d'un disque élémentaire positionné en $x$:
+\begin{center}
+\includegraphics[width = 0.25\linewidth]{../../Images_externes/disques2.png}
+\end{center}
+On obtient $dV = \pi f(x)^2 dx$ (il faut connaître le volume d'un cylindre pour trouver la réponse). En sommant, on en déduit que le volume $V$ est donné par:
+
+\begin{equation*}
+V = \int_{a}^b \pi f^2(x) dx
+\end{equation*}
+
+La difficulté consiste donc à (i) expliciter la fonction $f$ qui relie la position $x$ du cylindre élémentaire à son rayon $f(x)$ et (ii) à calculer l'intégrale.
+
+\Exo \textbf{Volume d'un cône}
+
+En utilisant la méthode des disques, (re)trouver le volume d'un cône de hauteur $h$ et de rayon $R$.
+
+\Exo \textbf{Volume d'une sphère}
+
+En utilisant la méthode des disques, (re)trouver le volume d'une sphère de rayon $R$. On peut commencer par calculer le volume d'une demi-spère.
+
+\end{document}
