@@ -1,0 +1,153 @@
+---
+title: "Équations différentielles (du premier ordre)"
+author: "Mahendra Mariadassou"
+date: "15 février 2018"
+output:
+  ioslides_presentation:
+    css: ../CSS/custom_licence_fdv.css
+    keep_md: yes
+    toc: yes
+  beamer_presentation: default
+height: 720
+width: 1280
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
+```
+
+# Introduction 
+
+## Avant propos (I)
+
+L'objectif de ce cours est de présenter et d'apprendre à résoudre des équations différentielles du premier ordre. Les équations différentielles interviennent naturellement en:
+
+- physique (principe fondamental de la dynamique), 
+- chimie (cinétique d'une réaction), 
+- biologie (dynamique des population, épidémiologie). 
+
+Une <alert>équation différentielle</alert> est une équation que doit vérifier une
+fonction, disons $y(x)$, et qui fait intervenir au moins une de
+ses dérivées, par exemple $y'(x)$. 
+
+## Définition
+
+<div class = "definition">
+Soit $I = [a, b]$ un segment, $x \mapsto a(x)$ et $x \mapsto b(x)$ deux fonctions continues sur $I$ et $(E)$ l'équation différentielle 
+$$
+y'(x) = a(x)y(x) + b(x)
+$$
+La fonction $f(x)$ est solution de $(E)$ sur $I$ si elle est vérifie l'égalité $f'(x) = a(x)f(x) + b(x)$ pour tout $x \in I$.
+</div>
+
+L'équation précédente est dite <alert>linéaire du premier ordre</alert> car elle fait uniquement intervenir 
+
+- $y$ et $y'$ sans transformation, par opposition à $y^2$, $\ln(y')$, etc (linéaire)
+- les dérivées d'ordre au plus 1, par opposition à $y''$, $y^{(3)}$, etc (premier ordre)
+
+## Conditions Initiales
+
+Une équation différentielle admet en général une <alert>infinité</alert> de solutions qui ne diffèrent que par la valeur d'une ou plusieurs constantes. 
+
+L'ensemble des solutions est appelé <alert>solution générale</alert> de l'équation différentielle. Lorsque qu'on cherche à résoudre un problème concret, on impose en général des <alert>conditons limites</alert> (par exemple la position initiale en mécanique, ou la concentration initiale d'un substrat en chimie). 
+
+L'unique solution qui vérifie ces conditions limites (si elle existe) est dite solution particulière de l'équation différentielle. 
+
+## Exemple
+
+L'équation différentielle
+$$
+y'(x) = y(x)
+$$
+admet comme solution générale sur $\mathbb{R}$ la fonction $y(x) = Ae^x$ avec $A$ une constante quelconque. 
+
+Si on impose la condition limite $y(0) = 2$, on peut vérifier que la constante $A$ doit valoir $2$ pour que la condition soit vérifiée (puisque $y(0) = A$). 
+
+La solution particulière qui vérifie $y(0)=2$ est donc $y(x) = 2e^x$.
+
+## Exercices 
+
+Parmi les équations suivantes, lesquelles sont linéaires d'ordre 1? 
+
+- $y(x) - y'(x) = 0$
+- $y(x) - y'(x) - y''(x) = 0$
+- $\lambda y(x) - y'(x) = 0$ avec $\lambda \in \mathbb{R}$
+- $f(x) - y'(x) = 0$ avec $f(x)$ une fonction continue
+- $y^2(x) - y'(x) = 0$ 
+- $y(x) - (y'(x))^2 = 0$ 
+- $y'(x) - y''(x) = 0$
+
+# Méthodes de résolution: fonctions tests
+
+## Essai de fonctions tests
+
+Avant de présenter des méthodes <alert>systématiques</alert> mais compliquées, on doit rappeler que la première méthode de résolution est l'<alert>essai de fonctions tests</alert>. 
+
+Si la solution saute aux yeux, inutile de se fatiguer avec des calculs compliquées. Et dans le cas contraire, on peut toujours essayer avec des *fonctions tests simples* (exponentielle, logarithme, fonctions trigonométrique, fonctions puissances) et essayer de bricoler pour trouver la solution. 
+
+Dans tous les cas, il suffit d'injecter notre fonction test et sa dérivée première (ou d'autres dérivées si on a affaire à des équations d'ordre supérieur à 1) dans l'équation différentielle et de vérifier si cette dernière est vérifiée.
+
+## Exemple (I)
+
+On cherche à résoudre l'équation $x^2 y'(x) = 5$. On essaie différentes fonctions tests:
+
+- $y(x) = e^x$ donne $y'(x) = e^x$ et on a $x^2 y'(x) = x^2 e^x \neq 5$
+- $y(x) = \ln(x)$ donne $y'(x) = 1/x$ et on a $x^2 y'(x) = x \neq 5$
+- $y(x) = x^{\alpha}$ (avec $\alpha$ à déterminer) donne $y'(x) = \alpha x^{\alpha - 1}$ et on a $x^2 y'(x) = \alpha x^{\alpha - 1} \neq 5$ qui est constant si $\alpha = -1$.
+
+On y est presque, $y(x) = 1/x$ donne $x^2 y'(x) = -1$ qui est certes différent de $5$ mais seulement à une constante multiplicative près. 
+
+## Exemple (II)
+
+On teste donc $y(x) = -5/x$ qui donne bien $x^2 y'(x) = 5$. 
+
+On a donc trouvé une solution de l'équation $x^2y'(x) = 5$ et on peut remarquer à ce niveau que toutes les fonctions 
+$$
+x \mapsto -5/x + A
+$$ 
+avec $A$ une constante arbitraire sont solutions (c'est la fameuse **solution générale**).
+
+## Exercices
+
+En essayant plusieurs fonctions tests (simples) en les modifiants, trouver une solution aux équations différentielles
+
+- $y'(x) = 10$
+- $y''(x) = 10$ 
+- $xy'(x) = 1$
+- $xy'(x) = y(x)$
+- $y'(x) = 1 + y^2(x)$
+- $y'(x) = \sqrt{x}$
+- $y'(x) + y(x) = 0$
+- $y''(x) + \omega^2 y(x) = 0$
+
+## Commentaires
+
+La méthode des fonctions tests est intéressante mais présente des défauts majeurs:
+
+- elle ne fonctionne pas à tous les coups
+- elle permet de trouver une solution mais pas forcément toutes (la solution générale)
+- l'absence de solution générale est pénalisant si on veut imposer des conditions limites: un boulet de canon et un objet laché sans vitesse initiale vérifient la même équation différentielles mais ont pourtant des trajectoires très différentes à cause de leurs conditions limites différentes
+
+# Équations directement intégrables
+
+## Principe (I)
+
+Il arrive que l'analyse scientifique du phénomène aboutisse à une relation du type
+$$
+db = f(a) da
+$$
+pour une certaine fonction $f(a)$, qui peut se réexprimer en 
+$$
+\frac{db}{da} = f(a)
+$$
+ce qui signifie que $b(a)$ est une primitive de $f(a)$. 
+
+## Primitive (II)
+
+En particulier, si $F(a)$ est une primitive quelconque de $f(a)$, la solution générale de l'équation est 
+$$
+b(a) = F(a) + K
+$$
+où $K$ est une constante. La solution générale est déterminée à une constante près, c'est caractéristique des équations du premier ordre. 
+
+
