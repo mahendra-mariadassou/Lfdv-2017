@@ -1,0 +1,252 @@
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ROUGE : intervention très fortement deconseillee
+\usepackage[utf8]{inputenc} % accent dans la source
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[french]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{fancybox}
+\usepackage{pstricks}
+\usepackage{pst-plot}
+%\usepackage{pst-char}
+\usepackage{pst-text}
+% \usepackage{psfig}
+\usepackage{ifthen}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+\def\F{\mathbb{F}}
+\def\P{\mathbb{P}}
+\def\A{\mathbb{A}}
+
+%%%% Théorème, Proposition et tout le reste%%%%
+\newcommand{\proofbegin}{\paragraph{Proof.}}
+\newcommand\floor[1]{\lfloor#1\rfloor}
+\newcommand{\proofend}{$\blacksquare$\bigskip}
+\newtheorem{theorem}{Théorème}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Définition}
+\newtheorem{lemma}[theorem]{Lemme}
+\newtheorem{corollary}[theorem]{Corollaire}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE ORANGE : intervention deconseillee
+\parindent=0pt
+\textwidth 17.0cm
+\textheight26.0cm
+\hoffset-2.0cm
+\voffset-2.0cm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE : Intervention obligatoire
+%%% ADAPTER SUIVANT LA NATURE DE L'EPREUVE
+\def\Exam{Test ``DL et Intégration''}
+\def\Date{19 février 2018}
+\def\Classe{TS3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE VERTE :
+%%% ALIGNER LES EQUATIONS A GAUCHE
+\makeatletter
+\newenvironment*{fleqn}{
+    \@fleqntrue
+    \setlength\@mathmargin{0pt}%
+    \ignorespaces
+}{%
+    \ignorespacesafterend
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Force synctex
+\synctex=1
+
+%%% knitr
+<<include=FALSE>>=
+library(knitr)
+opts_chunk$set(
+fig.path='Figures/',cache=TRUE,echo=FALSE
+)
+opts_knit$set(concordance = TRUE, self.contained=TRUE)
+require(patchSynctex)
+@
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\newcounter{nexo}
+\setcounter{nexo}{1}
+\newcommand{\Exo}{\medskip
+  {\bf Exercice \arabic{nexo} : }
+  \addtocounter{nexo}{1}}
+\newcommand{\Pb}{{\bf Problème \arabic{nexo} : }
+\addtocounter{nexo}{1} \bigskip}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% ZONE BLEUE : Intervention parfois utile mais a faire prudemment
+{\bf  \hfill \Date \quad ~}
+%
+\vskip 1cm
+%
+%%% FAIRE UN CHOIX (3 choix possibles)
+%%% 1)
+%\centerline{\psframebox[fillstyle=solid,fillcolor=lightgray]
+%\textbf{\LARGE \black \Exam}}
+%%% 2)
+%\centerline{\psframebox{\bf \LARGE  \Exam}}
+%%% 3)
+\centerline{\bf \LARGE \Exam}
+%
+\vskip 1.5cm
+%
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%% CORPS DU SUJET %%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+%% \section*{Test 1}
+
+\Exo \textbf{Formule de Taylor (2 points)}
+
+Rappeler la formule de Taylor pour le développement limité à l'ordre $n$ d'une fonction $f$ au point $a$ et les \textbf{hypothèses exactes} sous lesquelles on peut écrire cette formule.
+
+\textcolor{gray}{
+Soit $n \in \mathbb{R}$, $a \in \mathbb{R}$ et $f$ une fonction définie au voisinage de $a$ <alert>sauf éventuellement en $a$</alert>. Si $f$ est $n$ fois dérivable en $a$, alors elle admet le $DL_n(a)$ suivant
+$$
+\scriptsize
+f(x) = f(a) + f'(a) (x - a) + \frac{f^{(2)}(a)}{2!}(x - a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x - a)^n + o( (x-a)^n )
+$$
+}
+
+\Exo \textbf{DLs et Limites (6 points)}
+
+Calculer à l'aide de DLs les limites suivantes:
+
+\begin{equation*}
+\lim_{x \to 0} \frac{e^{x} - (1 - x)^{-1}}{x^2} \quad\quad  \lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x^2} \quad \quad \lim_{x \to 0} \frac{\cos(x) - \sqrt{1 - x^2}}{x^4}
+\end{equation*}
+
+\textcolor{gray}{
+\begin{equation*}
+\lim_{x \to 0} \frac{e^{x^2} - (1-x)^{-1}}{x^2}
+\end{equation*}
+Le dénominateur est de degré $2$ (c'est un infiniment petit d'ordre $2$ en $0$), il suffit donc de faire un DL d'ordre $2$ du numérateur pour lever l'indétermination. Au voisinage de $0$,
+\begin{align*}
+  \exp(x) & = 1 + x + x^2/2 + o(x^2) \\
+  (1-x)^{-1} & = 1 + x + x^2 + o(x^2) \\
+  \exp(x) - (1-x)^{-1} & = (1 + x + x^2/2) - (1 - x - x^2) + o(x^2) \\
+  & = -x^2/2 + o(x^2)
+\end{align*}
+D'où on déduit
+\begin{equation*}
+  \frac{e^{x} - (1-x)^{-1}}{x^2} = \frac{-x^2/2 + o(x^2)}{x^2} = -\frac{1}{2} + o(1) \xrightarrow[x\to 0^+]{} \infty
+\end{equation*}
+Pour la deuxième limite
+\begin{equation*}
+\lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x}
+\end{equation*}
+Le dénominateur est de degré $1$ (c'est un infiniment petit d'ordre $1$ en $0$), il suffit donc de faire un DL d'ordre $1$ du numérateur pour lever l'indétermination. Au voisinage de $0$,
+\begin{align*}
+  \ln(1+x) & = x + o(x) \\
+  \sin(x) & = x + o(x) \\
+  \ln(1+x) - \sin(x) & = o(x)
+\end{align*}
+D'où on déduit
+\begin{equation*}
+\frac{\ln(1+x) - \sin(x)}{x} = \frac{o(x)}{x} = o(1) \xrightarrow[x\to 0]{} 0
+\end{equation*}
+Pour la troisième limite
+\begin{equation*}
+\lim_{x \to 0} \frac{\cos(x) - \sqrt{1 - x^2}}{x^4}
+\end{equation*}
+Le dénominateur est de degré $4$ (c'est un infiniment petit d'ordre $4$ en $0$), il suffit donc de faire un DL d'ordre $4$ du numérateur pour lever l'indétermination. Au voisinage de $0$,
+\begin{align*}
+  \cos(x) & = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^4) \\
+  \sqrt{1 - x} & = 1 - \frac{x}{2} - \frac{x^2}{8} + o(x^2) \\
+  \sqrt{1 - x^2} & = 1 - \frac{x^2}{2} - \frac{x^4}{8} + o(x^4) \\
+  \cos(x) - \sqrt{1 - x^2} & = \left( 1 - \frac{x^2}{2} + \frac{x^4}{24} \right) - \left(1 - \frac{x^2}{2} - \frac{x^4}{8}\right) + o(x^4) \\
+  & = \frac{x^4}{24} + \frac{x^4}{8} + o(x^4) = \frac{x^4}{6} + o(x^4)
+\end{align*}
+D'où on déduit
+\begin{equation*}
+\frac{\cos(x) - \sqrt{1 - x^2}}{x^4} = \frac{\frac{x^4}{6} + o(x^4)}{x^4} = \frac{1}{6} + o(1) \xrightarrow[x\to 0]{} \frac{1}{6}
+\end{equation*}
+}
+
+\Exo \textbf{Intégration et linéarisation (3 points)}
+
+Calculer l'intégrale suivante \emph{sans faire de changement de variable}
+
+\begin{equation*}
+\int_{0}^{\pi/2} \cos^3(x) dx
+\end{equation*}
+
+\textcolor{gray}{On commence par linéariser $\cos^3(x)$ en utilisant les formules d'Euler:
+\begin{equation*}
+\cos^3(x) = \left( \frac{e^{ix} + e^{-ix}}{2} \right)^3 = \frac{1}{8} \left( e^{3ix} + e^{-3ix} + 3e^{ix} + 3e^{-ix}\right) = \frac{\cos(3x) + 3\cos(x)}{4}
+\end{equation*}
+et on substitue dans l'intégrale
+\begin{equation*}
+\int_{0}^{\pi/2} \cos^3(x) dx = \int_{0}^{\pi/2} \frac{\cos(3x) + 3\cos(x)}{4} = \frac{1}{12}[ \sin(3x)]_0^{\pi/2} + \frac{3}{4}[ \sin(x)]_0^{\pi/2} = -\frac{1}{12} + \frac{3}{4} = \frac{2}{3}
+\end{equation*}
+}
+
+\Exo \textbf{Intégration par Partie (5 points)}
+
+À l'aide de deux IPP, calculer l'intégrale suivante:
+\begin{equation*}
+\int_{0}^{\pi} \sin(x)e^{x} dx
+\end{equation*}
+
+\textcolor{gray}{On fait une première IPP en dérivant $\sin(x)$ et en intégrant $e^{x}$ pour obtenir:
+\begin{equation*}
+\int_{0}^{\pi} \sin(x)e^{x} dx = [\sin(x)e^{x}]_0^\pi - \int_{0}^{\pi} \cos(x)e^{x} dx
+\end{equation*}
+On veut ensuite calculer $\int_{0}^{\pi} \cos(x)e^{x} dx$. Pour ce faire, on dérive $\cos(x)$ et on intègre $e^{x}$ pour obtenir:
+\begin{align*}
+\int_{0}^{\pi} \cos(x)e^{x} dx &= [\cos(x)e^{x}]_0^\pi - \int_{0}^{\pi} (-\sin(x))e^{x} dx \\
+&= [\cos(x)e^{x}]_0^\pi + \int_{0}^{\pi} \sin(x)e^{x} dx
+\end{align*}
+En recollant les morceaux ensemble, on obtient,
+\begin{align*}
+\int_{0}^{\pi} \sin(x)e^{x} dx &= [\sin(x)e^{x}]_0^\pi - \left( [\cos(x)e^{x}]_0^\pi + \int_{0}^{\pi} \sin(x)e^{x} dx \right)
+\end{align*}
+qui peut se réécrire:
+\begin{align*}
+2 \int_{0}^{\pi} \sin(x)e^{x} dx &= [\sin(x)e^{x}]_0^\pi - [\cos(x)e^{x}]_0^\pi
+\end{align*}
+ou encore:
+\begin{align*}
+\int_{0}^{\pi} \sin(x)e^{x} dx &= \frac{1}{2}[(\sin(x) - \cos(x))e^{x}]_0^\pi = \frac{e^{\pi} + 1}{2}
+\end{align*}
+}
+
+\Exo \textbf{Changement de variable (4 points)}
+
+En effectuant le changement de variable $x = \cos(\theta)$, calculer l'intégrale suivante:
+\begin{equation*}
+\int_{0}^{\pi/4} \tan(\theta) d\theta
+\end{equation*}
+
+\textcolor{gray}{On veut calculer l'intégrale $I = \int_{0}^{\pi/4} \frac{\sin(\theta)}{\cos(\theta)} d\theta$. On remarque au numérateur une différentielle connue puisque $-\sin(\theta) d\theta = d(\cos(\theta))$. Il est donc tentant d'essayer de tout écrire en fonction de $y = \cos(\theta)$.
+\begin{itemize}
+\item Concernant l'élément différentiel, on sait que $dy = -\sin(\theta) d\theta$
+\item On veut réécrire l'expression dans l'intégrale en fonction de $y$ seulement: $\frac{\sin(\theta)}{\cos(\theta)} d\theta = \frac{-dy}{\cos(\theta)} = -\frac{dy}{y}$
+\item On veut changer les bornes, quand $\theta = 0$, $y = \cos(0) = 1$ et quand $\theta = \pi/4$, $y = \cos(\pi/4) = \sqrt{2}/2$
+\end{itemize}
+On a donc
+\begin{align*}
+I & = \int_{\theta = 0}^{\theta = \pi/4} \frac{\sin(\theta)}{\cos(\theta)}d\theta \\
+  & = \int_{y = 1}^{y = \sqrt{2}/2} -\frac{dy}{y} \\
+  & = [-\ln(y)]_{1}^{\sqrt{2}/2} = \ln(\sqrt{2})
+\end{align*}
+}
+
+\end{document}

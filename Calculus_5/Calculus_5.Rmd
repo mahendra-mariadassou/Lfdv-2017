@@ -642,7 +642,7 @@ $$
 
 ## Deuxième exemple (I)
 
-On veut calculer l'intégrale $I = \int_{\pi/6}^{\pi/3} \frac{\cos(\theta)}{\sin(\theta)} d\theta$. On remarque au numérateur une différentielle connue puisque $\sin(\theta) d\theta = d(\sin(\theta))$. Il est donc tentant d'essayer de tout écrire en fonction de $y = \sin(\theta)$. 
+On veut calculer l'intégrale $I = \int_{\pi/6}^{\pi/3} \frac{\cos(\theta)}{\sin(\theta)} d\theta$. On remarque au numérateur une différentielle connue puisque $\cos(\theta) d\theta = d(\sin(\theta))$. Il est donc tentant d'essayer de tout écrire en fonction de $y = \sin(\theta)$. 
 
 - Concernant l'élément différentiel, on sait que $dy = \cos(\theta) d\theta$
 - On veut réécrire l'expression dans l'intégrale en fonction de $y$ seulement: $\frac{\cos(\theta)}{\sin(\theta)} d\theta = \frac{dy}{\sin(\theta)} = \frac{dy}{y}$
