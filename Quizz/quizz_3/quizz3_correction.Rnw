@@ -146,21 +146,21 @@ Le dénominateur est de degré $2$ (c'est un infiniment petit d'ordre $2$ en $0$
 \end{align*}
 D'où on déduit
 \begin{equation*}
-  \frac{e^{x} - (1-x)^{-1}}{x^2} = \frac{-x^2/2 + o(x^2)}{x^2} = -\frac{1}{2} + o(1) \xrightarrow[x\to 0^+]{} \infty
+  \frac{e^{x} - (1-x)^{-1}}{x^2} = \frac{-x^2/2 + o(x^2)}{x^2} = -\frac{1}{2} + o(1) \xrightarrow[x\to 0^+]{} -\frac{1}{2}
 \end{equation*}
 Pour la deuxième limite
 \begin{equation*}
-\lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x}
+\lim_{x \to 0} \frac{\ln(1+x) - \sin(x)}{x^2}
 \end{equation*}
-Le dénominateur est de degré $1$ (c'est un infiniment petit d'ordre $1$ en $0$), il suffit donc de faire un DL d'ordre $1$ du numérateur pour lever l'indétermination. Au voisinage de $0$,
+Le dénominateur est de degré $2$ (c'est un infiniment petit d'ordre $2$ en $0$), il suffit donc de faire un DL d'ordre $2$ du numérateur pour lever l'indétermination. Au voisinage de $0$,
 \begin{align*}
-  \ln(1+x) & = x + o(x) \\
-  \sin(x) & = x + o(x) \\
-  \ln(1+x) - \sin(x) & = o(x)
+  \ln(1+x) & = x - x^2/2 + o(x^2) \\
+  \sin(x) & = x + o(x^2) \\
+  \ln(1+x) - \sin(x) & = -\frac{1}{2}x^2 + o(x^2)
 \end{align*}
 D'où on déduit
 \begin{equation*}
-\frac{\ln(1+x) - \sin(x)}{x} = \frac{o(x)}{x} = o(1) \xrightarrow[x\to 0]{} 0
+\frac{\ln(1+x) - \sin(x)}{x^2} = \frac{x^2/2 + o(x)}{x^2} = -\frac{1}{2} + o(1) \xrightarrow[x\to 0]{} -\frac{1}{2}
 \end{equation*}
 Pour la troisième limite
 \begin{equation*}
