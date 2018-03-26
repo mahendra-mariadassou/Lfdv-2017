@@ -151,3 +151,329 @@ $$
 où $K$ est une constante. La solution générale est déterminée à une constante près, c'est caractéristique des équations du premier ordre. 
 
 
+## Primitive (III)
+
+La valeur de la constante $K$ est généralement donnée par une **condition limite** $b(a_0) = b_0$. 
+
+En injectant dans l'équation précédente, on trouve $K = b(a_0) - F(a_0) = b_0 - F(a_0)$. 
+
+Les équations précédentes qui peuvent se mettre sous la forme $\frac{db}{da} = f(a)$ et se résoudre en cherchant une primitive de $f$ sont dites **directement intégrables**. 
+
+## Exercices {.smaller}
+
+Résoudre les équations directement intégrables suivantes (en prenant soin de vérifier **à posteriori** que la solution trouvée vérifie bien l'équation différentielle et la condition limite):
+
+- $\frac{db}{da} = \cos(a)$ avec cond. lim. $b(\pi/6) = 1/2$
+- $\frac{db}{da} = \frac{1}{\sqrt{1 - a^2}}$ avec cond. lim. $b(1/2) = \pi/6$
+- $\frac{df}{dx} = \left(\frac{X}{x}\right)^2 + 1$ avec $X$ constante et cond. lim. $f(X) = 0$
+- $\frac{df}{dx} = U \cos(kx)$ avec $U, k$ constantes et cond. lim. $f(0) = \frac{U}{k}$
+- $\frac{df}{dx} = \alpha (x - X)^2$ avec $\alpha, X$ constantes et cond. lim. $f(0) = 0$
+- $\frac{df}{dx} = -(x - x_0) e^{-\beta (x - x_0)^2}$ avec $\beta, x_0$ constantes et cond. lim. $f(x_0) = 0$
+- $\frac{dy}{dt} = v_0$ avec $v_0$ constante et cond. lim. $y(t_0) = y_0$
+
+## Application 
+
+On lâche une vitesse d'une hauteur $H$ sans vitesse initiale. On néglige les frottements de l'air et considère uniquement l'action de la gravité. On note $v(t)$ sa vitesse (dirigée vers le bas) et $h(t)$ sa hauteur à l'instant $t$. 
+
+- Écrire l'équation différentielle et la condition initiale vérifiée par $v(t)$. En déduire $v(t)$.
+- Écrire l'équation différentielle et la condition initiale vérifiée par $h(t)$. En déduire $h(t)$.
+
+# Méthode de résolution: séparation des variables
+
+## Un exemple
+
+Il arrive que l'équation différentielles soit trop compliquée pour être mise sous la forme $db/da = f(a)$, par exemple:
+
+$$
+\frac{dy}{dx} = -\frac{xy}{X^2} \quad \text{ avec } X \text{ constante}
+$$
+
+Dans ce cas-là, il faut recourir à d'autre techniques. L'une d'entre elles consiste à **séparer** les variables pour mettre l'équation sous la forme 
+$$
+f(a)da = g(b) db
+$$
+
+Dans notre exemple, on a par exemple 
+$$
+\frac{dy}{y} = -\frac{xdx}{X^2}
+$$
+
+## Principe de résolution
+
+Une équation de la forme $f(a)da = g(b) db$ peut être résolue en trouvant une primitive $F$ de $f$ et une $G$ de $g$. En effet, en utilisant la notation différentielle 
+
+- $dF = f(a)da$
+- $dG = g(b)db$
+
+On peut réécrire l'équation:
+$$
+dF = dG
+$$
+Dont la solution générale est évidemment 
+$$
+F(a) = G(b) + K
+$$
+
+## Principe de résolution (II)
+
+Là encore, si on se donne une condition limite $b(a_0) = b_0$, la valeur de $K$ est déterminée par 
+$$
+K = F(a_0) - G(b_0)
+$$
+et la solution peut se réécrire 
+$$
+F(a) - F(a_0) = G(b) - G(b_0)
+$$
+
+## Exemple 
+
+L'équation différentielle $\frac{du}{d\theta} = \frac{\cos(\theta)}{u}$ peut-être mise sous la forme séparée $udu = \cos(\theta)d\theta$ ou de façon équivalente:
+$$
+d[u^2/2] = d[\sin(\theta)]
+$$
+La solution générale de l'équation est donc:
+$$ 
+\frac{u^2}{2} = \sin(\theta) + K
+$$
+Si on impose en plus la condition limite $u(\theta = 0) = 1$, on obtient $K = 1/2$ et la solution peut donc se réécrire sous la forme 
+$$
+u(\theta) = \sqrt{2\sin\left( \theta \right) + 1}
+$$
+
+## Exercices 
+
+Résoudre les équations différentielles suivantes: 
+
+- $\frac{dy}{dx} = - \frac{xy}{X^2}$ avec $X$ const. et cond. lim. $y(0) = Y$
+- $\frac{dy}{dx} = e^{y - x}$ avec cond. lim. $y(0) = \ln(2)$
+- $\frac{dv}{du} = n \frac{\cos(u)}{\cos(v)}$ avec $n$ const. et cond. lim. $v(0) = 0$
+- $\frac{dv}{du} = 1 + \alpha v$ avec $\alpha$ const. et cond. lim. $v(0) = 1/\alpha$
+- $\frac{dy}{dx} = \left(\frac{x}{y}\right)^2$ avec cond. lim. $y(1) = 0$
+- $\frac{dy}{dx} = \left(\frac{y}{x}\right)^2$ avec cond. lim. $y(1) = 1/2$
+
+## Exemples importants: croissance bactérienne
+
+Une population bactérienne dans un milieu riche en nutriment contient à l'instant initial $N_0$ bactéries : ces bactéries peuvent se diviser. Chaque bactérie a la même probabilité par unité de temps de se diviser, notée
+$\lambda$. Pendant un tout petit intervalle de temps $dt$, chaque bactérie a donc une (toute petite)
+probabilité $\lambda dt$ de se diviser. Comme il y a $N(t)$ bactéries à l’instant $t$, il y en
+a $N(t) \lambda dt$ qui se divisent entre l’instant $t$ et l’instant $t + dt$. La variation du nombre
+de bactéries entre $t$ et $t + dt$ peut donc s’écrire $dN = −N (t)\lambda$ dt. On peut mettre
+également cette équation différentielle sous la forme :
+$$
+\frac{dN}{dt} = \lambda N
+$$
+
+## Croissance bactérienne (II) {.smaller}
+
+Il ne s'agit pas d'une équation directement intégrable, on essaye donc de séparer les variables en réécrivant:
+$$
+\frac{dN}{N} = \lambda dt
+$$
+Donc la solution générale est
+$$
+\ln(N) = \lambda t + K
+$$
+Ou encore, en notant $K' = e^{K}$
+$$
+N(t) = K' e^{\lambda t}
+$$
+Au vu de la condition limite $N(t = 0) = N_0$, on peut montrer que $K' = N_0$ et que la solution est donc 
+$$
+N(t) = N_0 e^{\lambda t}
+$$
+En particulièrement, la population double de taille au bout d'un temps $t = \ln(2) / \lambda$, généralement inteprété comme le temps de division. 
+
+## Exemples: frottements visqueux
+
+Une balle de ping-pong de masse $m$ est lâchée sans vitesse initiale : elle tombe verticalement avec une vitesse $v(t)$, en subissant la force de pesanteur $mg$ dirigée vers le bas
+ainsi qu’une force de frottement $f = −\alpha v$ (opposée au mouvement et proportionnelle à la
+célérité de la balle). L’équation différentielle du mouvement s’écrit :
+$$
+\frac{dv}{dt} = -\frac{\alpha}{m}v + g
+$$
+On remarque que l’on peut atteindre une vitesse limite constante notée $v_{\infty}$, pour laquelle l’accélération de la pesanteur compense les frottements : $v_\infty$ vérifie $\frac{dv}{dt} = 0$ et vaut donc :
+$$
+v_\infty = \frac{mg}{\alpha}
+$$
+
+## Frottements visqueux (II)
+
+En introduisant $v_\infty$ précédemment défini dans l'équation on peut la réécrire sous la forme:
+$$
+\frac{dv}{dt} = -\frac{\alpha}{m}(v - v_\infty)
+$$
+qui n'est pas directement intégrable. On peut néanmoins séparer les variable pour écrire:
+$$
+\frac{dv}{v - v_\infty} = -\frac{\alpha}{m} dt
+$$
+qui s'intègre sous la forme
+$$
+\ln |v - v_\infty| = -\frac{\alpha}{m} t + K
+$$
+
+## Frottements visqueux (III)
+
+Cette solution peut se réécrire:
+$$
+|v - v_\infty| = K' e^{-\frac{\alpha}{m} t} \Leftrightarrow v(t) = v_\infty + Ce^{-\frac{\alpha}{m}t}
+$$
+avec $K' = e^K$ et $C = \pm K'$ en fonction du signe de $v - v_\infty$. Dans tous les cas, cette solution fait toujours tendre $v$ vers $v_\infty$, indépendamment de la solution initiale. 
+
+Notre condition limite $v(0) = 0$ nous permet de déduire $C = -v_\infty$ et donc d'écrire la solution de notre équation:
+$$
+v(t) = v_\infty(1 - e^{-\frac{\alpha}{m}t})
+$$
+
+## Autres exemples
+
+- Un conducteur décide de faire accéler sa voiture de façon uniforme (accélération $\alpha$ uniforme). En écrivant puis résolvant deux équations différentielles, déterminer la position de la voiture à l'instant $t$. On notera $x_0$ et $v_0$ les positions et vitesses initiales.
+- Dans le plan $(x, y)$, Déterminer le tracé d'une courbe qui vérifie l'équation $\frac{dy}{dx} + \frac{x}{y} = 0$ et passe par le point $(0, 1)$. De quelle forme géométrique s'agit-il?
+
+# En général
+
+## Quelques notions à avoir
+
+- En général on ne pas résoudre **exactement** les équations différentielles.
+- On doit avoir recours à des méthodes **numériques** pour approcher les solutions. 
+- Les équations **directement intégrables** et **séparables** sont des exceptions importantes.
+- Une autre grande classe d'équation qu'on sait résoudre (dans la plupart des cas) est celle des équations **linéaires**
+
+## Équations linéaires
+
+Une équation différentielle est dite **linéaire homogène** si elle peut être mise sous la forme:
+$$
+a_0(x)f(x) + a_1(x)f'(x) + \dots + a_n(x) f^{(n)}(x) = 0
+$$
+et **linéaire inhomogène** si elle peut être mise sous la forme:
+$$
+a_0(x)f(x) + a_1(x)f'(x) + \dots + a_n(x) f^{(n)}(x) = b(x)
+$$
+La différence consiste en la présence ou non d'un second membre à l'équation. 
+
+## Principe de superposition
+
+Soit $(E)$ une équation différentielle linéaire homogène et $f_1$ et $f_2$ deux solutions de $(E)$. On montre facilement que pour tous réels $\alpha_1$ et $\alpha_2$, la fonction $f = \alpha_1 f_1 + \alpha_2 f_2$ est **encore** une solution de $(E)$. On peut donc superposer des fonctions solutions pour en construire de nouvelles. 
+
+Autrement dit, l'ensemble des solutions de $(E)$ est un **espace vectoriel** de fonctions. Pour le caractériser complètement, il suffit donc de déterminer une **base de solutions**. 
+
+Mieux, une équation linéaire homogène de degré $n$ admet toujours une base de cardinal $n$. Il reste donc à trouver ces $n$ fonctions solutions de base...
+
+## Équation linéaire homogène à coefficients constants
+
+Une équation différentielle linéaire homogène est dite à **coefficients constants** si les fonctions coefficients $a_0, a_1, \dots, a_n$ sont constantes (_i.e._ ne dépendent pas de $x$). Dans ce cas, l'équation peut s'écrire:
+$$
+a_0 f(x) + a_1 f'(x) + \dots + a_n f^{(n)}(x) = 0
+$$
+
+Pour ce type d'équation, on cherche une solution de la forme $f_r: x \mapsto e^{rx}$. En substituant, on constate que $f_r$ est solution si et seulement si $r$ est solution de l'équation **caractéristique**
+$$
+a_0 + a_1 r + \dots + a_n r^n = 0
+$$
+
+## Équation linéaire homogène à coefficients constants (II)
+
+Sauf cas très particuliers, l'équation caractéristique admet $n$ solutions distinctes notées $r_1, r_2, \dots, r_n$ (réels ou complexes) qui permettent de construire $n$ solutions particulières de l'équation différentielle. Ces fonctions forment une **famille libre** de dimension $n$ et constituent donc une base de l'espace des solutions. 
+
+La solution générale de l'équation différentielle est donc:
+$$
+f = \alpha_1 f_{r_1} + \alpha_2 f_{r_2} + \dots + \alpha_n f_{r_n}
+$$
+avec $\alpha_1, \dots, \alpha_n$ déterminés par les conditions limites de l'équation différentielle. 
+
+## Exercices
+
+- Reprendre l'exercice de la croissance d'une population bactérienne, montrer qu'il s'agit d'une équation linéaire homogène à coefficients constants et retrouver la solution.
+- Reprendre l'exercice des frottements visqueux, montrer qu'il s'agit d'une équation linéaire homogène à coefficients constants et retrouver la solution (on pourra poser $V = v - v_\infty$ et trouver une équation vérifiée par $V$). 
+
+## Principe de superposition et équation inhomogène
+
+Dans le cas d'une équation linéaire inhomogène $(E)$:
+$$
+a_0(x)f(x) + a_1(x)f'(x) + \dots + a_n(x) f^{(n)}(x) = b(x)
+$$
+et de l'équation homogène associée $(E_0)$:
+$$
+a_0(x)f(x) + a_1(x)f'(x) + \dots + a_n(x) f^{(n)}(x) = 0
+$$
+Le principe de superposition s'applique différemment. 
+
+- Soit $f_0$ une solution particulière de $(E)$
+- Soit $f_1$ une solution de $(E_0)$
+
+Alors $f = f_0 + f_1$ est solution de $(E)$. 
+
+## Équation linéaire inhomogène à coefficients constants
+
+Pour résoudre une équation linéaire inhomogène à coefficients constants $(E)$, on procède donc en trois temps:
+
+- on commence par chercher une solution particulière $f_0$ de $(E)$ (souvent simple ou évidente, par exemple un état d'équilibre en physique)
+- on cherche ensuite la solution de générale de $(E_0)$, sous la forme $\alpha_1 f_1 + \dots + \alpha_n f_n$
+- on ajoute les deux et on détermine les coefficients $\alpha_i$ à l'aide des conditons limites. 
+
+## Exemple important: phénomène oscillant
+
+Les équations différentielles d'ordre 2 sont très importantes en physique: elles interviennent systématiquement dans l'étude de système oscillants. 
+
+On considère par exemple une masse pnctuelle $m$ fixée à un ressort de longueur à vide $l_0$ et de constante de raideur $k$. Le ressort est fixée au plafond en un point (origine des positions, avec un axe dirigé vers le bas) et on note $l(t)$ la position de la masse au temps $t$ (qui correspond également à la longueur du ressort au temps). 
+
+En faisant un bilan des forces (cf cours de physique), on a:
+$$
+m \frac{d^2l}{dt^2} = mg - k(l - l_0)
+$$
+
+## Phénomène oscillant (II)
+
+L'équation peut se réécrire sous la forme:
+$$
+\frac{d^2l}{dt^2} + \frac{k}{m}l = g + \frac{k}{m} l_0
+$$
+qui n'est pas homogène. 
+
+On cherche donc une solution particulière simple, par exemple constante (pour annuler le terme $\frac{d^2l}{dt^2}$). La fonction constante $l(t) = l_0 + \frac{mg}{k}$ est solution (et correspond à un état d'équilibre). On note $l_{text{eq}}$ cette solution et on décrit le système en fonction de $L = l - l_{text{eq}}$. En injectant dans $(E)$, on montre que $L$ vérifie l'équation homogène
+$$
+\frac{d^2L}{dt^2} + \frac{k}{m}L = 0
+$$
+
+## Phénomène oscillant (III)
+
+L'équation caractéristique associée est 
+$$
+r^2 + \frac{k}{m} = 0
+$$
+dont les solutions sont $r_1 = i\sqrt{k/m}$ et $r_2 = -i\sqrt{k/m}$. En notant $\omega = \sqrt{k/m}$, notre base est donc donnée par le couple de fonctions 
+$$
+f_1(t) = e^{i\omega t} \qquad f_2(t) = e^{-i\omega t}
+$$
+C'est correct mais pas forcément interprétable... Cherchons une base plus intuitive. 
+
+## Phénomène oscillant (IV)
+
+On se rappelle que si $(f_1, f_2)$ est une base, alors $(e_1, e_2) = ( (f_1 + f_2)/2, (f_1 - f_2)/2)$ aussi. Dans notre cas, on adopte donc la nouvelle base
+$$
+\begin{align*}
+e_1(t) &= \frac{f_1(t) + f_2(t)}{2} = \frac{e^{i\omega t} + e^{-i\omega t}}{2} = \cos(\omega t) \\
+e_2(t) &= \frac{f_1(t) - f_2(t)}{2} = \frac{e^{i\omega t} - e^{-i\omega t}}{2} = \sin(\omega t)
+\end{align*}
+$$
+Notre solution générale peut donc s'écrire sous la forme 
+$$
+L(t) = A \cos(\omega t) + B \sin(\omega t)
+$$
+Ou en se rappelant du cours de début d'année:
+$$
+L(t) = R \cos(\omega t + \phi)
+$$
+
+## Phénomène oscillant (V)
+
+Les deux formulations précédentes sont **équivalentes** mathématiquement et dépendent de deux paramètres chacune mais correspondent à des interprétations différentes. 
+
+Pour déterminer $R$ et $phi$, on se donne des conditions initiales. Supposons que le ressort est laché _sans vitesse initiale_ et avec un _allongement initial nul_. On a
+
+- $l(0) = l_0 \Leftrightarrow L(0) = A\cos(0) + B\sin(0) + l_{\text{eq}} = l_0$
+- $l'(0) = 0 \Leftrightarrow L'(0) = -A\omega \sin(0) + B\omega\cos(0) = 0$
+
+d'où on déduit $A = l_0 - l_{\text{eq}}$ et $B = 0$. La solution de notre équation est donc:
+$$
+L(t) = (l_0 - l_{\text{eq}}) \cos(\omega t) \Leftrightarrow l(t) = l_{\text{eq}} + (l_0 - l_{\text{eq}}) \cos(\omega t)
+$$
